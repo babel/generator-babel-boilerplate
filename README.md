@@ -24,44 +24,46 @@ The [browser spec runner](https://github.com/jmeas/es6-library-boilerplate/blob/
 can be opened in a browser to run your tests. For it to work, you must first run `gulp test:browser`. This
 will set up a watch task that will automatically refresh the tests when your scripts, or the tests, change.
 
-### When to use this boilerplate
+### FAQ
 
-This boilerplate works best for libraries that export a single file, and that single file
+#### When should I consider using this boilerplate?
+
+You're authoring a library that exports a single file, and that one file
 exports a single variable.
 
-### When not to use this boilerplate
+#### When might I not want to use this boilerplate?
 
-This boilerplate is not designed to build an entire web application. It is also not
-good if your library needs to export more than one file, or more than one variable.
+You can always use this boilerplate as inspiration, but it works best for smaller libraries.
+If you're building a full-scale webapp, you will likely need many more changes to the build system.
 
 ### Customizing
 
-This boilerplate is easily customizable to a certain extent. To make changes,
+This boilerplate is, to a certain extent, easily customizable. To make changes,
 find what you're looking to do below and follow the instructions.
 
 #### I want to change the primary source file
 
-
-The primary source file for the library is `src/index.js`. To change this:
+The primary source file for the library is `src/index.js`. Only the files that this
+file imports will be included in the final build. To change the name of this entry file:
 
 1. Rename the file
 2. Update the value of `entryFileName` in `config/index.json`
 3. Update the filename in `src/wrapper.js`
 
-[View the diff here.](https://github.com/jmeas/es6-library-boilerplate/compare/master...change-entry-file)
+[View an example diff here.](https://github.com/jmeas/es6-library-boilerplate/compare/master...change-entry-file)
 
-### I want to change the exported file name
+#### I want to change the exported file name
 
 1. Update the value of `exportFileName` in `config/index.json`
 
-### I want to change what variable my module exports
+#### I want to change what variable my module exports
 
-A single variable, `MyLibrary`, is exported from your library. You can change this by following
+`MyLibrary` is the name of the variable exported from this boilerplate. You can change this by following
 these steps:
 
 1. Ensure that the variable you're exporting exists in your scripts
-1. Update the value of `exportVarName` in `config/index.json`
+2. Update the value of `exportVarName` in `config/index.json`
 
-### I want to change the destination directory
+#### I want to change the destination directory
 
 1. Update the value of `destinationFolder` in `config/index.json`
