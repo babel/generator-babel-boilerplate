@@ -4,8 +4,8 @@ Author libraries in ES6 for Node and the browser.
 
 ### Features
 
-- Author ES6, export ES5
-- Export UMD
+- Author in ES6
+- Export ES5 / UMD
 - Mocha/Chai/Sinon testing stack
 - Unit tests that work in Node and the browser
 
