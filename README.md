@@ -69,3 +69,18 @@ these steps:
 #### I want to change the destination directory
 
 1. Update the value of `destinationFolder` in `config/index.json`
+
+#### My library depends on an external module
+
+This is a slightly more complex procedure.
+
+1. Install the module via `npm install --save THE_MODULE`
+2. Load the module in the [test setup file](https://github.com/jmeas/es6-library-boilerplate/blob/master/test/setup/setup.js).
+  Attach any exported variables to global object if you'll be using them in your tests.
+3. Update the `test/.jshintrc` file to include any new global variable that you have added
+4. In the `src/wrapper.js` file, several things need to change: load the module in both the AMD and CommonJS 
+  module definitions. Load the root version of the module for the browser module definition. Lastly, be
+  sure that the factory method accepts the necessary arguments.
+
+That last item is a lot to process, I know. An example wrapper that depends on
+Underscore can be seen **[here](https://github.com/jmeas/es6-library-boilerplate/blob/add-underscore/src/wrapper.js#L3-L10)**.
