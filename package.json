@@ -34,6 +34,7 @@
     "gulp-6to5": "^2.0.2",
     "gulp-filter": "^2.0.0",
     "gulp-jshint": "^1.9.0",
+    "gulp-livereload": "^3.4.0",
     "gulp-mocha": "^2.0.0",
     "gulp-preprocess": "^1.2.0",
     "gulp-rename": "^1.2.0",

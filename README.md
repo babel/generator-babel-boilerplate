@@ -13,5 +13,5 @@ Author libraries in ES6 for Node and the browser.
 
 This library has two primary Gulp tasks.
 
-- `gulp` - Run the unit tests
-- `gulp build` - Build the library
+- `gulp` - Lint the library and tests, then run the unit tests
+- `gulp build` - Lint then build the library

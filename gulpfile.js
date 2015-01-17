@@ -9,6 +9,7 @@ const uglify = require('gulp-uglifyjs');
 const template = require('gulp-template');
 const preprocess = require('gulp-preprocess');
 const sourcemaps = require('gulp-sourcemaps');
+const livereload = require('gulp-livereload');
 
 // Adjust this file to configure the build
 const mainConfig = require('./config/main-config');
@@ -32,8 +33,7 @@ gulp.task('lint:test', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-// Build two versions of the library
-gulp.task('build', ['lint:src', 'clean'], function() {
+function build() {
   return gulp.src('src/wrapper.js')
     .pipe(template(mainConfig))
     .pipe(preprocess())
@@ -46,7 +46,10 @@ gulp.task('build', ['lint:src', 'clean'], function() {
     .pipe(rename(mainConfig.fileName + '.min.js'))
     .pipe(uglify(require('./config/build/uglify-config.js')))
     .pipe(gulp.dest(mainConfig.distFolder));
-});
+}
+
+// Build two versions of the library
+gulp.task('build', ['lint:src', 'clean'], build);
 
 // Lint and run our tests
 gulp.task('test', ['lint:src', 'lint:test'], function() {
@@ -54,9 +57,18 @@ gulp.task('test', ['lint:src', 'lint:test'], function() {
     .pipe(mocha({reporter: 'dot'}));
 });
 
+gulp.task('wat', function() {
+  return build()
+    .pipe(livereload());
+});
+
+gulp.task('watch', function() {
+  livereload.listen({port: 35729, host: 'localhost', start: true});
+  gulp.watch('src/**/*.js', ['wat']);
+});
+
 // Set up a livereload environment for our spec runner
 gulp.task('test:browser', ['lint'], function() {
-
 });
 
 // An alias of test
