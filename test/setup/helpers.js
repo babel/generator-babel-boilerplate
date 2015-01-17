@@ -17,6 +17,7 @@ var helpers = {};
 var node = typeof exports !== 'undefined';
 
 if (node) {
+  require('./node');
   setupTestHelpers();
 }
 
