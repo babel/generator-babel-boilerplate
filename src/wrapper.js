@@ -4,9 +4,9 @@
   } else if (typeof exports !== 'undefined') {
     module.exports = factory();
   } else {
-    root.<%= exportVarName %> = factory(root._);
+    root.<%= exportVarName %> = factory();
   }
-})(this, function(_) {
+})(this, function() {
   'use strict';
 
   // @include ./another.js
