@@ -36,5 +36,14 @@ good if your library needs to export more than one file, or more than one variab
 
 ### FAQ
 
-Configuring this library requires making changes in several places. A guide
-to do this will be coming soon!
+Configuring this library requires making changes in several places.
+
+#### I want to change the main source file
+
+The main file for the library is `src/index.js`. To change this:
+
+1. Rename the file
+2. Update the value of `entryFileName` in `config/index.json`
+3. Update the filename in `src/wrapper.js`
+
+[View the diff here.](https://github.com/jmeas/es6-library-boilerplate/compare/master...change-entry-file)
