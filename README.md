@@ -18,3 +18,8 @@ tasks for you to use.
 - `gulp build` - Lint then build the library
 - `gulp test:browser` - Build the library for use with the browser spec runner.
   Changes to the source will cause the runner to automatically refresh.
+
+### FAQ
+
+Configuring this library requires making changes in several places. A guide
+to do this will be coming soon!
