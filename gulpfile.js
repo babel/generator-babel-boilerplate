@@ -44,16 +44,16 @@ gulp.task('build', ['lint:src', 'clean'], function() {
   return gulp.src('src/wrapper.js')
     .pipe(template(config))
     .pipe(preprocess())
-    .pipe(rename(config.fileName + '.js'))
+    .pipe(rename(config.exportFileName + '.js'))
     .pipe(sourcemaps.init())
     .pipe(to5({blacklist: ['useStrict'], modules: 'ignore'}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.distFolder))
     .pipe(filter(['*', '!**/*.js.map']))
-    .pipe(rename(config.fileName + '.min.js'))
+    .pipe(rename(config.exportFileName + '.min.js'))
     .pipe(uglify({
       outSourceMap: true,
-      inSourceMap: config.distFolder + '/' + config.fileName + '.js.map',
+      inSourceMap: config.distFolder + '/' + config.exportFileName + '.js.map',
     }))
     .pipe(gulp.dest(config.distFolder));
 });
