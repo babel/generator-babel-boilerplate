@@ -5,7 +5,6 @@ const mocha = require('gulp-mocha');
 const jshint = require('gulp-jshint');
 const rename = require('gulp-rename');
 const filter = require('gulp-filter');
-const watchify = require('watchify');
 const uglify = require('gulp-uglifyjs');
 const browserify = require('browserify');
 const template = require('gulp-template');
