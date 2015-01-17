@@ -7,8 +7,8 @@
 import Another from './another';
 
 const MyLibrary = {
-  tester: Another.tester,
-  test() {
+  anotherFn: Another.anotherFn,
+  mainFn() {
     return 'hello';
   }
 };

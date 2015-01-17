@@ -47,7 +47,10 @@ function build() {
     .pipe(gulp.dest(mainConfig.distFolder))
     .pipe(filter(['*', '!**/*.js.map']))
     .pipe(rename(mainConfig.fileName + '.min.js'))
-    .pipe(uglify(require('./config/build/uglify-config.js')))
+    .pipe(uglify({
+      outSourceMap: true,
+      inSourceMap: 'dist/' + mainConfig.fileName + '.js.map',
+    }))
     .pipe(gulp.dest(mainConfig.distFolder));
 }
 

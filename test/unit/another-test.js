@@ -1,14 +1,14 @@
-describe('A second file', function() {
+describe('A second file of tests', function() {
   beforeEach(function() {
-    spy(MyLibrary, 'tester');
-    MyLibrary.tester();
+    spy(MyLibrary, 'anotherFn');
+    MyLibrary.anotherFn();
   });
 
   it('should have been run once', function() {
-    expect(MyLibrary.tester).to.have.been.calledOnce;
+    expect(MyLibrary.anotherFn).to.have.been.calledOnce;
   });
 
   it('should have always returned hello', function() {
-    expect(MyLibrary.tester).to.have.always.returned('ok');
+    expect(MyLibrary.anotherFn).to.have.always.returned('ok');
   });
 });
