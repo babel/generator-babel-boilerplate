@@ -1,5 +1,3 @@
-import MyLibrary from '../../src/index';
-
 describe('A feature test', function() {
   beforeEach(function() {
     spy(MyLibrary, 'test');
