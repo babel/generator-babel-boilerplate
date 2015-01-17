@@ -63,6 +63,8 @@ these steps:
 
 1. Ensure that the variable you're exporting exists in your scripts
 2. Update the value of `exportVarName` in `config/index.json`
+3. Update the globals array in the `test/.jshintrc` file
+4. Check that the unit tests have been updated to reference the new value
 
 #### I want to change the destination directory
 
