@@ -18,14 +18,22 @@ gulp.task('clean', function(cb) {
   del([mainConfig.distFolder], cb);
 });
 
-gulp.task('lint', function() {
+// Lint our source code
+gulp.task('lint:src', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
+// Lint our test code
+gulp.task('lint:test', function() {
+  return gulp.src(['test/unit/**/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
 // Build two versions of the library
-gulp.task('build', ['lint', 'clean'], function() {
+gulp.task('build', ['lint:src', 'clean'], function() {
   return gulp.src('src/wrapper.js')
     .pipe(template(mainConfig))
     .pipe(preprocess())
@@ -40,10 +48,15 @@ gulp.task('build', ['lint', 'clean'], function() {
     .pipe(gulp.dest(mainConfig.distFolder));
 });
 
-// Run our tests
-gulp.task('test', ['lint'], function() {
+// Lint and run our tests
+gulp.task('test', ['lint:src', 'lint:test'], function() {
   return gulp.src(['test/setup/helpers.js', 'test/unit/**/*.js'], {read: false})
     .pipe(mocha({reporter: 'dot'}));
+});
+
+// Set up a livereload environment for our spec runner
+gulp.task('test:browser', ['lint'], function() {
+
 });
 
 // An alias of test
