@@ -5,7 +5,6 @@ const mocha = require('gulp-mocha');
 const jshint = require('gulp-jshint');
 const rename = require('gulp-rename');
 const filter = require('gulp-filter');
-const watchify = require('watchify');
 const uglify = require('gulp-uglifyjs');
 const browserify = require('browserify');
 const template = require('gulp-template');
@@ -15,11 +14,15 @@ const sourcemaps = require('gulp-sourcemaps');
 const livereload = require('gulp-livereload');
 
 // Adjust this file to configure the build
-const mainConfig = require('./config/main-config');
+const config = require('./config');
 
 // Remove the built files
 gulp.task('clean', function(cb) {
-  del([mainConfig.distFolder], cb);
+  del([config.destinationFolder], cb);
+});
+
+gulp.task('clean:tmp', function(cb) {
+  del(['tmp'], cb);
 });
 
 // Lint our source code
@@ -36,40 +39,50 @@ gulp.task('lint:test', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-function build() {
+// Build two versions of the library
+gulp.task('build', ['lint:src', 'clean'], function() {
   return gulp.src('src/wrapper.js')
-    .pipe(template(mainConfig))
+    .pipe(template(config))
     .pipe(preprocess())
-    .pipe(rename(mainConfig.fileName + '.js'))
+    .pipe(rename(config.exportFileName + '.js'))
     .pipe(sourcemaps.init())
     .pipe(to5({blacklist: ['useStrict'], modules: 'ignore'}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(mainConfig.distFolder))
+    .pipe(gulp.dest(config.destinationFolder))
     .pipe(filter(['*', '!**/*.js.map']))
-    .pipe(rename(mainConfig.fileName + '.min.js'))
-    .pipe(uglify(require('./config/build/uglify-config.js')))
-    .pipe(gulp.dest(mainConfig.distFolder));
-}
+    .pipe(rename(config.exportFileName + '.min.js'))
+    .pipe(uglify({
+      outSourceMap: true,
+      inSourceMap: config.destinationFolder + '/' + config.exportFileName + '.js.map',
+    }))
+    .pipe(gulp.dest(config.destinationFolder));
+});
 
+// Use 6to5 to build the library to CommonJS modules. This
+// is fed to Browserify, which builds the version of the lib
+// for our browser spec runner.
 gulp.task('compile_browser_script', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
     .pipe(to5({modules: 'common'}))
     .pipe(gulp.dest('tmp'));
 });
 
-gulp.task('browserify', ['compile_browser_script'], function() {
-  var bundleStream = browserify({
-    entries: ['./test/setup/browserify.js'],
-    exclude: ['../src/index']
-  }).bundle();
+// Browserify does not support dynamic names, so
+// we need to create a predictable entry point for it
+gulp.task('rename_input', function() {
+  return gulp.src(['tmp/' + config.entryFileName + '.js'])
+    .pipe(rename('__entry.js'))
+    .pipe(gulp.dest('tmp'));
+});
+
+// Bundle our app for our unit tests
+gulp.task('browserify', ['compile_browser_script', 'rename_input'], function() {
+  var bundleStream = browserify(['./test/setup/browserify.js']).bundle();
   bundleStream
-    .pipe(source('./tmp/index.js'))
+    .pipe(source('./tmp/__spec-build.js'))
     .pipe(gulp.dest(''))
     .pipe(livereload());
 });
-
-// Build two versions of the library
-gulp.task('build', ['lint:src', 'clean'], build);
 
 // Lint and run our tests
 gulp.task('test', ['lint:src', 'lint:test'], function() {
@@ -78,9 +91,11 @@ gulp.task('test', ['lint:src', 'lint:test'], function() {
     .pipe(mocha({reporter: 'dot'}));
 });
 
+// This is used when testing in the browser. Reloads the tests
+// when the lib, or the tests themselves, change.
 gulp.task('watch', function() {
   livereload.listen({port: 35729, host: 'localhost', start: true});
-  gulp.watch('src/**/*.js', ['browserify']);
+  gulp.watch(['src/**/*.js', 'test/**/*'], ['browserify']);
 });
 
 // Set up a livereload environment for our spec runner

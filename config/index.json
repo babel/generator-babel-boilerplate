@@ -1,0 +1,6 @@
+{
+  "destinationFolder": "dist",
+  "exportFileName": "library-dist",
+  "entryFileName": "index",
+  "exportVarName": "MyLibrary"
+}

@@ -1,5 +1,11 @@
+//
+// Always be sure to define variables.
+// Never export directly, as 6to5 strips
+// all import and export lines.
+//
+
 var Another = {
-  tester: function() {
+  anotherFn: function() {
     return 'ok';
   }
 };
