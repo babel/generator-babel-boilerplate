@@ -14,11 +14,11 @@ const sourcemaps = require('gulp-sourcemaps');
 const livereload = require('gulp-livereload');
 
 // Adjust this file to configure the build
-const mainConfig = require('./config/main-config');
+const config = require('./config/config');
 
 // Remove the built files
 gulp.task('clean', function(cb) {
-  del([mainConfig.distFolder], cb);
+  del([config.distFolder], cb);
 });
 
 // Lint our source code
@@ -38,20 +38,20 @@ gulp.task('lint:test', function() {
 // Build two versions of the library
 gulp.task('build', ['lint:src', 'clean'], function() {
   return gulp.src('src/wrapper.js')
-    .pipe(template(mainConfig))
+    .pipe(template(config))
     .pipe(preprocess())
-    .pipe(rename(mainConfig.fileName + '.js'))
+    .pipe(rename(config.fileName + '.js'))
     .pipe(sourcemaps.init())
     .pipe(to5({blacklist: ['useStrict'], modules: 'ignore'}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(mainConfig.distFolder))
+    .pipe(gulp.dest(config.distFolder))
     .pipe(filter(['*', '!**/*.js.map']))
-    .pipe(rename(mainConfig.fileName + '.min.js'))
+    .pipe(rename(config.fileName + '.min.js'))
     .pipe(uglify({
       outSourceMap: true,
-      inSourceMap: 'dist/' + mainConfig.fileName + '.js.map',
+      inSourceMap: 'dist/' + config.fileName + '.js.map',
     }))
-    .pipe(gulp.dest(mainConfig.distFolder));
+    .pipe(gulp.dest(config.distFolder));
 });
 
 gulp.task('compile_browser_script', function() {
