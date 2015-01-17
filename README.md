@@ -5,13 +5,13 @@ Author libraries in ES6 for Node and the browser.
 ### Features
 
 - Author in ES6
-- Export ES5 / UMD
-- Mocha/Chai/Sinon testing stack
-- Unit tests that work in Node and the browser
+- Export as ES5 & UMD
+- Mocha-Chai-Sinon testing stack
+- Unit tests that work in Node and in the browser
 
 ### Gulp
 
-There are three main Gulp tasks for you to use.
+There are three primary Gulp tasks.
 
 - `gulp` - Lint the library and tests, then run the unit tests
 - `gulp build` - Lint then build the library
