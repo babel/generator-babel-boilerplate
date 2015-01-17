@@ -54,12 +54,16 @@ gulp.task('build', ['lint:src', 'clean'], function() {
     .pipe(gulp.dest(config.distFolder));
 });
 
+// Use 6to5 to build the library to CommonJS modules. This
+// is fed to Browserify, which builds the version of the lib
+// for our browser spec runner.
 gulp.task('compile_browser_script', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
     .pipe(to5({modules: 'common'}))
     .pipe(gulp.dest('tmp'));
 });
 
+// Bundle our app for our unit tests
 gulp.task('browserify', ['compile_browser_script'], function() {
   var bundleStream = browserify({
     entries: ['./test/setup/browserify.js'],
@@ -80,7 +84,7 @@ gulp.task('test', ['lint:src', 'lint:test'], function() {
 
 gulp.task('watch', function() {
   livereload.listen({port: 35729, host: 'localhost', start: true});
-  gulp.watch('src/**/*.js', ['browserify']);
+  gulp.watch(['src/**/*.js', 'test/**/*'], ['browserify']);
 });
 
 // Set up a livereload environment for our spec runner
