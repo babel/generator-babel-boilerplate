@@ -35,7 +35,8 @@ gulp.task('lint:test', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-function build() {
+// Build two versions of the library
+gulp.task('build', ['lint:src', 'clean'], function() {
   return gulp.src('src/wrapper.js')
     .pipe(template(mainConfig))
     .pipe(preprocess())
@@ -51,7 +52,7 @@ function build() {
       inSourceMap: 'dist/' + mainConfig.fileName + '.js.map',
     }))
     .pipe(gulp.dest(mainConfig.distFolder));
-}
+});
 
 gulp.task('compile_browser_script', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
@@ -69,9 +70,6 @@ gulp.task('browserify', ['compile_browser_script'], function() {
     .pipe(gulp.dest(''))
     .pipe(livereload());
 });
-
-// Build two versions of the library
-gulp.task('build', ['lint:src', 'clean'], build);
 
 // Lint and run our tests
 gulp.task('test', ['lint:src', 'lint:test'], function() {
