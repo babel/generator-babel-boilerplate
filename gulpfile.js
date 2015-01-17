@@ -58,7 +58,10 @@ gulp.task('compile_browser_script', function() {
 });
 
 gulp.task('browserify', ['compile_browser_script'], function() {
-  var bundleStream = browserify('./test/setup.js').bundle();
+  var bundleStream = browserify({
+    entries: ['./test/setup/browserify.js'],
+    exclude: ['../src/index']
+  }).bundle();
   bundleStream
     .pipe(source('./tmp/index.js'))
     .pipe(gulp.dest(''))
@@ -71,7 +74,7 @@ gulp.task('build', ['lint:src', 'clean'], build);
 // Lint and run our tests
 gulp.task('test', ['lint:src', 'lint:test'], function() {
   require('6to5/register')({ modules: 'common' });
-  return gulp.src(['test/**/*.js'], {read: false})
+  return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
     .pipe(mocha({reporter: 'dot'}));
 });
 
