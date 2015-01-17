@@ -2,7 +2,7 @@
   "name": "es6-library-boilerplate",
   "version": "0.0.1",
   "description": "Author libraries in ES6 for Node and the browser.",
-  "main": "index.js",
+  "main": "dist/library-dist.js",
   "scripts": {
     "test": "gulp"
   },

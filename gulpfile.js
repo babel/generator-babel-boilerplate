@@ -51,14 +51,14 @@ function build() {
     .pipe(gulp.dest(mainConfig.distFolder));
 }
 
-gulp.task('compile_to_5', function() {
-  return gulp.src('src/index.js')
-    .pipe(rename('test_script.js'))
+gulp.task('compile_browser_script', function() {
+  return gulp.src(['src/index.js', 'test/unit/**/*.js'])
     .pipe(to5({modules: 'common'}))
+    .pipe(rename('test_script.js'))
     .pipe(gulp.dest('tmp'));
 });
 
-gulp.task('browserify', ['compile_to_5'], function() {
+gulp.task('browserify', ['compile_browser_script'], function() {
   var bundleStream = browserify('./tmp/test_script.js').bundle();
   bundleStream
     .pipe(source('./tmp/test_script.js'))
@@ -71,7 +71,8 @@ gulp.task('build', ['lint:src', 'clean'], build);
 
 // Lint and run our tests
 gulp.task('test', ['lint:src', 'lint:test'], function() {
-  return gulp.src(['test/setup/helpers.js', 'test/unit/**/*.js'], {read: false})
+  require('6to5/register')({ modules: 'common' });
+  return gulp.src(['test/**/*.js'], {read: false})
     .pipe(mocha({reporter: 'dot'}));
 });
 
@@ -81,8 +82,7 @@ gulp.task('watch', function() {
 });
 
 // Set up a livereload environment for our spec runner
-gulp.task('test:browser', ['lint'], function() {
-});
+gulp.task('test:browser', ['lint:src', 'lint:test', 'watch']);
 
 // An alias of test
 gulp.task('default', ['test']);

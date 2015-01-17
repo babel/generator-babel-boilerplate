@@ -28,7 +28,7 @@
   "boss"          : false,
   "debug"         : false,
   "eqnull"        : false,
-  "esnext"        : false,
+  "esnext"        : true,
   "evil"          : false,
   "expr"          : true,
   "funcscope"     : false,
@@ -64,6 +64,7 @@
   "wsh"           : false,
   "yui"           : false,
   "globals": {
+    "console": true,
     "sinon": true,
     "spy": true,
     "stub": true,

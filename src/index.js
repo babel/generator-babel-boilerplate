@@ -4,6 +4,10 @@
 // load them in order in ./wrapper.js
 //
 
-const MyLibrary = {};
+const MyLibrary = {
+  test() {
+    return 'hello';
+  }
+};
 
 export default MyLibrary;

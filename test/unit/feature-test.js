@@ -1,14 +1,16 @@
+import MyLibrary from '../../src/index';
+
 describe('A feature test', function() {
   beforeEach(function() {
-    this.method = stub().returns('hello');
-    this.method();
+    spy(MyLibrary, 'test');
+    MyLibrary.test();
   });
 
   it('should have been run once', function() {
-    expect(this.method).to.have.been.calledOnce;
+    expect(MyLibrary.test).to.have.been.calledOnce;
   });
 
   it('should have always returned hello', function() {
-    expect(this.method).to.have.always.returned('hello');
+    expect(MyLibrary.test).to.have.always.returned('hello');
   });
 });
