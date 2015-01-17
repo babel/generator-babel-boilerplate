@@ -13,12 +13,12 @@ const mocha = require('gulp-mocha');
 const mainConfig = require('./config/main-config');
 
 // Remove the built files
-gulp.task('clean:dist', function(cb) {
+gulp.task('clean', function(cb) {
   del([mainConfig.distFolder], cb);
 });
 
 // Build two versions of the library
-gulp.task('build', ['clean:dist'], function() {
+gulp.task('build', ['clean'], function() {
   return gulp.src('src/wrapper.js')
     .pipe(template(mainConfig))
     .pipe(preprocess())
@@ -34,7 +34,7 @@ gulp.task('build', ['clean:dist'], function() {
 });
 
 gulp.task('test', function() {
-  return gulp.src('test/unit/**/*.js', {read: false})
+  return gulp.src(['test/setup/node.js', 'test/setup/helpers.js', 'test/unit/**/*.js'], {read: false})
     .pipe(mocha({reporter: 'dot'}));
 });
 
