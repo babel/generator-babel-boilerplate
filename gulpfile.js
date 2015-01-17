@@ -14,11 +14,15 @@ const sourcemaps = require('gulp-sourcemaps');
 const livereload = require('gulp-livereload');
 
 // Adjust this file to configure the build
-const config = require('./config/config');
+const config = require('./config');
 
 // Remove the built files
 gulp.task('clean', function(cb) {
   del([config.distFolder], cb);
+});
+
+gulp.task('clean:tmp', function(cb) {
+  del(['tmp'], cb);
 });
 
 // Lint our source code
@@ -49,7 +53,7 @@ gulp.task('build', ['lint:src', 'clean'], function() {
     .pipe(rename(config.fileName + '.min.js'))
     .pipe(uglify({
       outSourceMap: true,
-      inSourceMap: 'dist/' + config.fileName + '.js.map',
+      inSourceMap: config.distFolder + '/' + config.fileName + '.js.map',
     }))
     .pipe(gulp.dest(config.distFolder));
 });
@@ -63,14 +67,19 @@ gulp.task('compile_browser_script', function() {
     .pipe(gulp.dest('tmp'));
 });
 
+// Browserify does not support dynamic names, so
+// we need to create a predictable entry point for it
+gulp.task('rename_input', function() {
+  return gulp.src(['tmp/' + config.entryFileName + '.js'])
+    .pipe(rename('__entry.js'))
+    .pipe(gulp.dest('tmp'));
+});
+
 // Bundle our app for our unit tests
-gulp.task('browserify', ['compile_browser_script'], function() {
-  var bundleStream = browserify({
-    entries: ['./test/setup/browserify.js'],
-    exclude: ['../src/index']
-  }).bundle();
+gulp.task('browserify', ['compile_browser_script', 'rename_input'], function() {
+  var bundleStream = browserify(['./test/setup/browserify.js']).bundle();
   bundleStream
-    .pipe(source('./tmp/index.js'))
+    .pipe(source('./tmp/__spec-build.js'))
     .pipe(gulp.dest(''))
     .pipe(livereload());
 });
@@ -82,6 +91,8 @@ gulp.task('test', ['lint:src', 'lint:test'], function() {
     .pipe(mocha({reporter: 'dot'}));
 });
 
+// This is used when testing in the browser. Reloads the tests
+// when the lib, or the tests themselves, change.
 gulp.task('watch', function() {
   livereload.listen({port: 35729, host: 'localhost', start: true});
   gulp.watch(['src/**/*.js', 'test/**/*'], ['browserify']);
