@@ -4,7 +4,10 @@
 // load them in order in ./wrapper.js
 //
 
+import Another from './another';
+
 const MyLibrary = {
+  tester: Another.tester,
   test() {
     return 'hello';
   }

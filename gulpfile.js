@@ -52,7 +52,7 @@ function build() {
 }
 
 gulp.task('compile_browser_script', function() {
-  return gulp.src(['src/index.js'])
+  return gulp.src(['src/**/*.js', '!src/wrapper.js'])
     .pipe(to5({modules: 'common'}))
     .pipe(gulp.dest('tmp'));
 });

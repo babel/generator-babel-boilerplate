@@ -9,6 +9,7 @@
 })(this, function(_) {
   'use strict';
 
+  // @include ./another.js
   // @include ./index.js
   
   return <%= varName %>;
