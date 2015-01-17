@@ -1,34 +1,36 @@
-var root;
 function setup() {
-  root.expect = root.chai.expect;
+  global.expect = global.chai.expect;
 
   beforeEach(function() {
-    this.sandbox = root.sinon.sandbox.create();
-    root.stub = this.sandbox.stub.bind(this.sandbox);
-    root.spy  = this.sandbox.spy.bind(this.sandbox);
+    this.sandbox = global.sinon.sandbox.create();
+    global.stub = this.sandbox.stub.bind(this.sandbox);
+    global.spy  = this.sandbox.spy.bind(this.sandbox);
   });
 
   afterEach(function() {
-    delete root.stub;
-    delete root.spy;
+    delete global.stub;
+    delete global.spy;
     this.sandbox.restore();
   });
 }
 
-if (typeof exports !== 'undefined') {
-  root = global;
-  root.MyLibrary = require('../src/index');
-  root.chai = require('chai');
-  root.sinon = require('sinon');
-  root.chai.use(require('sinon-chai'));
-  setup();
-} else {
-  root = window;
-  root.mocha.setup('bdd');
-  root.onload = function() {
-    root.mocha.checkLeaks();
-    root.mocha.globals(['stub', 'spy', 'expect']);
-    root.mocha.run();
+if (global.navigator) {
+  global.MyLibrary = require('../tmp/index');
+  global.chai = require('chai');
+  global.sinon = require('sinon');
+  global.chai.use(require('sinon-chai'));
+  global.mocha.setup('bdd');
+  global.onload = function() {
+    global.mocha.checkLeaks();
+    global.mocha.globals(['stub', 'spy', 'expect']);
+    global.mocha.run();
     setup();
   };
+  setup();
+} else {
+  global.MyLibrary = require('../src/index');
+  global.chai = require('chai');
+  global.sinon = require('sinon');
+  global.chai.use(require('sinon-chai'));
+  setup();
 }

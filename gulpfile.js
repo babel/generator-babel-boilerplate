@@ -52,16 +52,15 @@ function build() {
 }
 
 gulp.task('compile_browser_script', function() {
-  return gulp.src(['src/index.js', 'test/unit/**/*.js'])
+  return gulp.src(['src/index.js'])
     .pipe(to5({modules: 'common'}))
-    .pipe(rename('test_script.js'))
     .pipe(gulp.dest('tmp'));
 });
 
 gulp.task('browserify', ['compile_browser_script'], function() {
-  var bundleStream = browserify('./tmp/test_script.js').bundle();
+  var bundleStream = browserify('./test/setup.js').bundle();
   bundleStream
-    .pipe(source('./tmp/test_script.js'))
+    .pipe(source('./tmp/index.js'))
     .pipe(gulp.dest(''))
     .pipe(livereload());
 });
@@ -82,7 +81,7 @@ gulp.task('watch', function() {
 });
 
 // Set up a livereload environment for our spec runner
-gulp.task('test:browser', ['lint:src', 'lint:test', 'watch']);
+gulp.task('test:browser', ['lint:src', 'lint:test', 'browserify', 'watch']);
 
 // An alias of test
 gulp.task('default', ['test']);
