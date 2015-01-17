@@ -28,6 +28,7 @@
   "devDependencies": {
     "6to5": "^2.12.6",
     "6to5-loader": "^2.0.0",
+    "browserify": "^8.1.1",
     "chai": "^1.10.0",
     "del": "^1.1.1",
     "gulp": "^3.8.10",
@@ -47,6 +48,8 @@
     "json-loader": "^0.5.1",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2",
-    "sinon-chai": "^2.6.0"
+    "sinon-chai": "^2.6.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.2.1"
   }
 }
