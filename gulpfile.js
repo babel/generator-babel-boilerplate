@@ -18,7 +18,7 @@ const config = require('./config');
 
 // Remove the built files
 gulp.task('clean', function(cb) {
-  del([config.distFolder], cb);
+  del([config.destinationFolder], cb);
 });
 
 gulp.task('clean:tmp', function(cb) {
@@ -48,14 +48,14 @@ gulp.task('build', ['lint:src', 'clean'], function() {
     .pipe(sourcemaps.init())
     .pipe(to5({blacklist: ['useStrict'], modules: 'ignore'}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.distFolder))
+    .pipe(gulp.dest(config.destinationFolder))
     .pipe(filter(['*', '!**/*.js.map']))
     .pipe(rename(config.exportFileName + '.min.js'))
     .pipe(uglify({
       outSourceMap: true,
-      inSourceMap: config.distFolder + '/' + config.exportFileName + '.js.map',
+      inSourceMap: config.destinationFolder + '/' + config.exportFileName + '.js.map',
     }))
-    .pipe(gulp.dest(config.distFolder));
+    .pipe(gulp.dest(config.destinationFolder));
 });
 
 // Use 6to5 to build the library to CommonJS modules. This

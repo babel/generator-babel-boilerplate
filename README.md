@@ -34,16 +34,34 @@ exports a single variable.
 This boilerplate is not designed to build an entire web application. It is also not
 good if your library needs to export more than one file, or more than one variable.
 
-### FAQ
+### Customizing
 
-Configuring this library requires making changes in several places.
+This boilerplate is easily customizable to a certain extent. To make changes,
+find what you're looking to do below and follow the instructions.
 
-#### I want to change the main source file
+#### I want to change the primary source file
 
-The main file for the library is `src/index.js`. To change this:
+
+The primary source file for the library is `src/index.js`. To change this:
 
 1. Rename the file
 2. Update the value of `entryFileName` in `config/index.json`
 3. Update the filename in `src/wrapper.js`
 
 [View the diff here.](https://github.com/jmeas/es6-library-boilerplate/compare/master...change-entry-file)
+
+### I want to change the exported file name
+
+1. Update the value of `exportFileName` in `config/index.json`
+
+### I want to change what variable my module exports
+
+A single variable, `MyLibrary`, is exported from your library. You can change this by following
+these steps:
+
+1. Ensure that the variable you're exporting exists in your scripts
+1. Update the value of `exportVarName` in `config/index.json`
+
+### I want to change the destination directory
+
+1. Update the value of `destinationFolder` in `config/index.json`
