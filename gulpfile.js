@@ -101,7 +101,7 @@ gulp.task('browserify', ['compile_browser_script', 'rename_input'], function() {
 gulp.task('test', ['lint:src', 'lint:test'], function() {
   require('6to5/register')({ modules: 'common' });
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
-    .pipe(mocha({reporter: 'dot'}));
+    .pipe(mocha({reporter: 'dot', globals: config.mochaGlobals}));
 });
 
 // Ensure that linting occurs before browserify runs. This prevents
@@ -114,7 +114,7 @@ gulp.task('build_in_sequence', function(callback) {
 // when the lib, or the tests themselves, change.
 gulp.task('watch', function() {
   livereload.listen({port: 35729, host: 'localhost', start: true});
-  gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc'], ['build_in_sequence']);
+  gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc', 'config/index.json'], ['build_in_sequence']);
 });
 
 // Set up a livereload environment for our spec runner
