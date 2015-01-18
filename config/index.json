@@ -2,5 +2,6 @@
   "destinationFolder": "dist",
   "exportFileName": "library-dist",
   "entryFileName": "index",
-  "exportVarName": "MyLibrary"
+  "exportVarName": "MyLibrary",
+  "mochaGlobals": ["stub", "spy", "expect"]
 }
