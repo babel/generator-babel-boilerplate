@@ -114,7 +114,7 @@ gulp.task('build_in_sequence', function(callback) {
 // when the lib, or the tests themselves, change.
 gulp.task('watch', function() {
   livereload.listen({port: 35729, host: 'localhost', start: true});
-  gulp.watch(['src/**/*.js', 'test/**/*'], ['build_in_sequence']);
+  gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc'], ['build_in_sequence']);
 });
 
 // Set up a livereload environment for our spec runner
