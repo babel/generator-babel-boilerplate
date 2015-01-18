@@ -78,7 +78,7 @@ This is a slightly more complex procedure.
 2. Load the module in the [test setup file](https://github.com/jmeas/es6-library-boilerplate/blob/master/test/setup/setup.js).
   Attach any exported variables to global object if you'll be using them in your tests.
 3. Update both `.jshintrc` files to include any new global variable that you have added
-4. Update Mocha's globals in both the `gulpfile` and `test/setup/browserify`.
+4. Add those same global variables to the `mochaGlobals` array in `config/index.json`
 5. In the `src/wrapper.js` file, several things need to change: load the module in both the AMD and CommonJS 
   module definitions. Load the root version of the module for the browser module definition. Lastly, be
   sure that the factory method accepts the necessary arguments. An example wrapper that depends on
