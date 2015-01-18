@@ -1,4 +1,4 @@
-# es6-library-boilerplate
+# es6-library-boilerplate [![Travis build status](http://img.shields.io/travis/jmeas/es6-library-boilerplate.svg?style=flat)](https://travis-ci.org/jmeas/es6-library-boilerplate)
 
 Author libraries in ES6 for Node and the browser.
 
