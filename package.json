@@ -1,6 +1,6 @@
 {
   "name": "es6-library-boilerplate",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Author libraries in ES6 for Node and the browser.",
   "main": "dist/library-dist.js",
   "scripts": {
