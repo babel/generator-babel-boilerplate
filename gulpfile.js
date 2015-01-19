@@ -77,21 +77,16 @@ gulp.task('build', ['lint:src', 'clean'], function() {
 gulp.task('compile_browser_script', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
     .pipe(to5({modules: 'common'}))
-    .pipe(gulp.dest('tmp'));
-});
-
-// Browserify does not support dynamic names, so
-// we need to create a predictable entry point for it
-gulp.task('rename_input', function() {
-  return gulp.src(['tmp/' + config.entryFileName + '.js'])
+    .pipe(gulp.dest('tmp'))
+    .pipe(filter([config.entryFileName + '.js']))
     .pipe(rename('__entry.js'))
     .pipe(gulp.dest('tmp'));
 });
 
 // Bundle our app for our unit tests
-gulp.task('browserify', ['compile_browser_script', 'rename_input'], function() {
+gulp.task('browserify', ['compile_browser_script'], function() {
   var bundleStream = browserify(['./test/setup/browserify.js']).bundle();
-  bundleStream
+  return bundleStream
     .pipe(source('./tmp/__spec-build.js'))
     .pipe(gulp.dest(''))
     .pipe(livereload());
