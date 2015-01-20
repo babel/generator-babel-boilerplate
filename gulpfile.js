@@ -9,6 +9,7 @@ const filter = require('gulp-filter');
 const uglify = require('gulp-uglifyjs');
 const browserify = require('browserify');
 const template = require('gulp-template');
+const istanbul = require('gulp-istanbul');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
 const preprocess = require('gulp-preprocess');
@@ -92,11 +93,25 @@ gulp.task('browserify', ['compile_browser_script'], function() {
     .pipe(livereload());
 });
 
+gulp.task('coverage', function(done) {
+  gulp.src(['src/*.js', '!src/wrapper.js'])
+    .pipe(istanbul())
+    .on('finish', function() {
+      return test()
+      .pipe(istanbul.writeReports())
+      .on('end', done);
+    });
+});
+
+function test() {
+  return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
+    .pipe(mocha({reporter: 'dot', globals: config.mochaGlobals}));
+};
+
 // Lint and run our tests
 gulp.task('test', ['lint:src', 'lint:test'], function() {
   require('6to5/register')({ modules: 'common' });
-  return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
-    .pipe(mocha({reporter: 'dot', globals: config.mochaGlobals}));
+  return test();
 });
 
 // Ensure that linting occurs before browserify runs. This prevents

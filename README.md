@@ -1,7 +1,9 @@
 # es6-library-boilerplate
 [![Travis build status](http://img.shields.io/travis/jmeas/es6-library-boilerplate.svg?style=flat)](https://travis-ci.org/jmeas/es6-library-boilerplate)
+[![Code Climate](https://codeclimate.com/github/jmeas/es6-library-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/jmeas/es6-library-boilerplate)
+[![Test Coverage](https://codeclimate.com/github/jmeas/es6-library-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/jmeas/es6-library-boilerplate)
 [![Dependency Status](https://david-dm.org/jmeas/es6-library-boilerplate.svg)](https://david-dm.org/jmeas/es6-library-boilerplate) 
-[![devDependency Status](https://david-dm.org/jmeas/es6-library-boilerplate/dev-status.svg)](https://david-dm.org/jmeas/es6-library-boilerplate#info=devDependencies) 
+[![devDependency Status](https://david-dm.org/jmeas/es6-library-boilerplate/dev-status.svg)](https://david-dm.org/jmeas/es6-library-boilerplate#info=devDependencies)
 
 Author libraries in ES6 for Node and the browser.
 

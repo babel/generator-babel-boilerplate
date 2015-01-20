@@ -1,3 +1,7 @@
 language: node_js
 node_js:
   - "0.10"
+script: "gulp coverage"
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate < coverage/lcov.info
