@@ -12,6 +12,14 @@ Author libraries in ES6 for Node and the browser.
 - Mocha-Chai-Sinon testing stack
 - Unit tests that work in Node and in the browser
 
+### Getting Started
+
+Place your code in `src`. The primary file is `index.js` (note:
+[the filename can be changed](https://github.com/jmeas/es6-library-boilerplate#i-want-to-change-the-primary-source-file)).
+Run `gulp build` to compile the source into a distributable format.
+
+Put your unit tests in `test/unit`. The `gulp` command runs the tests.
+
 ### Gulp
 
 There are three primary Gulp tasks.
