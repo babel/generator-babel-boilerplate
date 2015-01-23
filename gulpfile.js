@@ -1,20 +1,11 @@
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')({
+  replaceString: /^gulp(-|\.)([0-9]+)?/
+});
 const del = require('del');
-const gulp = require('gulp');
-const to5 = require('gulp-6to5');
-const mocha = require('gulp-mocha');
-const notify = require('gulp-notify');
-const jshint = require('gulp-jshint');
-const rename = require('gulp-rename');
-const filter = require('gulp-filter');
-const uglify = require('gulp-uglifyjs');
 const browserify = require('browserify');
-const template = require('gulp-template');
-const istanbul = require('gulp-istanbul');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
-const preprocess = require('gulp-preprocess');
-const sourcemaps = require('gulp-sourcemaps');
-const livereload = require('gulp-livereload');
 
 // Adjust this file to configure the build
 const config = require('./config');
@@ -38,34 +29,34 @@ function ding(file) {
 // Lint our source code
 gulp.task('lint:src', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(notify(ding))
-    .pipe(jshint.reporter('fail'));
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.notify(ding))
+    .pipe($.jshint.reporter('fail'));
 });
 
 // Lint our test code
 gulp.task('lint:test', function() {
   return gulp.src(['test/unit/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(notify(ding))
-    .pipe(jshint.reporter('fail'));
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.notify(ding))
+    .pipe($.jshint.reporter('fail'));
 });
 
 // Build two versions of the library
 gulp.task('build', ['lint:src', 'clean'], function() {
   return gulp.src('src/wrapper.js')
-    .pipe(template(config))
-    .pipe(preprocess())
-    .pipe(rename(config.exportFileName + '.js'))
-    .pipe(sourcemaps.init())
-    .pipe(to5({blacklist: ['useStrict'], modules: 'ignore'}))
-    .pipe(sourcemaps.write('./'))
+    .pipe($.template(config))
+    .pipe($.preprocess())
+    .pipe($.rename(config.exportFileName + '.js'))
+    .pipe($.sourcemaps.init())
+    .pipe($.to5({blacklist: ['useStrict'], modules: 'ignore'}))
+    .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(config.destinationFolder))
-    .pipe(filter(['*', '!**/*.js.map']))
-    .pipe(rename(config.exportFileName + '.min.js'))
-    .pipe(uglify({
+    .pipe($.filter(['*', '!**/*.js.map']))
+    .pipe($.rename(config.exportFileName + '.min.js'))
+    .pipe($.uglifyjs({
       outSourceMap: true,
       inSourceMap: config.destinationFolder + '/' + config.exportFileName + '.js.map',
     }))
@@ -77,10 +68,10 @@ gulp.task('build', ['lint:src', 'clean'], function() {
 // for our browser spec runner.
 gulp.task('compile_browser_script', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
-    .pipe(to5({modules: 'common'}))
+    .pipe($.to5({modules: 'common'}))
     .pipe(gulp.dest('tmp'))
-    .pipe(filter([config.entryFileName + '.js']))
-    .pipe(rename('__entry.js'))
+    .pipe($.filter([config.entryFileName + '.js']))
+    .pipe($.rename('__entry.js'))
     .pipe(gulp.dest('tmp'));
 });
 
@@ -90,22 +81,22 @@ gulp.task('browserify', ['compile_browser_script'], function() {
   return bundleStream
     .pipe(source('./tmp/__spec-build.js'))
     .pipe(gulp.dest(''))
-    .pipe(livereload());
+    .pipe($.livereload());
 });
 
 gulp.task('coverage', function(done) {
   gulp.src(['src/*.js', '!src/wrapper.js'])
-    .pipe(istanbul())
+    .pipe($.istanbul())
     .on('finish', function() {
       return test()
-      .pipe(istanbul.writeReports())
+      .pipe($.istanbul.writeReports())
       .on('end', done);
     });
 });
 
 function test() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
-    .pipe(mocha({reporter: 'dot', globals: config.mochaGlobals}));
+    .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
 };
 
 // Lint and run our tests
@@ -123,7 +114,7 @@ gulp.task('build_in_sequence', function(callback) {
 // This is used when testing in the browser. Reloads the tests
 // when the lib, or the tests themselves, change.
 gulp.task('watch', function() {
-  livereload.listen({port: 35729, host: 'localhost', start: true});
+  $.livereload.listen({port: 35729, host: 'localhost', start: true});
   gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc', 'config/index.json'], ['build_in_sequence']);
 });
 
