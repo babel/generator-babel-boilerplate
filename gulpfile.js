@@ -55,7 +55,7 @@ gulp.task('build', ['lint:src', 'clean'], function() {
     .pipe($.preprocess())
     .pipe($.rename(config.exportFileName + '.js'))
     .pipe($.sourcemaps.init())
-    .pipe($.to5({blacklist: ['useStrict'], modules: 'ignore'}))
+    .pipe($.to5({blacklist: ['useStrict'], modules: 'ignore', loose: ['es6.modules']}))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(config.destinationFolder))
     .pipe($.filter(['*', '!**/*.js.map']))
@@ -73,7 +73,7 @@ gulp.task('build', ['lint:src', 'clean'], function() {
 gulp.task('compile_browser_script', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
     .pipe($.plumber())
-    .pipe($.to5({modules: 'common'}))
+    .pipe($.to5({modules: 'common', loose: ['es6.modules']}))
     .pipe(gulp.dest('tmp'))
     .pipe($.filter([config.entryFileName + '.js']))
     .pipe($.rename('__entry.js'))
