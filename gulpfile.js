@@ -30,6 +30,7 @@ function ding(file) {
 // Lint our source code
 gulp.task('lint:src', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
+    .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.notify(ding))
@@ -39,6 +40,7 @@ gulp.task('lint:src', function() {
 // Lint our test code
 gulp.task('lint:test', function() {
   return gulp.src(['test/unit/**/*.js'])
+    .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.notify(ding))
@@ -48,6 +50,7 @@ gulp.task('lint:test', function() {
 // Build two versions of the library
 gulp.task('build', ['lint:src', 'clean'], function() {
   return gulp.src('src/wrapper.js')
+    .pipe($.plumber())
     .pipe($.template(config))
     .pipe($.preprocess())
     .pipe($.rename(config.exportFileName + '.js'))
@@ -69,6 +72,7 @@ gulp.task('build', ['lint:src', 'clean'], function() {
 // for our browser spec runner.
 gulp.task('compile_browser_script', function() {
   return gulp.src(['src/**/*.js', '!src/wrapper.js'])
+    .pipe($.plumber())
     .pipe($.to5({modules: 'common'}))
     .pipe(gulp.dest('tmp'))
     .pipe($.filter([config.entryFileName + '.js']))
@@ -80,6 +84,11 @@ gulp.task('compile_browser_script', function() {
 gulp.task('browserify', ['compile_browser_script'], function() {
   var bundleStream = browserify(['./test/setup/browserify.js']).bundle();
   return bundleStream
+    .on('error', function(err){
+      console.log(err.message);
+      this.emit('end');
+    })
+    .pipe($.plumber())
     .pipe(source('./tmp/__spec-build.js'))
     .pipe(gulp.dest(''))
     .pipe($.livereload());
@@ -87,6 +96,7 @@ gulp.task('browserify', ['compile_browser_script'], function() {
 
 gulp.task('coverage', function(done) {
   gulp.src(['src/*.js', '!src/wrapper.js'])
+    .pipe($.plumber())
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe($.istanbul.hookRequire())
     .on('finish', function() {
@@ -98,6 +108,7 @@ gulp.task('coverage', function(done) {
 
 function test() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
+    .pipe($.plumber())
     .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
 };
 
