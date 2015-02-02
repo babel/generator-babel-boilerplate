@@ -2,8 +2,11 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
   replaceString: /^gulp(-|\.)([0-9]+)?/
 });
+const fs = require('fs');
 const del = require('del');
+const path = require('path');
 const isparta = require('isparta');
+const esperanto = require('esperanto');
 const browserify = require('browserify');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
@@ -48,23 +51,37 @@ gulp.task('lint:test', function() {
 });
 
 // Build two versions of the library
-gulp.task('build', ['lint:src', 'clean'], function() {
-  return gulp.src('src/wrapper.js')
-    .pipe($.plumber())
-    .pipe($.template(config))
-    .pipe($.preprocess())
-    .pipe($.rename(config.exportFileName + '.js'))
-    .pipe($.sourcemaps.init())
-    .pipe($.to5({blacklist: ['useStrict'], modules: 'ignore', loose: ['es6.modules']}))
-    .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest(config.destinationFolder))
-    .pipe($.filter(['*', '!**/*.js.map']))
-    .pipe($.rename(config.exportFileName + '.min.js'))
-    .pipe($.uglifyjs({
-      outSourceMap: true,
-      inSourceMap: config.destinationFolder + '/' + config.exportFileName + '.js.map',
-    }))
-    .pipe(gulp.dest(config.destinationFolder));
+gulp.task('build', ['lint:src', 'clean'], function(done) {
+  esperanto.bundle({
+    base: 'src',
+    entry: config.entryFileName,
+  }).then(function(bundle) {
+    res = bundle.toUmd({
+      sourceMap: true,
+      sourceMapSource: config.entryFileName + '.js',
+      sourceMapFile: config.exportFileName + '.js',
+      name: config.exportVarName
+    });
+
+    // Write the generated sourcemap
+    fs.mkdirSync(config.destinationFolder);
+    fs.writeFileSync(path.join(config.destinationFolder, config.exportFileName + '.js'), res.map.toString());
+
+    $.file(config.exportFileName + '.js', res.code, { src: true })
+      .pipe($.plumber())
+      .pipe($.sourcemaps.init({ loadMaps: true }))
+      .pipe($.to5({ blacklist: ['useStrict'] }))
+      .pipe($.sourcemaps.write('./', {addComment: false}))
+      .pipe(gulp.dest(config.destinationFolder))
+      .pipe($.filter(['*', '!**/*.js.map']))
+      .pipe($.rename(config.exportFileName + '.min.js'))
+      .pipe($.uglifyjs({
+        outSourceMap: true,
+        inSourceMap: config.destinationFolder + '/' + config.exportFileName + '.js.map',
+      }))
+      .pipe(gulp.dest(config.destinationFolder))
+      .on('end', done);
+  });
 });
 
 // Use 6to5 to build the library to CommonJS modules. This
