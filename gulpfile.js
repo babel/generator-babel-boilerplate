@@ -3,6 +3,7 @@ var $ = require('gulp-load-plugins')({
   replaceString: /^gulp(-|\.)([0-9]+)?/
 });
 const del = require('del');
+const isparta = require('isparta');
 const browserify = require('browserify');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
@@ -86,7 +87,8 @@ gulp.task('browserify', ['compile_browser_script'], function() {
 
 gulp.task('coverage', function(done) {
   gulp.src(['src/*.js', '!src/wrapper.js'])
-    .pipe($.istanbul())
+    .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
+    .pipe($.istanbul.hookRequire())
     .on('finish', function() {
       return test()
       .pipe($.istanbul.writeReports())
