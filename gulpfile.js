@@ -124,15 +124,11 @@ gulp.task('build_in_sequence', function(callback) {
   runSequence(['lint:src', 'lint:test'], 'browserify', callback);
 });
 
-// This is used when testing in the browser. Reloads the tests
-// when the lib, or the tests themselves, change.
-gulp.task('watch', function() {
-  $.livereload.listen({port: 35729, host: 'localhost', start: true});
-  gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc', 'config/index.json'], ['build_in_sequence']);
-});
-
 // Set up a livereload environment for our spec runner
-gulp.task('test:browser', ['build_in_sequence', 'watch']);
+gulp.task('test:browser', ['build_in_sequence'], function() {
+  $.livereload.listen({port: 35729, host: 'localhost', start: true});
+  return gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc', 'config/index.json'], ['build_in_sequence']);
+});
 
 // An alias of test
 gulp.task('default', ['test']);
