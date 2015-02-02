@@ -37,6 +37,20 @@ The [browser spec runner](https://github.com/jmeas/es6-library-boilerplate/blob/
 can be opened in a browser to run your tests. For it to work, you must first run `gulp test:browser`. This
 will set up a watch task that will automatically refresh the tests when your scripts, or the tests, change.
 
+### Code Climate
+
+This library is set up to integrate with Code Climate. If you've never used Code Climate, then you might be wondering
+why it's useful. There are two reasons:
+
+1. It consumes code coverage reports, and provides a badge for the README
+2. It provides interesting stats on your library, if you're into that kinda thing
+
+One or both of these items on the list can simply be ignored if you're uninterested in it. Or you can pull Code Climate
+out entirely from the boilerplate and not worry about it. To do that, update the relevant Gulp tasks and the Travis
+build.
+
+If you'd like to set up Code Climate for your project, follow [the steps here](https://github.com/jmeas/es6-library-boilerplate/wiki/Code-Climate).
+
 ### FAQ
 
 #### When should I consider using this boilerplate?
