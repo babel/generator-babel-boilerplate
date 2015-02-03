@@ -79,9 +79,6 @@ file imports will be included in the final build. To change the name of this ent
 
 1. Rename the file
 2. Update the value of `entryFileName` in `config/index.json`
-3. Update the filename in `src/wrapper.js`
-
-[View an example diff here.](https://github.com/jmeas/es6-library-boilerplate/compare/master...change-entry-file)
 
 #### I want to change the exported file name
 
@@ -103,14 +100,10 @@ these steps:
 
 #### My library depends on an external module
 
-This is a slightly more complex procedure.
+There are a few more files to update to add external modules.
 
 1. Install the module via `npm install --save THE_MODULE`
 2. Load the module in the [test setup file](https://github.com/jmeas/es6-library-boilerplate/blob/master/test/setup/setup.js).
   Attach any exported variables to global object if you'll be using them in your tests.
 3. Update both `.jshintrc` files to include any new global variable that you have added
 4. Add those same global variables to the `mochaGlobals` array in `config/index.json`
-5. In the `src/wrapper.js` file, several things need to change: load the module in both the AMD and CommonJS 
-  module definitions. Load the root version of the module for the browser module definition. Lastly, be
-  sure that the factory method accepts the necessary arguments. An example wrapper that depends on
-  Underscore can be seen **[here](https://github.com/jmeas/es6-library-boilerplate/blob/add-underscore/src/wrapper.js#L3-L10)**.
