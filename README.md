@@ -100,10 +100,12 @@ these steps:
 
 #### My library depends on an external module
 
-There are a few more files to update to add external modules.
+In the simplest case, you just need to install the module and use it in your scripts.
 
-1. Install the module via `npm install --save THE_MODULE`
-2. Load the module in the [test setup file](https://github.com/jmeas/es6-library-boilerplate/blob/master/test/setup/setup.js).
+If you want to access the module itself in your unit test files, you will need to set up the
+test environment to support the module. To do this:
+
+1. Load the module in the [test setup file](https://github.com/jmeas/es6-library-boilerplate/blob/master/test/setup/setup.js).
   Attach any exported variables to global object if you'll be using them in your tests.
-3. Update both `.jshintrc` files to include any new global variable that you have added
-4. Add those same global variables to the `mochaGlobals` array in `config/index.json`
+2. Update both `.jshintrc` files to include any new global variable that you have added
+3. Add those same global variables to the `mochaGlobals` array in `config/index.json`
