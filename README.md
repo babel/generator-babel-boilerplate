@@ -63,6 +63,10 @@ exports a single variable.
 You can always use this boilerplate as inspiration, but it works best for smaller libraries.
 If you're building a full-scale webapp, you will likely need many more changes to the build system.
 
+#### Are there examples?
+
+Quite a few! Check them out on [the wiki](https://github.com/jmeas/es6-library-boilerplate/wiki/Examples).
+
 ### Customizing
 
 This boilerplate is, to a certain extent, easily customizable. To make changes,
