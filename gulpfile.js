@@ -32,7 +32,7 @@ function ding(file) {
 
 // Lint our source code
 gulp.task('lint:src', function() {
-  return gulp.src(['src/**/*.js', '!src/wrapper.js'])
+  return gulp.src(['src/**/*.js'])
     .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
@@ -88,9 +88,9 @@ gulp.task('build', ['lint:src', 'clean'], function(done) {
 // is fed to Browserify, which builds the version of the lib
 // for our browser spec runner.
 gulp.task('compile_browser_script', function() {
-  return gulp.src(['src/**/*.js', '!src/wrapper.js'])
+  return gulp.src(['src/**/*.js'])
     .pipe($.plumber())
-    .pipe($.to5({modules: 'common', loose: ['es6.modules']}))
+    .pipe($.to5({modules: 'common'}))
     .pipe(gulp.dest('tmp'))
     .pipe($.filter([config.entryFileName + '.js']))
     .pipe($.rename('__entry.js'))
@@ -112,7 +112,7 @@ gulp.task('browserify', ['compile_browser_script'], function() {
 });
 
 gulp.task('coverage', function(done) {
-  gulp.src(['src/*.js', '!src/wrapper.js'])
+  gulp.src(['src/*.js'])
     .pipe($.plumber())
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe($.istanbul.hookRequire())
