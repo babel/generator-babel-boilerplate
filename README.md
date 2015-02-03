@@ -76,8 +76,6 @@ file imports will be included in the final build. To change the name of this ent
 1. Rename the file
 2. Update the value of `entryFileName` in `config/index.json`
 
-[View an example diff here.](https://github.com/jmeas/es6-library-boilerplate/compare/master...change-entry-file)
-
 #### I want to change the exported file name
 
 1. Update the value of `exportFileName` in `config/index.json`
