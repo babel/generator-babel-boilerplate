@@ -12,7 +12,7 @@ const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
 
 // Adjust this file to configure the build
-const config = require('./config');
+const config = require('./package.json').to5BoilerplateOptions;
 
 // Remove the built files
 gulp.task('clean', function(cb) {

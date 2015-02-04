@@ -2,7 +2,7 @@
 [![Travis build status](http://img.shields.io/travis/6to5/6to5-library-boilerplate.svg?style=flat)](https://travis-ci.org/6to5/6to5-library-boilerplate)
 [![Code Climate](https://codeclimate.com/github/6to5/6to5-library-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/6to5/6to5-library-boilerplate)
 [![Test Coverage](https://codeclimate.com/github/6to5/6to5-library-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/6to5/6to5-library-boilerplate)
-[![Dependency Status](https://david-dm.org/6to5/6to5-library-boilerplate.svg)](https://david-dm.org/6to5/6to5-library-boilerplate) 
+[![Dependency Status](https://david-dm.org/6to5/6to5-library-boilerplate.svg)](https://david-dm.org/6to5/6to5-library-boilerplate)
 [![devDependency Status](https://david-dm.org/6to5/6to5-library-boilerplate/dev-status.svg)](https://david-dm.org/6to5/6to5-library-boilerplate#info=devDependencies)
 
 Author libraries in ES6 for Node and the browser.
@@ -78,11 +78,11 @@ The primary source file for the library is `src/index.js`. Only the files that t
 file imports will be included in the final build. To change the name of this entry file:
 
 1. Rename the file
-2. Update the value of `entryFileName` in `config/index.json`
+2. Update the value of `entryFileName` in `package.json` under `to5BoilerplateOptions`
 
 #### I want to change the exported file name
 
-1. Update the value of `exportFileName` in `config/index.json`
+1. Update the value of `exportFileName` in `package.json` under `to5BoilerplateOptions`
 
 #### I want to change what variable my module exports
 
@@ -90,13 +90,13 @@ file imports will be included in the final build. To change the name of this ent
 these steps:
 
 1. Ensure that the variable you're exporting exists in your scripts
-2. Update the value of `exportVarName` in `config/index.json`
+2. Update the value of `exportVarName` in `package.json` under `to5BoilerplateOptions`
 3. Update the globals array in the `test/.jshintrc` file
 4. Check that the unit tests have been updated to reference the new value
 
 #### I want to change the destination directory
 
-1. Update the value of `destinationFolder` in `config/index.json`
+1. Update the value of `destinationFolder` in `package.json` under `to5BoilerplateOptions`
 
 #### My library depends on an external module
 
@@ -108,4 +108,5 @@ test environment to support the module. To do this:
 1. Load the module in the [test setup file](https://github.com/6to5/6to5-library-boilerplate/blob/master/test/setup/setup.js).
   Attach any exported variables to global object if you'll be using them in your tests.
 2. Update both `.jshintrc` files to include any new global variable that you have added
-3. Add those same global variables to the `mochaGlobals` array in `config/index.json`
+3. Add those same global variables to the `mochaGlobals` array in `package.json` under
+  `to5BoilerplateOptions`
