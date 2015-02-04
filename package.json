@@ -1,5 +1,5 @@
 {
-  "name": "es6-library-boilerplate",
+  "name": "6to5-library-boilerplate",
   "version": "1.1.2",
   "description": "Author libraries in ES6 for Node and the browser.",
   "main": "dist/library-dist.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jmeas/es6-library-boilerplate.git"
+    "url": "https://github.com/6to5/6to5-boilerplate.git"
   },
   "keywords": [
     "boilerplate",
@@ -22,9 +22,9 @@
   "author": "Jmeas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jmeas/es6-library-boilerplate/issues"
+    "url": "https://github.com/6to5/6to5-boilerplate/issues"
   },
-  "homepage": "https://github.com/jmeas/es6-library-boilerplate",
+  "homepage": "https://github.com/6to5/6to5-boilerplate",
   "devDependencies": {
     "6to5": "^3.3.3",
     "browserify": "^8.1.1",
