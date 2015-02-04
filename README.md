@@ -1,9 +1,9 @@
-# es6-library-boilerplate
-[![Travis build status](http://img.shields.io/travis/jmeas/es6-library-boilerplate.svg?style=flat)](https://travis-ci.org/jmeas/es6-library-boilerplate)
-[![Code Climate](https://codeclimate.com/github/jmeas/es6-library-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/jmeas/es6-library-boilerplate)
-[![Test Coverage](https://codeclimate.com/github/jmeas/es6-library-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/jmeas/es6-library-boilerplate)
-[![Dependency Status](https://david-dm.org/jmeas/es6-library-boilerplate.svg)](https://david-dm.org/jmeas/es6-library-boilerplate) 
-[![devDependency Status](https://david-dm.org/jmeas/es6-library-boilerplate/dev-status.svg)](https://david-dm.org/jmeas/es6-library-boilerplate#info=devDependencies)
+# 6to5-library-boilerplate
+[![Travis build status](http://img.shields.io/travis/6to5/6to5-library-boilerplate.svg?style=flat)](https://travis-ci.org/6to5/6to5-library-boilerplate)
+[![Code Climate](https://codeclimate.com/github/6to5/6to5-library-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/6to5/6to5-library-boilerplate)
+[![Test Coverage](https://codeclimate.com/github/6to5/6to5-library-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/6to5/6to5-library-boilerplate)
+[![Dependency Status](https://david-dm.org/6to5/6to5-library-boilerplate.svg)](https://david-dm.org/6to5/6to5-library-boilerplate) 
+[![devDependency Status](https://david-dm.org/6to5/6to5-library-boilerplate/dev-status.svg)](https://david-dm.org/6to5/6to5-library-boilerplate#info=devDependencies)
 
 Author libraries in ES6 for Node and the browser.
 
@@ -17,7 +17,7 @@ Author libraries in ES6 for Node and the browser.
 ### Getting Started
 
 Place your code in `src`. The primary file is `index.js` (note:
-[the filename can be changed](https://github.com/jmeas/es6-library-boilerplate#i-want-to-change-the-primary-source-file)).
+[the filename can be changed](https://github.com/6to5/6to5-library-boilerplate#i-want-to-change-the-primary-source-file)).
 Run `gulp build` to compile the source into a distributable format.
 
 Put your unit tests in `test/unit`. The `gulp` command runs the tests.
@@ -33,7 +33,7 @@ There are three primary Gulp tasks.
 
 ### Browser Tests
 
-The [browser spec runner](https://github.com/jmeas/es6-library-boilerplate/blob/master/test/runner.html)
+The [browser spec runner](https://github.com/6to5/6to5-library-boilerplate/blob/master/test/runner.html)
 can be opened in a browser to run your tests. For it to work, you must first run `gulp test:browser`. This
 will set up a watch task that will automatically refresh the tests when your scripts, or the tests, change.
 
@@ -42,14 +42,14 @@ will set up a watch task that will automatically refresh the tests when your scr
 This library is set up to integrate with Code Climate. If you've never used Code Climate, then you might be wondering
 why it's useful. There are two reasons:
 
-1. It consumes code coverage reports, and provides a badge for the README
+1. It consumes code coverage reports, and provides a coverage badge for the README
 2. It provides interesting stats on your library, if you're into that kinda thing
 
-One or both of these items on the list can simply be ignored if you're uninterested in it. Or you can pull Code Climate
+Either of these items on the list can simply be ignored if you're uninterested in them. Or you can pull Code Climate
 out entirely from the boilerplate and not worry about it. To do that, update the relevant Gulp tasks and the Travis
 build.
 
-If you'd like to set up Code Climate for your project, follow [the steps here](https://github.com/jmeas/es6-library-boilerplate/wiki/Code-Climate).
+If you'd like to set up Code Climate for your project, follow [the steps here](https://github.com/6to5/6to5-library-boilerplate/wiki/Code-Climate).
 
 ### FAQ
 
@@ -65,7 +65,7 @@ If you're building a full-scale webapp, you will likely need many more changes t
 
 #### Are there examples?
 
-Quite a few! Check them out on [the wiki](https://github.com/jmeas/es6-library-boilerplate/wiki/Examples).
+Quite a few! Check them out on [the wiki](https://github.com/6to5/6to5-library-boilerplate/wiki/Examples).
 
 ### Customizing
 
@@ -105,7 +105,7 @@ In the simplest case, you just need to install the module and use it in your scr
 If you want to access the module itself in your unit test files, you will need to set up the
 test environment to support the module. To do this:
 
-1. Load the module in the [test setup file](https://github.com/jmeas/es6-library-boilerplate/blob/master/test/setup/setup.js).
+1. Load the module in the [test setup file](https://github.com/6to5/6to5-library-boilerplate/blob/master/test/setup/setup.js).
   Attach any exported variables to global object if you'll be using them in your tests.
 2. Update both `.jshintrc` files to include any new global variable that you have added
 3. Add those same global variables to the `mochaGlobals` array in `config/index.json`
