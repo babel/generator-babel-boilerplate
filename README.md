@@ -34,7 +34,7 @@ There are three primary Gulp tasks.
 ### Browser Tests
 
 The [browser spec runner](https://github.com/6to5/6to5-library-boilerplate/blob/master/test/runner.html)
-can be opened in a browser to run your tests. For it to work, you must first run `gulp test:browser`. This
+can be opened in a browser to run your tests. For it to work, you must first run `gulp test-browser`. This
 will set up a watch task that will automatically refresh the tests when your scripts, or the tests, change.
 
 ### Code Climate
