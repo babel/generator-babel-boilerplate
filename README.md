@@ -83,6 +83,7 @@ file imports will be included in the final build. To change the name of this ent
 #### I want to change the exported file name
 
 1. Update the value of `exportFileName` in `package.json` under `to5BoilerplateOptions`
+2. Update `main` in `package.json`
 
 #### I want to change what variable my module exports
 
@@ -97,6 +98,7 @@ these steps:
 #### I want to change the destination directory
 
 1. Update the value of `destinationFolder` in `package.json` under `to5BoilerplateOptions`
+2. Update `main` in `package.json`
 
 #### My library depends on an external module
 
