@@ -1,5 +1,5 @@
 var setup = require('./setup');
-var config = require('../../config');
+var config = require('../../package.json').to5BoilerplateOptions;
 
 global[config.exportVarName] = require('../../src/' + config.entryFileName);
 global.chai = require('chai');
