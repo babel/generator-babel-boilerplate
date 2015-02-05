@@ -5,7 +5,7 @@
   "main": "dist/library-dist.js",
   "scripts": {
     "test": "gulp",
-    "test-browser": "gulp test:browser",
+    "test-browser": "gulp test-browser",
     "build": "gulp build",
     "coverage": "gulp coverage"
   },

@@ -20,7 +20,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Remove our temporary files
-gulp.task('clean:tmp', function(cb) {
+gulp.task('clean-tmp', function(cb) {
   del(['tmp'], cb);
 });
 
@@ -31,7 +31,7 @@ function ding(file) {
 };
 
 // Lint our source code
-gulp.task('lint:src', function() {
+gulp.task('lint-src', function() {
   return gulp.src(['src/**/*.js'])
     .pipe($.plumber())
     .pipe($.jshint())
@@ -41,7 +41,7 @@ gulp.task('lint:src', function() {
 });
 
 // Lint our test code
-gulp.task('lint:test', function() {
+gulp.task('lint-test', function() {
   return gulp.src(['test/unit/**/*.js'])
     .pipe($.plumber())
     .pipe($.jshint())
@@ -51,7 +51,7 @@ gulp.task('lint:test', function() {
 });
 
 // Build two versions of the library
-gulp.task('build', ['lint:src', 'clean'], function(done) {
+gulp.task('build', ['lint-src', 'clean'], function(done) {
   esperanto.bundle({
     base: 'src',
     entry: config.entryFileName,
@@ -87,7 +87,7 @@ gulp.task('build', ['lint:src', 'clean'], function(done) {
 // Use 6to5 to build the library to CommonJS modules. This
 // is fed to Browserify, which builds the version of the lib
 // for our browser spec runner.
-gulp.task('compile_browser_script', function() {
+gulp.task('compile-browser-script', function() {
   return gulp.src(['src/**/*.js'])
     .pipe($.plumber())
     .pipe($.to5({modules: 'common'}))
@@ -98,7 +98,7 @@ gulp.task('compile_browser_script', function() {
 });
 
 // Bundle our app for our unit tests
-gulp.task('browserify', ['compile_browser_script'], function() {
+gulp.task('browserify', ['compile-browser-script'], function() {
   var bundleStream = browserify(['./test/setup/browserify.js']).bundle();
   return bundleStream
     .on('error', function(err){
@@ -130,21 +130,21 @@ function test() {
 };
 
 // Lint and run our tests
-gulp.task('test', ['lint:src', 'lint:test'], function() {
+gulp.task('test', ['lint-src', 'lint-test'], function() {
   require('6to5/register')({ modules: 'common' });
   return test();
 });
 
 // Ensure that linting occurs before browserify runs. This prevents
 // the build from breaking due to poorly formatted code.
-gulp.task('build_in_sequence', function(callback) {
-  runSequence(['lint:src', 'lint:test'], 'browserify', callback);
+gulp.task('build-in-sequence', function(callback) {
+  runSequence(['lint-src', 'lint-test'], 'browserify', callback);
 });
 
 // Set up a livereload environment for our spec runner
-gulp.task('test:browser', ['build_in_sequence'], function() {
+gulp.task('test-browser', ['build-in-sequence'], function() {
   $.livereload.listen({port: 35729, host: 'localhost', start: true});
-  return gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc', 'config/index.json'], ['build_in_sequence']);
+  return gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc', 'config/index.json'], ['build-in-sequence']);
 });
 
 // An alias of test
