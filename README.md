@@ -63,6 +63,12 @@ exports a single variable.
 You can always use this boilerplate as inspiration, but it works best for smaller libraries.
 If you're building a full-scale webapp, you will likely need many more changes to the build system.
 
+#### What's the browser compatibility?
+
+As a rule of thumb, this transpiler works best in IE9+. You can support IE8 by limiting yourself
+to a subset of ES6 features. The [6to5 caveats page](http://6to5.org/docs/usage/caveats/) does an
+excellent job at explaining the nitty gritty details of supporting legacy browsers.
+
 #### Are there examples?
 
 Quite a few! Check them out on [the wiki](https://github.com/6to5/6to5-library-boilerplate/wiki/Examples).
