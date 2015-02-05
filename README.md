@@ -28,7 +28,7 @@ There are three primary Gulp tasks.
 
 - `gulp` - Lint the library and tests, then run the unit tests
 - `gulp build` - Lint then build the library
-- `gulp test:browser` - Build the library for use with the browser spec runner.
+- `gulp test-browser` - Build the library for use with the browser spec runner.
   Changes to the source will cause the runner to automatically refresh.
 
 ### Browser Tests
