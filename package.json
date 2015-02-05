@@ -4,7 +4,10 @@
   "description": "Author libraries in ES6 for Node and the browser.",
   "main": "dist/library-dist.js",
   "scripts": {
-    "test": "gulp"
+    "test": "gulp",
+    "test-browser": "gulp test:browser",
+    "build": "gulp build",
+    "coverage": "gulp coverage"
   },
   "repository": {
     "type": "git",
