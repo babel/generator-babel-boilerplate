@@ -73,6 +73,10 @@ excellent job at explaining the nitty gritty details of supporting legacy browse
 
 Quite a few! Check them out on [the wiki](https://github.com/6to5/6to5-library-boilerplate/wiki/Examples).
 
+#### Is there a Yeoman generator?
+
+[There sure is.](https://github.com/thejameskyle/generator-es6-library-boilerplate)
+
 ### Customizing
 
 This boilerplate is, to a certain extent, easily customizable. To make changes,
