@@ -51,6 +51,18 @@ build.
 
 If you'd like to set up Code Climate for your project, follow [the steps here](https://github.com/6to5/6to5-library-boilerplate/wiki/Code-Climate).
 
+### Linting
+
+This boilerplate uses [JSHint](http://jshint.com/docs/options/)
+and [JSCS](http://jscs.info/rules.html) to lint your source. To change the rules,
+edit the `.jshintrc` and `.jscsrc` files in the root directory, respectively.
+
+Given that your unit tests aren't your library code, it makes sense to
+lint them against a separate JSHint configuration. For this reason, a
+separate, unit-test specific `.jshintrc` can be found in the `test`
+directory. Unlike JSHint, the same JSCS rules are applied to both your code
+and your tests.
+
 ### FAQ
 
 #### When should I consider using this boilerplate?

@@ -41,6 +41,7 @@
     "gulp-file": "^0.2.0",
     "gulp-filter": "^2.0.0",
     "gulp-istanbul": "^0.6.0",
+    "gulp-jscs": "^1.4.0",
     "gulp-jshint": "^1.9.0",
     "gulp-livereload": "^3.4.0",
     "gulp-load-plugins": "^0.8.0",

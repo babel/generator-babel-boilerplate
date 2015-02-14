@@ -32,9 +32,14 @@ gulp.task('clean-tmp', function(cb) {
 
 // Send a notification when JSHint fails,
 // so that you know your changes didn't build
-function ding(file) {
+function jshintNotify(file) {
   if (!file.jshint) { return; }
   return file.jshint.success ? false : 'JSHint failed';
+}
+
+function jscsNotify(file) {
+  if (!file.jscs) { return; }
+  return file.jscs.success ? false : 'JSRC failed';
 }
 
 // Lint our source code
@@ -43,7 +48,9 @@ gulp.task('lint-src', function() {
     .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.notify(ding))
+    .pipe($.notify(jshintNotify))
+    .pipe($.jscs())
+    .pipe($.notify(jscsNotify))
     .pipe($.jshint.reporter('fail'));
 });
 
@@ -53,7 +60,9 @@ gulp.task('lint-test', function() {
     .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.notify(ding))
+    .pipe($.notify(jshintNotify))
+    .pipe($.jscs())
+    .pipe($.notify(jscsNotify))
     .pipe($.jshint.reporter('fail'));
 });
 
