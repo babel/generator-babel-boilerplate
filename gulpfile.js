@@ -4,8 +4,10 @@ var $ = require('gulp-load-plugins')({
 });
 const fs = require('fs');
 const del = require('del');
+const glob = require('glob');
 const path = require('path');
 const mkdirp = require('mkdirp');
+const to5ify = require('6to5ify');
 const isparta = require('isparta');
 const esperanto = require('esperanto');
 const browserify = require('browserify');
@@ -89,22 +91,16 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
   });
 });
 
-// Use 6to5 to build the library to CommonJS modules. This
-// is fed to Browserify, which builds the version of the lib
-// for our browser spec runner.
-gulp.task('compile-browser-script', function() {
-  return gulp.src(['src/**/*.js'])
-    .pipe($.plumber())
-    .pipe($.to5({modules: 'common'}))
-    .pipe(gulp.dest('tmp'))
-    .pipe($.filter([config.entryFileName + '.js']))
-    .pipe($.rename('__entry.js'))
-    .pipe(gulp.dest('tmp'));
-});
-
 // Bundle our app for our unit tests
-gulp.task('browserify', ['compile-browser-script'], function() {
-  var bundleStream = browserify(['./test/setup/browserify.js']).bundle();
+gulp.task('browserify', function() {
+  var testFiles = glob.sync('./test/unit/**/*');
+  var allFiles = ['./test/setup/browserify.js'].concat(testFiles);
+  var bundler = browserify(allFiles);
+  bundler.transform(to5ify.configure({
+    sourceMapRelative: __dirname + '/src',
+    blacklist: ['useStrict']
+  }));
+  var bundleStream = bundler.bundle();
   return bundleStream
     .on('error', function(err){
       console.log(err.message);

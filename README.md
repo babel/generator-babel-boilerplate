@@ -9,7 +9,7 @@ Author libraries in ES6 for Node and the browser.
 
 ### Features
 
-- Author in ES6
+- Author in ES6 (even the unit tests)
 - Export as ES5 & UMD
 - Mocha-Chai-Sinon testing stack
 - Unit tests that work in Node and in the browser
