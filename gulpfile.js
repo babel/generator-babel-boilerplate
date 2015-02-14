@@ -5,18 +5,22 @@ var $ = require('gulp-load-plugins')({
 const fs = require('fs');
 const del = require('del');
 const path = require('path');
+const mkdirp = require('mkdirp');
 const isparta = require('isparta');
 const esperanto = require('esperanto');
 const browserify = require('browserify');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
 
-// Adjust this file to configure the build
-const config = require('./package.json').to5BoilerplateOptions;
+const manifest = require('./package.json');
+const config = manifest.to5BoilerplateOptions;
+const mainFile = manifest.main;
+const destinationFolder = path.dirname(mainFile);
+const exportFileName = path.basename(mainFile, path.extname(mainFile));
 
 // Remove the built files
 gulp.task('clean', function(cb) {
-  del([config.destinationFolder], cb);
+  del([destinationFolder], cb);
 });
 
 // Remove our temporary files
@@ -27,8 +31,9 @@ gulp.task('clean-tmp', function(cb) {
 // Send a notification when JSHint fails,
 // so that you know your changes didn't build
 function ding(file) {
+  if (!file.jshint) { return; }
   return file.jshint.success ? false : 'JSHint failed';
-};
+}
 
 // Lint our source code
 gulp.task('lint-src', function() {
@@ -59,27 +64,27 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     res = bundle.toUmd({
       sourceMap: true,
       sourceMapSource: config.entryFileName + '.js',
-      sourceMapFile: config.exportFileName + '.js',
+      sourceMapFile: exportFileName + '.js',
       name: config.exportVarName
     });
 
     // Write the generated sourcemap
-    fs.mkdirSync(config.destinationFolder);
-    fs.writeFileSync(path.join(config.destinationFolder, config.exportFileName + '.js'), res.map.toString());
+    mkdirp.sync(destinationFolder);
+    fs.writeFileSync(path.join(destinationFolder, exportFileName + '.js'), res.map.toString());
 
-    $.file(config.exportFileName + '.js', res.code, { src: true })
+    $.file(exportFileName + '.js', res.code, { src: true })
       .pipe($.plumber())
       .pipe($.sourcemaps.init({ loadMaps: true }))
       .pipe($.to5({ blacklist: ['useStrict'] }))
       .pipe($.sourcemaps.write('./', {addComment: false}))
-      .pipe(gulp.dest(config.destinationFolder))
+      .pipe(gulp.dest(destinationFolder))
       .pipe($.filter(['*', '!**/*.js.map']))
-      .pipe($.rename(config.exportFileName + '.min.js'))
+      .pipe($.rename(exportFileName + '.min.js'))
       .pipe($.uglifyjs({
         outSourceMap: true,
-        inSourceMap: config.destinationFolder + '/' + config.exportFileName + '.js.map',
+        inSourceMap: destinationFolder + '/' + exportFileName + '.js.map',
       }))
-      .pipe(gulp.dest(config.destinationFolder))
+      .pipe(gulp.dest(destinationFolder))
       .on('end', done);
   });
 });
