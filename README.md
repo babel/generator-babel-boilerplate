@@ -22,12 +22,12 @@ Run `gulp build` to compile the source into a distributable format.
 
 Put your unit tests in `test/unit`. The `gulp` command runs the tests.
 
-### Gulp
-
-There are three primary Gulp tasks.
+### Gulp tasks
 
 - `gulp` - Lint the library and tests, then run the unit tests
 - `gulp build` - Lint then build the library
+- `gulp watch` - Continuously run the unit tests as you make changes to the source
+   and test files themselves
 - `gulp test-browser` - Build the library for use with the browser spec runner.
   Changes to the source will cause the runner to automatically refresh.
 
