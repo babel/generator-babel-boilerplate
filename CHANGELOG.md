@@ -1,3 +1,13 @@
+### [2.1.0](https://github.com/6to5/6to5-library-boilerplate/releases/tag/v2.1.0)
+
+- You no longer need to specify the individual test files in the browser runner; Browserify bundles it all together
+- You can author your unit tests in ES6 now, as well!
+- Add CHANGELOG file
+- No longer specify the output directory or file. It's determined by the `main` field in `package.json`
+- Add JSSC to lint for code style
+- Remove code style rules from JSHint
+- Add `gulp watch` to run headless tests as you make changes to the library and tests
+
 ### [2.0.0](https://github.com/6to5/6to5-library-boilerplate/releases/tag/v2.0.0)
 
 This library is now officially endorsed by 6to5! That's pretty cool, right?
