@@ -146,6 +146,11 @@ gulp.task('build-in-sequence', function(callback) {
   runSequence(['lint-src', 'lint-test'], 'browserify', callback);
 });
 
+// Run the headless unit tests as you make changes.
+gulp.task('watch', function() {
+  gulp.watch(['src/**/*', 'test/**/*', '.jshintrc', 'test/.jshintrc'], ['test']);
+});
+
 // Set up a livereload environment for our spec runner
 gulp.task('test-browser', ['build-in-sequence'], function() {
   $.livereload.listen({port: 35729, host: 'localhost', start: true});
