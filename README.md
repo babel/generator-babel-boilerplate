@@ -16,8 +16,12 @@ Author libraries in ES6 for Node and the browser.
 
 ### Getting Started
 
-Place your code in `src`. The primary file is `index.js` (note:
-[the filename can be changed](https://github.com/6to5/6to5-library-boilerplate#i-want-to-change-the-primary-source-file)).
+Update the metadata about the project, including the name in the `LICENSE`
+and the `package.json` information.
+
+Write your code in `src`. The primary file is `index.js` ([although the filename
+can be changed](https://github.com/6to5/6to5-library-boilerplate#i-want-to-change-the-primary-source-file)).
+
 Run `gulp build` to compile the source into a distributable format.
 
 Put your unit tests in `test/unit`. The `gulp` command runs the tests.
