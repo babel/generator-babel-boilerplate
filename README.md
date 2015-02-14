@@ -108,7 +108,11 @@ these steps:
 3. Update the globals array in the `test/.jshintrc` file
 4. Check that the unit tests have been updated to reference the new value
 
+#### I don't want to export a variable
 
+1. Ensure that your entry file does not export anything
+2. Set the property of `exportVarName` in `package.json` to be `null`
+3. Remove the variable name from the globals array in `test/.jshintrc`
 
 #### My library depends on an external module
 
