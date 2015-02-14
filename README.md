@@ -92,8 +92,11 @@ file imports will be included in the final build. To change the name of this ent
 
 #### I want to change the exported file name
 
-1. Update the value of `exportFileName` in `package.json` under `to5BoilerplateOptions`
-2. Update `main` in `package.json`
+1. Update `main` in `package.json`
+
+#### I want to change the destination directory
+
+1. Update `main` in `package.json`
 
 #### I want to change what variable my module exports
 
@@ -105,10 +108,7 @@ these steps:
 3. Update the globals array in the `test/.jshintrc` file
 4. Check that the unit tests have been updated to reference the new value
 
-#### I want to change the destination directory
 
-1. Update the value of `destinationFolder` in `package.json` under `to5BoilerplateOptions`
-2. Update `main` in `package.json`
 
 #### My library depends on an external module
 

@@ -50,6 +50,7 @@
     "gulp-uglifyjs": "^0.5.0",
     "isparta": "^1.0.1",
     "jshint-stylish": "^1.0.0",
+    "mkdirp": "^0.5.0",
     "mocha": "^2.1.0",
     "run-sequence": "^1.0.2",
     "sinon": "^1.12.2",
@@ -57,10 +58,12 @@
     "vinyl-source-stream": "^1.0.0"
   },
   "to5BoilerplateOptions": {
-    "destinationFolder": "dist",
-    "exportFileName": "library-dist",
     "entryFileName": "index",
     "exportVarName": "MyLibrary",
-    "mochaGlobals": ["stub", "spy", "expect"]
+    "mochaGlobals": [
+      "stub",
+      "spy",
+      "expect"
+    ]
   }
 }
