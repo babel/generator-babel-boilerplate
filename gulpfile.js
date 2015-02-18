@@ -1,13 +1,11 @@
 var gulp = require('gulp');
-var $ = require('gulp-load-plugins')({
-  replaceString: /^gulp(-|\.)([0-9]+)?/
-});
+var $ = require('gulp-load-plugins')();
 const fs = require('fs');
 const del = require('del');
 const glob = require('glob');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const to5ify = require('6to5ify');
+const babelify = require('babelify');
 const isparta = require('isparta');
 const esperanto = require('esperanto');
 const browserify = require('browserify');
@@ -15,7 +13,7 @@ const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
 
 const manifest = require('./package.json');
-const config = manifest.to5BoilerplateOptions;
+const config = manifest.babelBoilerplateOptions;
 const mainFile = manifest.main;
 const destinationFolder = path.dirname(mainFile);
 const exportFileName = path.basename(mainFile, path.extname(mainFile));
@@ -86,7 +84,7 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     $.file(exportFileName + '.js', res.code, { src: true })
       .pipe($.plumber())
       .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.to5({ blacklist: ['useStrict'] }))
+      .pipe($.babel({ blacklist: ['useStrict'] }))
       .pipe($.sourcemaps.write('./', {addComment: false}))
       .pipe(gulp.dest(destinationFolder))
       .pipe($.filter(['*', '!**/*.js.map']))
@@ -105,7 +103,7 @@ gulp.task('browserify', function() {
   var testFiles = glob.sync('./test/unit/**/*');
   var allFiles = ['./test/setup/browserify.js'].concat(testFiles);
   var bundler = browserify(allFiles);
-  bundler.transform(to5ify.configure({
+  bundler.transform(babelify.configure({
     sourceMapRelative: __dirname + '/src',
     blacklist: ['useStrict']
   }));
@@ -122,7 +120,7 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('coverage', function(done) {
-  require('6to5/register')({ modules: 'common' });
+  require('babel/register')({ modules: 'common' });
   gulp.src(['src/*.js'])
     .pipe($.plumber())
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
@@ -142,7 +140,7 @@ function test() {
 
 // Lint and run our tests
 gulp.task('test', ['lint-src', 'lint-test'], function() {
-  require('6to5/register')({ modules: 'common' });
+  require('babel/register')({ modules: 'common' });
   return test();
 });
 

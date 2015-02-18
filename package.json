@@ -1,5 +1,5 @@
 {
-  "name": "6to5-library-boilerplate",
+  "name": "babel-library-boilerplate",
   "version": "2.1.0",
   "description": "Author libraries in ES6 for Node and the browser.",
   "main": "dist/library-dist.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/6to5/6to5-library-boilerplate.git"
+    "url": "https://github.com/babel/babel-library-boilerplate.git"
   },
   "keywords": [
     "boilerplate",
@@ -20,24 +20,25 @@
     "starter",
     "kit",
     "transpile",
-    "6to5"
+    "6to5",
+    "babel"
   ],
   "author": "Jmeas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/6to5/6to5-library-boilerplate/issues"
+    "url": "https://github.com/babel/babel-library-boilerplate/issues"
   },
-  "homepage": "https://github.com/6to5/6to5-library-boilerplate",
+  "homepage": "https://github.com/babel/babel-library-boilerplate",
   "devDependencies": {
-    "6to5": "^3.3.3",
-    "6to5ify": "^4.1.1",
+    "babel": "^4.3.0",
+    "babelify": "^5.0.3",
     "browserify": "^8.1.1",
     "chai": "^1.10.0",
     "del": "^1.1.1",
     "esperanto": "^0.6.7",
     "glob": "^4.3.5",
     "gulp": "^3.8.10",
-    "gulp-6to5": "^3.0.0",
+    "gulp-babel": "^4.0.0",
     "gulp-file": "^0.2.0",
     "gulp-filter": "^2.0.0",
     "gulp-istanbul": "^0.6.0",
@@ -60,7 +61,7 @@
     "sinon-chai": "^2.6.0",
     "vinyl-source-stream": "^1.0.0"
   },
-  "to5BoilerplateOptions": {
+  "babelBoilerplateOptions": {
     "entryFileName": "index",
     "exportVarName": "MyLibrary",
     "mochaGlobals": [

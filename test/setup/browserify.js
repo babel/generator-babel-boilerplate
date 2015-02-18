@@ -1,4 +1,4 @@
-var config = require('../../package.json').to5BoilerplateOptions;
+var config = require('../../package.json').babelBoilerplateOptions;
 
 global.mocha.setup('bdd');
 global.onload = function() {
