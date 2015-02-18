@@ -16,8 +16,7 @@ Author libraries in ES6 for Node and the browser.
 
 ### Getting Started
 
-Update the metadata about the project, including the name in the `LICENSE`
-and the `package.json` information.
+Update the the name in the `LICENSE` and the information in `package.json`.
 
 Write your code in `src`. The primary file is `index.js` ([although the filename
 can be changed](https://github.com/babel/babel-library-boilerplate#i-want-to-change-the-primary-source-file)).
