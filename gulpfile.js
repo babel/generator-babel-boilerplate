@@ -122,6 +122,7 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('coverage', function(done) {
+  require('6to5/register')({ modules: 'common' });
   gulp.src(['src/*.js'])
     .pipe($.plumber())
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
