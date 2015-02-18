@@ -1,3 +1,8 @@
+### [3.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v3.0.0)
+
+- Fixes a bug where coverage reports would not be generated
+- Adopts the name `babel`
+
 ### [2.1.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v2.1.0)
 
 - You no longer need to specify the individual test files in the browser runner; Browserify bundles it all together

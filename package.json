@@ -1,6 +1,6 @@
 {
   "name": "babel-library-boilerplate",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Author libraries in ES6 for Node and the browser.",
   "main": "dist/library-dist.js",
   "scripts": {
