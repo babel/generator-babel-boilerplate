@@ -70,7 +70,7 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     base: 'src',
     entry: config.entryFileName,
   }).then(function(bundle) {
-    res = bundle.toUmd({
+    var res = bundle.toUmd({
       sourceMap: true,
       sourceMapSource: config.entryFileName + '.js',
       sourceMapFile: exportFileName + '.js',
