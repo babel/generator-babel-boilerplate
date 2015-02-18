@@ -70,7 +70,7 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     base: 'src',
     entry: config.entryFileName,
   }).then(function(bundle) {
-    res = bundle.toUmd({
+    var res = bundle.toUmd({
       sourceMap: true,
       sourceMapSource: config.entryFileName + '.js',
       sourceMapFile: exportFileName + '.js',
@@ -158,7 +158,7 @@ gulp.task('watch', function() {
 // Set up a livereload environment for our spec runner
 gulp.task('test-browser', ['build-in-sequence'], function() {
   $.livereload.listen({port: 35729, host: 'localhost', start: true});
-  return gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc', 'config/index.json'], ['build-in-sequence']);
+  return gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc'], ['build-in-sequence']);
 });
 
 // An alias of test
