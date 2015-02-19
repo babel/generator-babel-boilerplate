@@ -126,7 +126,7 @@ these steps:
 #### I don't want to export a variable
 
 1. Ensure that your entry file does not export anything
-2. Set the property of `exportVarName` in `package.json` to be `null`
+2. Set the property of `exportVarName` in `package.json` to be `"null"`
 3. Remove the variable name from the globals array in `test/.jshintrc`
 
 #### My library depends on an external module
