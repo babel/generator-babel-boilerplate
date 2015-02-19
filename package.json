@@ -33,7 +33,7 @@
     "babel": "^4.3.0",
     "babelify": "^5.0.3",
     "browserify": "^8.1.1",
-    "chai": "^1.10.0",
+    "chai": "^2.0.0",
     "del": "^1.1.1",
     "esperanto": "^0.6.7",
     "glob": "^4.3.5",
@@ -58,7 +58,7 @@
     "mocha": "^2.1.0",
     "run-sequence": "^1.0.2",
     "sinon": "^1.12.2",
-    "sinon-chai": "^2.6.0",
+    "sinon-chai": "^2.7.0",
     "vinyl-source-stream": "^1.0.0"
   },
   "babelBoilerplateOptions": {
