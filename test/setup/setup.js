@@ -12,4 +12,4 @@ module.exports = function() {
     delete global.spy;
     this.sandbox.restore();
   });
-}
+};
