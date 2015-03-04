@@ -119,7 +119,7 @@ gulp.task('browserify', function() {
     .pipe($.livereload());
 });
 
-gulp.task('coverage', function(done) {
+gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
   require('babel/register')({ modules: 'common' });
   gulp.src(['src/*.js'])
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
