@@ -1,3 +1,9 @@
+### [3.1.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v3.1.0)
+
+- Lints test set-up files in addition to the tests themselves
+- Travis builds now lint the library
+- Fixes a bug where Travis would not report failures when unit tests were failing
+
 ### [3.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v3.0.0)
 
 - Fixes a bug where coverage reports would not be generated
