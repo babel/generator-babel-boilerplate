@@ -43,7 +43,6 @@ function jscsNotify(file) {
 // Lint our source code
 gulp.task('lint-src', function() {
   return gulp.src(['src/**/*.js'])
-    .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.notify(jshintNotify))
@@ -55,7 +54,6 @@ gulp.task('lint-src', function() {
 // Lint our test code
 gulp.task('lint-test', function() {
   return gulp.src(['test/**/*.js'])
-    .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.notify(jshintNotify))
