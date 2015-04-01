@@ -10,7 +10,7 @@ describe('A second file of tests', () => {
     expect(MyLibrary.anotherFn).to.have.been.calledOnce;
   });
 
-  it('should have always returned hello', () => {
+  it('should have always returned ok', () => {
     expect(MyLibrary.anotherFn).to.have.always.returned('ok');
   });
 });
