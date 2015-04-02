@@ -40,27 +40,24 @@ function jscsNotify(file) {
   return file.jscs.success ? false : 'JSRC failed';
 }
 
+function createLintTask(taskName, files) {
+  gulp.task(taskName, function() {
+    return gulp.src(files)
+      .pipe($.plumber())
+      .pipe($.jshint())
+      .pipe($.jshint.reporter('jshint-stylish'))
+      .pipe($.notify(jshintNotify))
+      .pipe($.jscs())
+      .pipe($.notify(jscsNotify))
+      .pipe($.jshint.reporter('fail'));
+  });
+}
+
 // Lint our source code
-gulp.task('lint-src', function() {
-  return gulp.src(['src/**/*.js'])
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.notify(jshintNotify))
-    .pipe($.jscs())
-    .pipe($.notify(jscsNotify))
-    .pipe($.jshint.reporter('fail'));
-});
+createLintTask('lint-src', ['src/**/*.js']);
 
 // Lint our test code
-gulp.task('lint-test', function() {
-  return gulp.src(['test/**/*.js'])
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.notify(jshintNotify))
-    .pipe($.jscs())
-    .pipe($.notify(jscsNotify))
-    .pipe($.jshint.reporter('fail'));
-});
+createLintTask('lint-test', ['test/**/*.js']);
 
 // Build two versions of the library
 gulp.task('build', ['lint-src', 'clean'], function(done) {
