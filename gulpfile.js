@@ -144,15 +144,17 @@ gulp.task('build-in-sequence', function(callback) {
   runSequence(['lint-src', 'lint-test'], 'browserify', callback);
 });
 
+const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.jshintrc', '.jscsrc'];
+
 // Run the headless unit tests as you make changes.
 gulp.task('watch', function() {
-  gulp.watch(['src/**/*', 'test/**/*', '.jshintrc', 'test/.jshintrc'], ['test']);
+  gulp.watch(watchFiles, ['test']);
 });
 
 // Set up a livereload environment for our spec runner
 gulp.task('test-browser', ['build-in-sequence'], function() {
   $.livereload.listen({port: 35729, host: 'localhost', start: true});
-  return gulp.watch(['src/**/*.js', 'test/**/*', '.jshintrc', 'test/.jshintrc'], ['build-in-sequence']);
+  return gulp.watch(watchFiles, ['build-in-sequence']);
 });
 
 // An alias of test
