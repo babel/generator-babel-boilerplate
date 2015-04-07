@@ -11,6 +11,7 @@ const esperanto = require('esperanto');
 const browserify = require('browserify');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
+const _ = require('lodash');
 
 const manifest = require('./package.json');
 const config = manifest.babelBoilerplateOptions;
@@ -59,6 +60,18 @@ createLintTask('lint-src', ['src/**/*.js']);
 // Lint our test code
 createLintTask('lint-test', ['test/**/*.js']);
 
+function getBanner() {
+  var banner = ['/**',
+    ' * <%= name %> - <%= description %>',
+    ' * @version v<%= version %>',
+    ' * @link <%= homepage %>',
+    ' * @license <%= license %>',
+    ' */',
+    ''].join('\n');
+
+  return _.template(banner)(manifest);
+}
+
 // Build two versions of the library
 gulp.task('build', ['lint-src', 'clean'], function(done) {
   esperanto.bundle({
@@ -66,6 +79,7 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     entry: config.entryFileName,
   }).then(function(bundle) {
     var res = bundle.toUmd({
+      banner: getBanner(),
       sourceMap: true,
       sourceMapSource: config.entryFileName + '.js',
       sourceMapFile: exportFileName + '.js',
