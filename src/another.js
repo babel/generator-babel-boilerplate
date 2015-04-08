@@ -1,6 +1,6 @@
 //
 // Always be sure to define variables.
-// Never export directly, as 6to5 strips
+// Never export directly, as babel strips
 // all import and export lines.
 //
 
