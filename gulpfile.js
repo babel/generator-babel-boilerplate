@@ -1,5 +1,5 @@
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
 const fs = require('fs');
 const del = require('del');
 const glob = require('glob');
