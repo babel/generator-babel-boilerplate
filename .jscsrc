@@ -1,5 +1,3 @@
-// See https://github.com/jscs-dev/node-jscs/tree/master/presets for
-// other options (remember to re-enable esnext)
 {
   "preset": "google",
   "maximumLineLength": null,
