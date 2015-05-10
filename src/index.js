@@ -1,7 +1,9 @@
 import Another from './another';
 
 const MyLibrary = {
-  anotherFn: Another.anotherFn,
+  anotherFn() {
+    return Another.anotherFn() + ', friend';
+  },
   mainFn() {
     return 'hello';
   }
