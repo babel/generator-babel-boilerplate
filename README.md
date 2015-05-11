@@ -70,8 +70,8 @@ and your tests.
 
 #### When should I consider using this boilerplate?
 
-You're authoring any library that exports a single file. Examples are small libraries,
-or even entire JavaScript web applications. I use this boilerplate for both!
+You're authoring a library that exports a single file, and that one file
+exports a single variable.
 
 #### When might I not want to use this boilerplate?
 
@@ -91,11 +91,6 @@ Quite a few! Check them out on [the wiki](https://github.com/babel/babel-library
 #### Is there a Yeoman generator?
 
 [There sure is.](https://github.com/thejameskyle/generator-es6-library-boilerplate)
-
-#### Is there a version for Node-only projects?
-
-Yup. It has fewer pieces on account of no longer running the tests in the browser.
-[Check it out over here](https://github.com/jmeas/es6-node-boilerplate).
 
 ### Customizing
 
