@@ -5,11 +5,11 @@
 [![Dependency Status](https://david-dm.org/babel/babel-library-boilerplate.svg)](https://david-dm.org/babel/babel-library-boilerplate)
 [![devDependency Status](https://david-dm.org/babel/babel-library-boilerplate/dev-status.svg)](https://david-dm.org/babel/babel-library-boilerplate#info=devDependencies)
 
-Author libraries in ES2015 (prev: ES6) for Node and the browser.
+Author libraries in ES6 for Node and the browser.
 
 ### Features
 
-- Author in ES2015 (even the unit tests)
+- Author in ES6 (even the unit tests)
 - Export as ES5 & UMD
 - Mocha-Chai-Sinon testing stack
 - Unit tests that work in Node and in the browser
@@ -70,8 +70,8 @@ and your tests.
 
 #### When should I consider using this boilerplate?
 
-You're authoring any library that exports a single file. Examples are small libraries,
-or even entire JavaScript web applications. I use this boilerplate for both!
+You're authoring a library that exports a single file, and that one file
+exports a single variable.
 
 #### When might I not want to use this boilerplate?
 
@@ -81,7 +81,7 @@ If you're building a full-scale webapp, you will likely need many more changes t
 #### What's the browser compatibility?
 
 As a rule of thumb, this transpiler works best in IE9+. You can support IE8 by limiting yourself
-to a subset of ES2015 features. The [Babel caveats page](http://babeljs.io/docs/usage/caveats/) does an
+to a subset of ES6 features. The [Babel caveats page](http://babeljs.io/docs/usage/caveats/) does an
 excellent job at explaining the nitty gritty details of supporting legacy browsers.
 
 #### Are there examples?
@@ -91,11 +91,6 @@ Quite a few! Check them out on [the wiki](https://github.com/babel/babel-library
 #### Is there a Yeoman generator?
 
 [There sure is.](https://github.com/thejameskyle/generator-es6-library-boilerplate)
-
-#### Is there a version for Node-only projects?
-
-Yup. It has fewer pieces on account of no longer running the tests in the browser.
-[Check it out over here](https://github.com/jmeas/es6-node-boilerplate).
 
 ### Customizing
 
