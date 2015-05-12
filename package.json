@@ -31,6 +31,7 @@
   "homepage": "https://github.com/babel/babel-library-boilerplate",
   "devDependencies": {
     "babel": "^5.0.0",
+    "babel-core": "^5.2.17",
     "babelify": "^6.0.0",
     "browserify": "^8.1.1",
     "chai": "^2.0.0",
