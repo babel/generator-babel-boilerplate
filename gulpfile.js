@@ -84,10 +84,9 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
       .pipe(gulp.dest(destinationFolder))
       .pipe($.filter(['*', '!**/*.js.map']))
       .pipe($.rename(exportFileName + '.min.js'))
-      .pipe($.uglifyjs({
-        outSourceMap: true,
-        inSourceMap: destinationFolder + '/' + exportFileName + '.js.map',
-      }))
+      .pipe($.sourcemaps.init({ loadMaps: true }))
+      .pipe($.uglify())
+      .pipe($.sourcemaps.write('./'))
       .pipe(gulp.dest(destinationFolder))
       .on('end', done);
   })
