@@ -102,8 +102,7 @@ gulp.task('browserify', function() {
     sourceMapRelative: __dirname + '/src',
     blacklist: ['useStrict']
   }));
-  var bundleStream = bundler.bundle();
-  return bundleStream
+  return bundler.bundle()
     .on('error', function(err){
       console.log(err.message);
       this.emit('end');
@@ -113,6 +112,11 @@ gulp.task('browserify', function() {
     .pipe(gulp.dest(''))
     .pipe($.livereload());
 });
+
+function test() {
+  return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
+    .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
+}
 
 gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
   require('babel/register')({ modules: 'common' });
@@ -125,11 +129,6 @@ gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
       .on('end', done);
     });
 });
-
-function test() {
-  return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
-    .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
-};
 
 // Lint and run our tests
 gulp.task('test', ['lint-src', 'lint-test'], function() {
