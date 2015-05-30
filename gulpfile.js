@@ -28,13 +28,8 @@ gulp.task('clean-tmp', function(cb) {
   del(['tmp'], cb);
 });
 
-// Send a notification when JSHint fails,
+// Send a notification when JSRC fails,
 // so that you know your changes didn't build
-function jshintNotify(file) {
-  if (!file.jshint) { return; }
-  return file.jshint.success ? false : 'JSHint failed';
-}
-
 function jscsNotify(file) {
   if (!file.jscs) { return; }
   return file.jscs.success ? false : 'JSRC failed';
@@ -44,12 +39,11 @@ function createLintTask(taskName, files) {
   gulp.task(taskName, function() {
     return gulp.src(files)
       .pipe($.plumber())
-      .pipe($.jshint())
-      .pipe($.jshint.reporter('jshint-stylish'))
-      .pipe($.notify(jshintNotify))
+      .pipe($.eslint())
+      .pipe($.eslint.format())
+      .pipe($.eslint.failOnError())
       .pipe($.jscs())
-      .pipe($.notify(jscsNotify))
-      .pipe($.jshint.reporter('fail'));
+      .pipe($.notify(jscsNotify));
   });
 }
 
@@ -142,7 +136,7 @@ gulp.task('build-in-sequence', function(callback) {
   runSequence(['lint-src', 'lint-test'], 'browserify', callback);
 });
 
-const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.jshintrc', '.jscsrc'];
+const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc', '.jscsrc'];
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', function() {
