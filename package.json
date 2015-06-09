@@ -1,7 +1,7 @@
 {
   "name": "babel-library-boilerplate",
   "version": "3.1.0",
-  "description": "Author libraries in ES6 for Node and the browser.",
+  "description": "Author libraries in ES2015 for Node and the browser.",
   "main": "dist/library-dist.js",
   "scripts": {
     "test": "gulp",
@@ -16,6 +16,7 @@
   "keywords": [
     "boilerplate",
     "es6",
+    "es2015",
     "node",
     "starter",
     "kit",
