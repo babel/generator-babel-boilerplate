@@ -5,11 +5,11 @@
 [![Dependency Status](https://david-dm.org/babel/babel-library-boilerplate.svg)](https://david-dm.org/babel/babel-library-boilerplate)
 [![devDependency Status](https://david-dm.org/babel/babel-library-boilerplate/dev-status.svg)](https://david-dm.org/babel/babel-library-boilerplate#info=devDependencies)
 
-Author libraries in ES6 for Node and the browser.
+A boilerplate to author libraries in ES2015 for Node and the browser.
 
 ### Features
 
-- Author in ES6 (even the unit tests)
+- Author in ES2015 (even the unit tests)
 - Export as ES5 & UMD
 - Mocha-Chai-Sinon testing stack
 - Unit tests that work in Node and in the browser
@@ -81,7 +81,7 @@ If you're building a full-scale webapp, you will likely need many more changes t
 #### What's the browser compatibility?
 
 As a rule of thumb, this transpiler works best in IE9+. You can support IE8 by limiting yourself
-to a subset of ES6 features. The [Babel caveats page](http://babeljs.io/docs/usage/caveats/) does an
+to a subset of ES2015 features. The [Babel caveats page](http://babeljs.io/docs/usage/caveats/) does an
 excellent job at explaining the nitty gritty details of supporting legacy browsers.
 
 #### Are there examples?
