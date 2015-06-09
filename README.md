@@ -56,14 +56,14 @@ If you'd like to set up Code Climate for your project, follow [the steps here](h
 
 ### Linting
 
-This boilerplate uses [JSHint](http://jshint.com/docs/options/)
+This boilerplate uses [ESLint](http://eslint.org/)
 and [JSCS](http://jscs.info/rules.html) to lint your source. To change the rules,
-edit the `.jshintrc` and `.jscsrc` files in the root directory, respectively.
+edit the `.eslintrc` and `.jscsrc` files in the root directory, respectively.
 
 Given that your unit tests aren't your library code, it makes sense to
-lint them against a separate JSHint configuration. For this reason, a
-separate, unit-test specific `.jshintrc` can be found in the `test`
-directory. Unlike JSHint, the same JSCS rules are applied to both your code
+lint them against a separate ESLint configuration. For this reason, a
+separate, unit-test specific `.eslintrc` can be found in the `test`
+directory. Unlike ESLint, the same JSCS rules are applied to both your code
 and your tests.
 
 ### FAQ
@@ -125,14 +125,12 @@ these steps:
 
 1. Ensure that the variable you're exporting exists in your scripts
 2. Update the value of `exportVarName` in `package.json` under `babelBoilerplateOptions`
-3. Update the globals array in the `test/.jshintrc` file
-4. Check that the unit tests have been updated to reference the new value
+3. Check that the unit tests have been updated to reference the new value
 
 #### I don't want to export a variable
 
 1. Ensure that your entry file does not export anything
 2. Set the property of `exportVarName` in `package.json` to be `"null"`
-3. Remove the variable name from the globals array in `test/.jshintrc`
 
 #### My library depends on an external module
 
@@ -143,6 +141,5 @@ test environment to support the module. To do this:
 
 1. Load the module in the [test setup file](https://github.com/babel/babel-library-boilerplate/blob/master/test/setup/setup.js).
   Attach any exported variables to global object if you'll be using them in your tests.
-2. Update both `.jshintrc` files to include any new global variable that you have added
-3. Add those same global variables to the `mochaGlobals` array in `package.json` under
+2. Add those same global variables to the `mochaGlobals` array in `package.json` under
   `babelBoilerplateOptions`
