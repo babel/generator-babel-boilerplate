@@ -1,7 +1,5 @@
 {
   "preset": "google",
   "maximumLineLength": null,
-  "esprima": "babel-jscs",
-  // disable rule until babel-jscs/issues/1 is fixed
-  "validateQuoteMarks": null
+  "esprima": "babel-jscs"
 }
