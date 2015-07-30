@@ -159,17 +159,22 @@ gulp.task('build-in-sequence', function(callback) {
   runSequence(['lint-src', 'lint-test'], 'browserify', callback);
 });
 
-const watchFiles = ['package.json', '**/.eslintrc', '.jscsrc'];
+// These are JS files that should be watched by Gulp. When running tests in the browser,
+// watchify is used instead, so these aren't included.
+const jsWatchFiles = ['src/**/*', 'test/**/*'];
+// These are files other than JS files which are to be watched. They are always watched.
+const otherWatchFiles = ['package.json', '**/.eslintrc', '.jscsrc'];
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', function() {
+  const watchFiles = jsWatchFiles.concat(otherWatchFiles);
   gulp.watch(watchFiles, ['test']);
 });
 
 // Set up a livereload environment for our spec runner
 gulp.task('test-browser', ['build-in-sequence'], function() {
   $.livereload.listen({port: 35729, host: 'localhost', start: true});
-  return gulp.watch(watchFiles, ['build-in-sequence']);
+  return gulp.watch(otherWatchFiles, ['build-in-sequence']);
 });
 
 // An alias of test
