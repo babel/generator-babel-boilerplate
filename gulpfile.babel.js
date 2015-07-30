@@ -71,7 +71,7 @@ function build(done) {
   .catch(done);
 }
 
-function browserify() {
+function browserifyBundle() {
   let testFiles = glob.sync('./test/unit/**/*');
   let allFiles = ['./test/setup/browserify.js'].concat(testFiles);
   let bundler = browserify(allFiles);
@@ -142,7 +142,7 @@ gulp.task('lint-test', () => lint('test/**/*.js'));
 gulp.task('build', ['lint-src', 'clean'], build);
 
 // Bundle our app for our unit tests
-gulp.task('browserify', browserify);
+gulp.task('browserify', browserifyBundle);
 
 // Set up coverage and run tests
 gulp.task('coverage', ['lint-src', 'lint-test'], coverage);
