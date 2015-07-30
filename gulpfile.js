@@ -73,7 +73,7 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     $.file(exportFileName + '.js', res.code, { src: true })
       .pipe($.plumber())
       .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.babel({ blacklist: ['useStrict'] }))
+      .pipe($.babel())
       .pipe($.sourcemaps.write('./', {addComment: false}))
       .pipe(gulp.dest(destinationFolder))
       .pipe($.filter(['*', '!**/*.js.map']))
@@ -93,8 +93,7 @@ gulp.task('browserify', function() {
   var allFiles = ['./test/setup/browserify.js'].concat(testFiles);
   var bundler = browserify(allFiles);
   bundler.transform(babelify.configure({
-    sourceMapRelative: __dirname + '/src',
-    blacklist: ['useStrict']
+    sourceMapRelative: __dirname + '/src'
   }));
   return bundler.bundle()
     .on('error', function(err){
