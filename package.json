@@ -1,6 +1,6 @@
 {
   "name": "babel-library-boilerplate",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "Author libraries in ES2015 for Node and the browser.",
   "main": "dist/library-dist.js",
   "scripts": {
