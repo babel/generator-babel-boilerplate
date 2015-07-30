@@ -28,11 +28,11 @@ gulp.task('clean-tmp', function(cb) {
   del(['tmp'], cb);
 });
 
-// Send a notification when JSRC fails,
+// Send a notification when JSCS fails,
 // so that you know your changes didn't build
 function jscsNotify(file) {
   if (!file.jscs) { return; }
-  return file.jscs.success ? false : 'JSRC failed';
+  return file.jscs.success ? false : 'JSCS failed';
 }
 
 function createLintTask(taskName, files) {
