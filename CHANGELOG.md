@@ -1,3 +1,11 @@
+### [4.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v4.0.0)
+
+- Watch keeps an eye on more files
+- Travis now tests against more things! More specifically, io.js and Node 0.12
+- Updated dependencies, which led to changes in the config files (such as the .eslintrc file for the tests)
+- As part of the above change, JSCS now supports every Babel feature
+- JSHint has been swapped with ESLint + Babel-ESLint, which also provides support for every Babel feature
+
 ### [3.1.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v3.1.0)
 
 - Lints test set-up files in addition to the tests themselves
