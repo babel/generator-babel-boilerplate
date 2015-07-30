@@ -60,6 +60,8 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     entry: config.entryFileName,
   }).then(function(bundle) {
     var res = bundle.toUmd({
+      // Don't worry about the fact that the source map is inlined at this step.
+      // `gulp-sourcemaps`, which comes next, will externalize them.
       sourceMap: 'inline',
       name: config.exportVarName
     });
