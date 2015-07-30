@@ -3,7 +3,7 @@
   "rules": {
     "strict": 0,
     "quotes": [2, "single"],
-    "no-unused-expressions": false
+    "no-unused-expressions": 0
   },
   "env": {
     "browser": true,
