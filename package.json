@@ -59,7 +59,9 @@
     "run-sequence": "^1.0.2",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.7.0",
-    "vinyl-source-stream": "^1.0.0"
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^3.3.1"
   },
   "babelBoilerplateOptions": {
     "entryFileName": "index",

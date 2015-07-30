@@ -1,15 +1,21 @@
+// Load Gulp and all of our Gulp plugins
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+
+// Load other npm modules
 const del = require('del');
 const glob = require('glob');
 const path = require('path');
-const babelify = require('babelify');
 const isparta = require('isparta');
+const babelify = require('babelify');
+const watchify = require('watchify');
+const buffer = require('vinyl-buffer');
 const esperanto = require('esperanto');
 const browserify = require('browserify');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
 
+// Gather the library data from `package.json`
 const manifest = require('./package.json');
 const config = manifest.babelBoilerplateOptions;
 const mainFile = manifest.main;
@@ -81,23 +87,47 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
   .catch(done);
 });
 
-// Bundle our app for our unit tests
-gulp.task('browserify', function() {
-  var testFiles = glob.sync('./test/unit/**/*');
-  var allFiles = ['./test/setup/browserify.js'].concat(testFiles);
-  var bundler = browserify(allFiles);
-  bundler.transform(babelify.configure({
-    sourceMapRelative: __dirname + '/src'
-  }));
+function bundle(bundler) {
   return bundler.bundle()
-    .on('error', function(err){
+    .on('error', function(err) {
       console.log(err.message);
       this.emit('end');
     })
     .pipe($.plumber())
     .pipe(source('./tmp/__spec-build.js'))
+    .pipe(buffer())
     .pipe(gulp.dest(''))
     .pipe($.livereload());
+}
+
+function getBundler() {
+  // Our browserify bundle is made up of our unit tests, which
+  // should individually load up pieces of our application.
+  // We also include the browserify setup file.
+  var testFiles = glob.sync('./test/unit/**/*');
+  var allFiles = ['./test/setup/browserify.js'].concat(testFiles);
+
+  // Create our bundler, passing in the arguments required for watchify
+  var bundler = browserify(allFiles, watchify.args);
+
+  // Watch the bundler, and re-bundle it whenever files change
+  bundler = watchify(bundler);
+  bundler.on('update', function() {
+    bundle(bundler);
+  });
+
+  // Set up Babelify so that ES6 works in the tests
+  bundler.transform(babelify.configure({
+    sourceMapRelative: __dirname + '/src'
+  }));
+
+  return bundler;
+};
+
+// Build the unit test suite for running tests
+// in the browser
+gulp.task('browserify', function() {
+  return bundle(getBundler());
 });
 
 function test() {
@@ -112,8 +142,8 @@ gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
     .pipe($.istanbul.hookRequire())
     .on('finish', function() {
       return test()
-      .pipe($.istanbul.writeReports())
-      .on('end', done);
+        .pipe($.istanbul.writeReports())
+        .on('end', done);
     });
 });
 
@@ -129,7 +159,7 @@ gulp.task('build-in-sequence', function(callback) {
   runSequence(['lint-src', 'lint-test'], 'browserify', callback);
 });
 
-const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc', '.jscsrc'];
+const watchFiles = ['package.json', '**/.eslintrc', '.jscsrc'];
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', function() {
