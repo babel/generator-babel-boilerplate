@@ -9,7 +9,7 @@
     "build": "gulp build",
     "coverage": "gulp coverage",
     "preversion": "[[ -z $(git status --porcelain) ]] && npm run build && git add -A dist && git commit -m 'Build lib'",
-    "prepublish": "git push origin master --follow-tags"
+    "postpublish": "git push origin master --follow-tags"
   },
   "repository": {
     "type": "git",
