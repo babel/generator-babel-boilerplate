@@ -60,21 +60,17 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
     entry: config.entryFileName,
   }).then(function(bundle) {
     var res = bundle.toUmd({
-      sourceMap: true,
-      sourceMapSource: config.entryFileName + '.js',
-      sourceMapFile: exportFileName + '.js',
+      // Don't worry about the fact that the source map is inlined at this step.
+      // `gulp-sourcemaps`, which comes next, will externalize them.
+      sourceMap: 'inline',
       name: config.exportVarName
     });
-
-    // Write the generated sourcemap
-    mkdirp.sync(destinationFolder);
-    fs.writeFileSync(path.join(destinationFolder, exportFileName + '.js'), res.map.toString());
 
     $.file(exportFileName + '.js', res.code, { src: true })
       .pipe($.plumber())
       .pipe($.sourcemaps.init({ loadMaps: true }))
       .pipe($.babel())
-      .pipe($.sourcemaps.write('./', {addComment: false}))
+      .pipe($.sourcemaps.write('./'))
       .pipe(gulp.dest(destinationFolder))
       .pipe($.filter(['*', '!**/*.js.map']))
       .pipe($.rename(exportFileName + '.min.js'))
