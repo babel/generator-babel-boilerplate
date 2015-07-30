@@ -19,15 +19,10 @@ const mainFile = manifest.main;
 const destinationFolder = path.dirname(mainFile);
 const exportFileName = path.basename(mainFile, path.extname(mainFile));
 
-// Remove the built files
-gulp.task('clean', cb => {
-  del([destinationFolder], cb);
-});
-
-// Remove our temporary files
-gulp.task('clean-tmp', cb => {
-  del(['tmp'], cb);
-});
+// Remove a directory
+function clean(dir, cb) {
+  del([dir], cb);
+}
 
 // Send a notification when JSCS fails,
 // so that you know your changes didn't build
@@ -36,26 +31,18 @@ function jscsNotify(file) {
   return file.jscs.success ? false : 'JSCS failed';
 }
 
-function createLintTask(taskName, files) {
-  gulp.task(taskName, () => {
-    return gulp.src(files)
-      .pipe($.plumber())
-      .pipe($.eslint())
-      .pipe($.eslint.format())
-      .pipe($.eslint.failOnError())
-      .pipe($.jscs())
-      .pipe($.notify(jscsNotify));
-  });
+// Lint a set of files
+function lint(files) {
+  return gulp.src(files)
+    .pipe($.plumber())
+    .pipe($.eslint())
+    .pipe($.eslint.format())
+    .pipe($.eslint.failOnError())
+    .pipe($.jscs())
+    .pipe($.notify(jscsNotify));
 }
 
-// Lint our source code
-createLintTask('lint-src', ['src/**/*.js']);
-
-// Lint our test code
-createLintTask('lint-test', ['test/**/*.js']);
-
-// Build two versions of the library
-gulp.task('build', ['lint-src', 'clean'], done => {
+function build(done) {
   esperanto.bundle({
     base: 'src',
     entry: config.entryFileName,
@@ -82,10 +69,9 @@ gulp.task('build', ['lint-src', 'clean'], done => {
       .on('end', done);
   })
   .catch(done);
-});
+}
 
-// Bundle our app for our unit tests
-gulp.task('browserify', () => {
+function browserify() {
   let testFiles = glob.sync('./test/unit/**/*');
   let allFiles = ['./test/setup/browserify.js'].concat(testFiles);
   let bundler = browserify(allFiles);
@@ -101,49 +87,78 @@ gulp.task('browserify', () => {
     .pipe(source('./tmp/__spec-build.js'))
     .pipe(gulp.dest(''))
     .pipe($.livereload());
-});
+}
 
-function test() {
+function mocha() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
     .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
 }
 
-gulp.task('coverage', ['lint-src', 'lint-test'], done => {
+function coverage(done) {
   require('babel-core/register');
   gulp.src(['src/**/*.js'])
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe($.istanbul.hookRequire())
     .on('finish', () => {
-      return test()
+      return mocha()
         .pipe($.istanbul.writeReports())
         .on('end', done);
     });
-});
+}
 
-// Lint and run our tests
-gulp.task('test', ['lint-src', 'lint-test'], () => {
+function test() {
   require('babel-core/register');
-  return test();
-});
+  return mocha();
+}
 
-// Ensure that linting occurs before browserify runs. This prevents
-// the build from breaking due to poorly formatted code.
-gulp.task('build-in-sequence', callback => {
-  runSequence(['lint-src', 'lint-test'], 'browserify', callback);
-});
+function buildInSequence(cb) {
+  runSequence(['lint-src', 'lint-test'], 'browserify', cb);
+}
 
 const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc', '.jscsrc'];
 
-// Run the headless unit tests as you make changes.
-gulp.task('watch', () => {
+function watch() {
   gulp.watch(watchFiles, ['test']);
-});
+}
 
-// Set up a livereload environment for our spec runner
-gulp.task('test-browser', ['build-in-sequence'], () => {
+function testBrowser() {
   $.livereload.listen({port: 35729, host: 'localhost', start: true});
   return gulp.watch(watchFiles, ['build-in-sequence']);
-});
+}
+
+// Remove the built files
+gulp.task('clean', done => clean(destinationFolder, done));
+
+// Remove our temporary files
+gulp.task('clean-tmp', done => clean('tmp', done));
+
+// Lint our source code
+gulp.task('lint-src', () => lint('src/**/*.js'));
+
+// Lint our test code
+gulp.task('lint-test', () => lint('test/**/*.js'));
+
+// Build two versions of the library
+gulp.task('build', ['lint-src', 'clean'], build);
+
+// Bundle our app for our unit tests
+gulp.task('browserify', browserify);
+
+// Set up coverage and run tests
+gulp.task('coverage', ['lint-src', 'lint-test'], coverage);
+
+// Lint and run our tests
+gulp.task('test', ['lint-src', 'lint-test'], test);
+
+// Ensure that linting occurs before browserify runs. This prevents
+// the build from breaking due to poorly formatted code.
+gulp.task('build-in-sequence', buildInSequence);
+
+// Run the headless unit tests as you make changes.
+gulp.task('watch', watch);
+
+// Set up a livereload environment for our spec runner
+gulp.task('test-browser', ['build-in-sequence'], testBrowser);
 
 // An alias of test
 gulp.task('default', ['test']);
