@@ -113,7 +113,7 @@ function test() {
 }
 
 gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
-  require('babel/register');
+  require('babel-core/register');
   gulp.src(['src/**/*.js'])
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe($.istanbul.hookRequire())
@@ -126,7 +126,7 @@ gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
 
 // Lint and run our tests
 gulp.task('test', ['lint-src', 'lint-test'], function() {
-  require('babel/register');
+  require('babel-core/register');
   return test();
 });
 
