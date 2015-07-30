@@ -13,6 +13,7 @@ A boilerplate to author libraries in ES2015 for Node and the browser.
 - Export as ES5 & UMD
 - Mocha-Chai-Sinon testing stack
 - Unit tests that work in Node and in the browser
+- A set of [useful npm scripts](#npm-scripts), including release scripts
 
 ### Getting Started
 
@@ -65,6 +66,18 @@ lint them against a separate ESLint configuration. For this reason, a
 separate, unit-test specific `.eslintrc` can be found in the `test`
 directory. Unlike ESLint, the same JSCS rules are applied to both your code
 and your tests.
+
+### npm Scripts
+
+You can view all of the npm scripts in the `package.json`. English language descriptions
+of each script are below.
+
+- `test`: Runs the tests in a Node environment a single time
+- `test-browser`: Sets up livereload on the browser spec runner.
+- `build`: Build the distribution files
+- `coverage`: Generate a code coverage report
+- `preversion`: If the repo has no changes, it builds the code and commits it.
+- `postpublish`: Pushes the `master` branch and any new tags.
 
 ### FAQ
 
