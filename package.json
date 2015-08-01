@@ -62,14 +62,5 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^3.3.1"
-  },
-  "babelBoilerplateOptions": {
-    "entryFileName": "index",
-    "exportVarName": "MyLibrary",
-    "mochaGlobals": [
-      "stub",
-      "spy",
-      "expect"
-    ]
   }
 }

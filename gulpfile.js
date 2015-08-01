@@ -15,9 +15,18 @@ const browserify = require('browserify');
 const runSequence = require('run-sequence');
 const source = require('vinyl-source-stream');
 
+// The entry point to your library or application.
+var entryFileName = 'index';
+// The variable that your library or application exports. Set
+// to `null` to export nothing.
+var exportVarName = 'MyLibrary';
+
+// The list of global variables you plan to use in your tests. Mocha
+// explodes when globals aren't specified (to prevent global leaks / side effects)
+var mochaGlobals = ['stub', 'spy', 'expect'];
+
 // Gather the library data from `package.json`
 const manifest = require('./package.json');
-const config = manifest.babelBoilerplateOptions;
 const mainFile = manifest.main;
 const destinationFolder = path.dirname(mainFile);
 const exportFileName = path.basename(mainFile, path.extname(mainFile));
@@ -61,13 +70,13 @@ createLintTask('lint-test', ['test/**/*.js']);
 gulp.task('build', ['lint-src', 'clean'], function(done) {
   esperanto.bundle({
     base: 'src',
-    entry: config.entryFileName,
+    entry: entryFileName,
   }).then(function(bundle) {
     var res = bundle.toUmd({
       // Don't worry about the fact that the source map is inlined at this step.
       // `gulp-sourcemaps`, which comes next, will externalize them.
       sourceMap: 'inline',
-      name: config.exportVarName
+      name: exportVarName
     });
 
     $.file(exportFileName + '.js', res.code, { src: true })
@@ -132,7 +141,7 @@ gulp.task('browserify', function() {
 
 function test() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
-    .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
+    .pipe($.mocha({reporter: 'dot', globals: mochaGlobals}));
 }
 
 gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
