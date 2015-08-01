@@ -41,7 +41,7 @@
     "glob": "^5.0.14",
     "gulp": "^3.8.10",
     "gulp-babel": "^5.0.0",
-    "gulp-eslint": "^0.15.0",
+    "gulp-eslint": "^1.0.0",
     "gulp-file": "^0.2.0",
     "gulp-filter": "^3.0.0",
     "gulp-istanbul": "^0.10.0",
