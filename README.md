@@ -1,11 +1,9 @@
-# babel-library-boilerplate
+# generator-babel-boilerplate
 [![Travis build status](http://img.shields.io/travis/babel/babel-library-boilerplate.svg?style=flat)](https://travis-ci.org/babel/babel-library-boilerplate)
-[![Code Climate](https://codeclimate.com/github/babel/babel-library-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/babel/babel-library-boilerplate)
-[![Test Coverage](https://codeclimate.com/github/babel/babel-library-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/babel/babel-library-boilerplate)
 [![Dependency Status](https://david-dm.org/babel/babel-library-boilerplate.svg)](https://david-dm.org/babel/babel-library-boilerplate)
 [![devDependency Status](https://david-dm.org/babel/babel-library-boilerplate/dev-status.svg)](https://david-dm.org/babel/babel-library-boilerplate#info=devDependencies)
 
-A boilerplate to author libraries in ES2015 for Node and the browser.
+A Yeoman generator to author libraries in ES2015 (and beyond!) for Node and the browser.
 
 ### Features
 
@@ -14,11 +12,22 @@ A boilerplate to author libraries in ES2015 for Node and the browser.
 - Mocha-Chai-Sinon testing stack
 - Unit tests that work in Node and in the browser
 
-### Getting Started
+### Installation
 
-Update the the name in the `LICENSE` and the information in `package.json`.
+Install `yo` and this generator globally.
 
-Write your code in `src`. The primary file is `index.js` ([although the filename
+`npm install -g yo generator-babel-boilerplate`
+
+### Using Yeoman
+
+Yeoman is a breeze to use. Simply navigate to the directory you'd like to use for your project,
+then run `yo babel-boilerplate`.
+
+Answer a few questions, and your project will be scaffolded.
+
+### Basic Guide
+
+Write your code in `src`. The entry file is what you named the project in kebab case ([although the filename
 can be changed](https://github.com/babel/babel-library-boilerplate#i-want-to-change-the-primary-source-file)).
 
 Run `gulp build` to compile the source into a distributable format.
@@ -70,13 +79,13 @@ and your tests.
 
 #### When should I consider using this boilerplate?
 
-You're authoring any library that exports a single file. Examples are small libraries,
-or even entire JavaScript web applications. I use this boilerplate for both!
+You're authoring any library that exports a single file. From small libraries to full-fledged
+JavaScript web apps, I use this generator for both.
 
 #### When might I not want to use this boilerplate?
 
 You can always use this boilerplate as inspiration, but it works best for smaller libraries.
-If you're building a full-scale webapp, you will likely need many more changes to the build system.
+If you're building a full-scale webapp, you will likely need to make more changes to the build system.
 
 #### What's the browser compatibility?
 
@@ -87,10 +96,6 @@ excellent job at explaining the nitty gritty details of supporting legacy browse
 #### Are there examples?
 
 Quite a few! Check them out on [the wiki](https://github.com/babel/babel-library-boilerplate/wiki/Examples).
-
-#### Is there a Yeoman generator?
-
-[There sure is.](https://github.com/thejameskyle/generator-es6-library-boilerplate)
 
 #### Is there a version for Node-only projects?
 
@@ -110,11 +115,7 @@ file imports will be included in the final build. To change the name of this ent
 1. Rename the file
 2. Update the value of `entryFileName` in `package.json` under `babelBoilerplateOptions`
 
-#### I want to change the exported file name
-
-1. Update `main` in `package.json`
-
-#### I want to change the destination directory
+#### I want to change the destination file name or directory
 
 1. Update `main` in `package.json`
 
@@ -129,8 +130,7 @@ these steps:
 
 #### I don't want to export a variable
 
-1. Ensure that your entry file does not export anything
-2. Set the property of `exportVarName` in `package.json` to be `"null"`
+This is unsupported at this time. Ref https://github.com/esperantojs/esperanto/issues/96
 
 #### My library depends on an external module
 
