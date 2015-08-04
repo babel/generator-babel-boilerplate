@@ -1,4 +1,4 @@
-### [5.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v4.0.0)
+### [5.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v5.0.0)
 
 - The boilerplate has been converted into a Yeoman generator, which makes using it far, far easier.
 - A `.babelrc` file has been added, which simplifies the existing the Babel config, and makes it easier for you to change your Babel preferences.
