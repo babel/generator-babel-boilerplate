@@ -67,7 +67,7 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
       // Don't worry about the fact that the source map is inlined at this step.
       // `gulp-sourcemaps`, which comes next, will externalize them.
       sourceMap: 'inline',
-      name: config.exportVarName
+      name: config.mainVarName
     });
 
     $.file(exportFileName + '.js', res.code, { src: true })
