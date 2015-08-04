@@ -1,3 +1,10 @@
+### [5.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v4.0.0)
+
+- The boilerplate has been converted into a Yeoman generator, which makes using it far, far easier.
+- A `.babelrc` file has been added, which simplifies the existing the Babel config, and makes it easier for you to change your Babel preferences.
+- Watchify is now used for the browser tests. This should speed up the reload time for large web apps or libraries.
+- ESLint has been updated to v1.0.0.
+
 ### [4.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v4.0.0)
 
 - Watch keeps an eye on more files
