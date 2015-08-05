@@ -81,6 +81,7 @@ module.exports = generators.Base.extend({
       this.template('jscsrc', '.jscsrc');
       this.template('travis.yml', '.travis.yml');
       this.template('eslintrc', '.eslintrc');
+      this.template('editorconfig', '.editorconfig');
       this.template('_package.json', 'package.json');
       this.template('LICENSE', 'LICENSE');
       this.template('README.md', 'README.md');
