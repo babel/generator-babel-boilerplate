@@ -1,3 +1,8 @@
+### [5.1.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v5.1.0)
+
+- Fixes a bug where CodeClimate coverage would not be sent
+- Adds an `editorconfig` file
+
 ### [5.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v5.0.0)
 
 - The boilerplate has been converted into a Yeoman generator, which makes using it far, far easier.
