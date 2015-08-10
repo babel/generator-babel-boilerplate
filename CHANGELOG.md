@@ -1,3 +1,7 @@
+### [5.1.1](https://github.com/babel/babel-library-boilerplate/releases/tag/v5.1.1)
+
+- Resolves a bug where files were being excluded from published npm packages
+
 ### [5.1.0](https://github.com/babel/babel-library-boilerplate/releases/tag/v5.1.0)
 
 - Fixes a bug where CodeClimate coverage would not be sent
