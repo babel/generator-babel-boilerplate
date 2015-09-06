@@ -1,34 +1,35 @@
-// Load Gulp and all of our Gulp plugins
-const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
+import gulp  from 'gulp');
+import loadPlugins from 'gulp-load-plugins';
+import del  from 'del';
+import glob  from 'glob';
+import path  from 'path';
+import isparta  from 'isparta';
+import babelify  from 'babelify';
+import watchify  from 'watchify';
+import buffer  from 'vinyl-buffer';
+import esperanto  from 'esperanto';
+import browserify  from 'browserify';
+import runSequence  from 'run-sequence';
+import source  from 'vinyl-source-stream';
 
-// Load other npm modules
-const del = require('del');
-const glob = require('glob');
-const path = require('path');
-const isparta = require('isparta');
-const babelify = require('babelify');
-const watchify = require('watchify');
-const buffer = require('vinyl-buffer');
-const esperanto = require('esperanto');
-const browserify = require('browserify');
-const runSequence = require('run-sequence');
-const source = require('vinyl-source-stream');
+import manifest  from './package.json';
+
+// Load all of our Gulp plugins
+const $ = loadPlugins();
 
 // Gather the library data from `package.json`
-const manifest = require('./package.json');
 const config = manifest.babelBoilerplateOptions;
 const mainFile = manifest.main;
 const destinationFolder = path.dirname(mainFile);
 const exportFileName = path.basename(mainFile, path.extname(mainFile));
 
 // Remove the built files
-gulp.task('clean', function(cb) {
+gulp.task('clean', cb => {
   del([destinationFolder], cb);
 });
 
 // Remove our temporary files
-gulp.task('clean-tmp', function(cb) {
+gulp.task('clean-tmp', cb => {
   del(['tmp'], cb);
 });
 
@@ -40,7 +41,7 @@ function jscsNotify(file) {
 }
 
 function createLintTask(taskName, files) {
-  gulp.task(taskName, function() {
+  gulp.task(taskName, () => {
     return gulp.src(files)
       .pipe($.plumber())
       .pipe($.eslint())
@@ -58,12 +59,12 @@ createLintTask('lint-src', ['src/**/*.js']);
 createLintTask('lint-test', ['test/**/*.js']);
 
 // Build two versions of the library
-gulp.task('build', ['lint-src', 'clean'], function(done) {
+gulp.task('build', ['lint-src', 'clean'], done => {
   esperanto.bundle({
     base: 'src',
     entry: config.entryFileName,
-  }).then(function(bundle) {
-    var res = bundle.toUmd({
+  }).then(bundle => {
+    const res = bundle.toUmd({
       // Don't worry about the fact that the source map is inlined at this step.
       // `gulp-sourcemaps`, which comes next, will externalize them.
       sourceMap: 'inline',
@@ -89,7 +90,7 @@ gulp.task('build', ['lint-src', 'clean'], function(done) {
 
 function bundle(bundler) {
   return bundler.bundle()
-    .on('error', function(err) {
+    .on('error', err => {
       console.log(err.message);
       this.emit('end');
     })
@@ -104,17 +105,15 @@ function getBundler() {
   // Our browserify bundle is made up of our unit tests, which
   // should individually load up pieces of our application.
   // We also include the browserify setup file.
-  var testFiles = glob.sync('./test/unit/**/*.js');
-  var allFiles = ['./test/setup/browserify.js'].concat(testFiles);
+  const testFiles = glob.sync('./test/unit/**/*.js');
+  const allFiles = ['./test/setup/browserify.js'].concat(testFiles);
 
   // Create our bundler, passing in the arguments required for watchify
-  var bundler = browserify(allFiles, watchify.args);
+  const bundler = browserify(allFiles, watchify.args);
 
   // Watch the bundler, and re-bundle it whenever files change
   bundler = watchify(bundler);
-  bundler.on('update', function() {
-    bundle(bundler);
-  });
+  bundler.on('update', () => bundle(bundler));
 
   // Set up Babelify so that ES6 works in the tests
   bundler.transform(babelify.configure({
@@ -126,21 +125,19 @@ function getBundler() {
 
 // Build the unit test suite for running tests
 // in the browser
-gulp.task('browserify', function() {
-  return bundle(getBundler());
-});
+gulp.task('browserify', () => bundle(getBundler()));
 
 function test() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
     .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
 }
 
-gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
+gulp.task('coverage', ['lint-src', 'lint-test'], done => {
   require('babel-core/register');
   gulp.src(['src/**/*.js'])
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe($.istanbul.hookRequire())
-    .on('finish', function() {
+    .on('finish', () => {
       return test()
         .pipe($.istanbul.writeReports())
         .on('end', done);
@@ -148,14 +145,14 @@ gulp.task('coverage', ['lint-src', 'lint-test'], function(done) {
 });
 
 // Lint and run our tests
-gulp.task('test', ['lint-src', 'lint-test'], function() {
+gulp.task('test', ['lint-src', 'lint-test'], () => {
   require('babel-core/register');
   return test();
 });
 
 // Ensure that linting occurs before browserify runs. This prevents
 // the build from breaking due to poorly formatted code.
-gulp.task('build-in-sequence', function(callback) {
+gulp.task('build-in-sequence', callback => {
   runSequence(['lint-src', 'lint-test'], 'browserify', callback);
 });
 
@@ -166,13 +163,13 @@ const jsWatchFiles = ['src/**/*', 'test/**/*'];
 const otherWatchFiles = ['package.json', '**/.eslintrc', '.jscsrc'];
 
 // Run the headless unit tests as you make changes.
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   const watchFiles = jsWatchFiles.concat(otherWatchFiles);
   gulp.watch(watchFiles, ['test']);
 });
 
 // Set up a livereload environment for our spec runner
-gulp.task('test-browser', ['build-in-sequence'], function() {
+gulp.task('test-browser', ['build-in-sequence'], () => {
   $.livereload.listen({port: 35729, host: 'localhost', start: true});
   return gulp.watch(otherWatchFiles, ['build-in-sequence']);
 });
