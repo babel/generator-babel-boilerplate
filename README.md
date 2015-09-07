@@ -77,6 +77,17 @@ and your tests.
 
 ### FAQ
 
+#### What Babel features are supported?
+
+This boilerplate is limited by the ECMAScript features that [Acorn](https://github.com/marijnh/acorn) has
+implemented. This is because Acorn is used by the tool that performs the bundling in this boilerplate,
+[Esperanto](https://github.com/esperantojs/esperanto). As of September 2015, Acorn does not support numerous
+proposed ES2016 features, such as async functions.
+
+There's [ongoing research](https://github.com/babel/generator-babel-boilerplate/issues/230) to find an alternative
+system that allows for all of Babel's feature. If you have an idea, feel free
+[to suggest it in the issue!](https://github.com/babel/generator-babel-boilerplate/issues/230)
+
 #### When should I consider using this boilerplate?
 
 You're authoring any library that exports a single file. From small libraries to full-fledged
