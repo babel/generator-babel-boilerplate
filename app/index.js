@@ -87,7 +87,7 @@ module.exports = generators.Base.extend({
       this.template('README.md', 'README.md');
       this.template('CHANGELOG.md', 'CHANGELOG.md');
       this.template('gitignore', '.gitignore');
-      this.template('gulpfile.js', 'gulpfile.js');
+      this.template('gulpfile.babel.js', 'gulpfile.babel.js');
       mkdirp.sync('src');
       this.template('src/index.js', 'src/' + this.repo + '.js');
       mkdirp.sync('test');
