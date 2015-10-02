@@ -197,7 +197,7 @@ gulp.task('test', ['lint-src', 'lint-test'], test);
 // Set up coverage and run tests
 gulp.task('coverage', ['lint-src', 'lint-test'], coverage);
 
-// Set up a livereload environment for our spec runner
+// Set up a livereload environment for our spec runner `test/runner.html`
 gulp.task('test-browser', testBrowser);
 
 // Run the headless unit tests as you make changes.
