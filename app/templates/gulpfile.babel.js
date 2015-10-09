@@ -178,9 +178,11 @@ function testBrowser() {
   // Ensure that linting occurs before browserify runs. This prevents
   // the build from breaking due to poorly formatted code.
   runSequence(['lint-src', 'lint-test'], () => {
-    _browserifyBundle();
-    $.livereload.listen({port: 35729, host: 'localhost', start: true});
-    gulp.watch(otherWatchFiles, ['lint-src', 'lint-test']);
+    _browserifyBundle().on('end', () => {
+      $.livereload.listen({port: 35729, host: 'localhost', start: true});
+      gulp.watch(otherWatchFiles, ['lint-src', 'lint-test']);
+      $.util.log($.util.colors.green.bold('Ready to go! Open "test/runner.html" in your browser to view the tests. Changes will automatically refresh the browser.'));
+    });
   });
 }
 
