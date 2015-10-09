@@ -5,7 +5,9 @@
   "main": "dist/<%= repo %>.js",
   "scripts": {
     "test": "gulp",
+    "lint": "gulp lint-src && gulp lint-test",
     "test-browser": "gulp test-browser",
+    "watch": "gulp watch",
     "build": "gulp build",
     "coverage": "gulp coverage"
   },
