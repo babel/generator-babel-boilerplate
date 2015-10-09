@@ -130,7 +130,11 @@ function _browserifyBundle() {
 
 function _mocha() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
-    .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
+    .pipe($.mocha({
+      reporter: 'dot',
+      globals: config.mochaGlobals,
+      ignoreLeaks: false
+    }));
 }
 
 function _registerBabel() {
