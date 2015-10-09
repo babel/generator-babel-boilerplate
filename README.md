@@ -20,8 +20,7 @@ Install `yo` and this generator globally.
 
 ### Using Yeoman
 
-Yeoman is a breeze to use. Simply navigate to the directory you'd like to use for your project,
-then run `yo babel-boilerplate`.
+Navigate to the directory you'd like to use for your project, then run `yo babel-boilerplate`.
 
 Answer a few questions, and your project will be scaffolded.
 
@@ -30,23 +29,25 @@ Answer a few questions, and your project will be scaffolded.
 Write your code in `src`. The entry file is what you named the project in kebab case ([although the filename
 can be changed](https://github.com/babel/generator-babel-boilerplate#i-want-to-change-the-primary-source-file)).
 
-Run `gulp build` to compile the source into a distributable format.
+Run `npm run build` to compile the source into a distributable format.
 
-Put your unit tests in `test/unit`. The `gulp` command runs the tests using Node. If your library / tests uses features of the DOM, see the `test/setup/node.js` file.
+Put your unit tests in `test/unit`. The `npm test` command runs the tests using Node. If your library / tests uses features of the DOM, see the `test/setup/node.js` file.
 
-### Gulp tasks
+### npm Scripts
 
-- `gulp` - Lint the library and tests, then run the unit tests
-- `gulp build` - Lint then build the library
-- `gulp watch` - Continuously run the unit tests as you make changes to the source
+- `npm test` - Lint the library and tests, then run the unit tests
+- `npm run lint` - Lint the source and unit tests
+- `npm run watch` - Continuously run the unit tests as you make changes to the source
    and test files themselves
-- `gulp test-browser` - Build the library for use with the browser spec runner.
+- `npm run test-browser` - Build the library for use with the browser spec runner.
   Changes to the source will cause the runner to automatically refresh.
+- `npm run build` - Lint then build the library
+- `npm run coverage` - Generate a coverage report
 
 ### Browser Tests
 
 The [browser spec runner](https://github.com/babel/generator-babel-boilerplate/blob/master/test/runner.html)
-can be opened in a browser to run your tests. For it to work, you must first run `gulp test-browser`. This
+can be opened in a browser to run your tests. For it to work, you must first run `npm run test-browser`. This
 will set up a watch task that will automatically refresh the tests when your scripts, or the tests, change.
 
 ### Code Climate
@@ -141,7 +142,7 @@ these steps:
 
 #### I don't want to export a variable
 
-This is unsupported at this time. Ref https://github.com/esperantojs/esperanto/issues/96
+This is unsupported at this time due to Esperanto. See https://github.com/esperantojs/esperanto/issues/96 for more.
 
 #### My library depends on an external module
 
