@@ -32,7 +32,7 @@ can be changed](https://github.com/babel/generator-babel-boilerplate#i-want-to-c
 
 Run `gulp build` to compile the source into a distributable format.
 
-Put your unit tests in `test/unit`. The `gulp` command runs the tests.
+Put your unit tests in `test/unit`. The `gulp` command runs the tests using Node. If your library / tests uses features of the DOM, see the `test/setup/node.js` file.
 
 ### Gulp tasks
 
