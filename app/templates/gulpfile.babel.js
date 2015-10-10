@@ -94,7 +94,7 @@ function build(done) {
 function _runBrowserifyBundle(bundler) {
   return bundler.bundle()
     .on('error', err => {
-      console.log(err.message);
+      $.util.log($.util.colors.red.bold(err.message));
       this.emit('end');
     })
     .pipe($.plumber())
