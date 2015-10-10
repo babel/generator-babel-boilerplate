@@ -32,11 +32,8 @@ function cleanTmp(done) {
   _clean('tmp', done);
 }
 
-// Send a notification when JSCS fails,
-// so that you know your changes didn't build
-function _jscsNotify(file) {
-  if (!file.jscs) { return; }
-  return file.jscs.success ? false : 'JSCS failed';
+function onError() {
+  $.util.beep();
 }
 
 // Lint a set of files
@@ -47,7 +44,8 @@ function lint(files) {
     .pipe($.eslint.format())
     .pipe($.eslint.failOnError())
     .pipe($.jscs())
-    .pipe($.notify(_jscsNotify));
+    .pipe($.jscs.reporter('fail'))
+    .on('error', onError);
 }
 
 function lintSrc() {
