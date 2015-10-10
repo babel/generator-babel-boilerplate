@@ -3,10 +3,10 @@ import loadPlugins from 'gulp-load-plugins';
 import del  from 'del';
 import glob  from 'glob';
 import path  from 'path';
-import isparta  from 'isparta';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import source  from 'vinyl-source-stream';
+import { Instrumenter } from 'isparta';
 
 import manifest  from './package.json';
 
@@ -106,7 +106,7 @@ function test() {
 function coverage(done) {
   _registerBabel();
   gulp.src(['src/**/*.js'])
-    .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
+    .pipe($.istanbul({ instrumenter: Instrumenter }))
     .pipe($.istanbul.hookRequire())
     .on('finish', () => {
       return test()
