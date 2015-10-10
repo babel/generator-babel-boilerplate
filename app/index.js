@@ -61,7 +61,7 @@ module.exports = generators.Base.extend({
     }, {
       type: 'input',
       name: 'variable',
-      message: 'What is the name of this project\'s main variable?',
+      message: 'If there is one, what is the name of this project\'s main variable?',
       default: camelcase(this.appname)
     }];
 

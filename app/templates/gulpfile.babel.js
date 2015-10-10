@@ -66,7 +66,9 @@ function build() {
     .pipe($.plumber())
     .pipe(webpackStream({
       output: {
-        filename: exportFileName + '.js'
+        filename: exportFileName + '.js',
+        libraryTarget: 'umd',
+        library: config.mainVarName
       },
       module: {
         loaders: [
