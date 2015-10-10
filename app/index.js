@@ -77,28 +77,7 @@ module.exports = generators.Base.extend({
 
   writing: {
     app: function() {
-      this.template('babelrc', '.babelrc');
-      this.template('jscsrc', '.jscsrc');
-      this.template('travis.yml', '.travis.yml');
-      this.template('eslintrc', '.eslintrc');
-      this.template('editorconfig', '.editorconfig');
-      this.template('_package.json', 'package.json');
-      this.template('LICENSE', 'LICENSE');
-      this.template('README.md', 'README.md');
-      this.template('CHANGELOG.md', 'CHANGELOG.md');
-      this.template('gitignore', '.gitignore');
-      this.template('gulpfile.babel.js', 'gulpfile.babel.js');
-      mkdirp.sync('src');
-      this.template('src/index.js', 'src/' + this.repo + '.js');
-      mkdirp.sync('test');
-      this.template('test/eslintrc', 'test/.eslintrc');
-      this.template('test/runner.html', 'test/runner.html');
-      mkdirp.sync('test/setup');
-      this.template('test/setup/browser.js', 'test/setup/browser.js');
-      this.template('test/setup/node.js', 'test/setup/node.js');
-      this.template('test/setup/setup.js', 'test/setup/setup.js');
-      mkdirp.sync('test/unit');
-      this.template('test/unit/index.js', 'test/unit/' + this.repo + '.js');
+      this.directory('.');
     }
   },
 
