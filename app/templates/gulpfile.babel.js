@@ -9,7 +9,6 @@ import watchify  from 'watchify';
 import buffer  from 'vinyl-buffer';
 import esperanto  from 'esperanto';
 import browserify  from 'browserify';
-import runSequence  from 'run-sequence';
 import source  from 'vinyl-source-stream';
 
 import manifest  from './package.json';
@@ -175,14 +174,10 @@ function watch() {
 }
 
 function testBrowser() {
-  // Ensure that linting occurs before browserify runs. This prevents
-  // the build from breaking due to poorly formatted code.
-  runSequence(['lint-src', 'lint-test'], () => {
-    _browserifyBundle().on('end', () => {
-      $.livereload.listen({port: 35729, host: 'localhost', start: true});
-      gulp.watch(otherWatchFiles, ['lint-src', 'lint-test']);
-      $.util.log($.util.colors.green.bold('Ready to go! Open "test/runner.html" in your browser to view the tests. Changes will automatically refresh the browser.'));
-    });
+  _browserifyBundle().on('end', () => {
+    $.livereload.listen({port: 35729, host: 'localhost', start: true});
+    gulp.watch(otherWatchFiles, ['lint-src', 'lint-test']);
+    $.util.log($.util.colors.green.bold('Ready to go! Open "test/runner.html" in your browser to view the tests. Changes will automatically refresh the browser.'));
   });
 }
 
@@ -208,7 +203,7 @@ gulp.task('test', ['lint-src', 'lint-test'], test);
 gulp.task('coverage', ['lint-src', 'lint-test'], coverage);
 
 // Set up a livereload environment for our spec runner `test/runner.html`
-gulp.task('test-browser', testBrowser);
+gulp.task('test-browser', ['lint-src', 'lint-test'], testBrowser);
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch);
