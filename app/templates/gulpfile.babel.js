@@ -7,7 +7,6 @@ import * as isparta  from 'isparta';
 import babelify  from 'babelify';
 import watchify  from 'watchify';
 import buffer  from 'vinyl-buffer';
-import esperanto  from 'esperanto';
 import browserify  from 'browserify';
 import source  from 'vinyl-source-stream';
 
@@ -65,33 +64,27 @@ function lintGulpfile() {
   return lint('gulpfile.babel.js');
 }
 
-function build(done) {
-  esperanto.bundle({
-    base: 'src',
-    entry: config.entryFileName,
-  }).then(bundle => {
-    const res = bundle.toUmd({
-      // Don't worry about the fact that the source map is inlined at this step.
-      // `gulp-sourcemaps`, which comes next, will externalize them.
-      sourceMap: 'inline',
-      name: config.mainVarName
-    });
-
-    $.file(exportFileName + '.js', res.code, { src: true })
-      .pipe($.plumber())
-      .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.babel())
-      .pipe($.sourcemaps.write('./'))
-      .pipe(gulp.dest(destinationFolder))
-      .pipe($.filter(['*', '!**/*.js.map']))
-      .pipe($.rename(exportFileName + '.min.js'))
-      .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.uglify())
-      .pipe($.sourcemaps.write('./'))
-      .pipe(gulp.dest(destinationFolder))
-      .on('end', done);
-  })
-  .catch(done);
+function build() {
+  return gulp.src(path.join('src', config.entryFileName + '.js'))
+    .pipe($.plumber())
+    .pipe(webpack({
+      output: {
+        filename: exportFileName + '.js'
+      },
+      module: {
+        loaders: [
+          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+        ]
+      },
+      devtool: 'source-map'
+    }))
+    .pipe(gulp.dest(destinationFolder))
+    .pipe($.filter(['*', '!**/*.js.map']))
+    .pipe($.rename(exportFileName + '.min.js'))
+    .pipe($.sourcemaps.init({ loadMaps: true }))
+    .pipe($.uglify())
+    .pipe($.sourcemaps.write('./'))
+    .pipe(gulp.dest(destinationFolder));
 }
 
 function _runBrowserifyBundle(bundler) {
