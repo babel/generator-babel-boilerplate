@@ -5,7 +5,7 @@ import glob  from 'glob';
 import path  from 'path';
 import isparta  from 'isparta';
 import webpack from 'webpack';
-import webpackSteam from 'webpack-stream';
+import webpackStream from 'webpack-stream';
 import source  from 'vinyl-source-stream';
 
 import manifest  from './package.json';
@@ -65,7 +65,7 @@ function lintGulpfile() {
 function build() {
   return gulp.src(path.join('src', config.entryFileName + '.js'))
     .pipe($.plumber())
-    .pipe(webpack({
+    .pipe(webpackStream({
       output: {
         filename: exportFileName + '.js'
       },
@@ -136,7 +136,7 @@ function testBrowser() {
   // the `entry` option of webpack. Otherwise, it ignores whatever file(s) are placed in here.
   return gulp.src('')
     .pipe($.plumber())
-    .pipe(webpackSteam({
+    .pipe(webpackStream({
       watch: true,
       entry: allFiles,
       output: {
