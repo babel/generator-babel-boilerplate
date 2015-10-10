@@ -28,11 +28,11 @@ function _clean(dir, done) {
 }
 
 function cleanDist(done) {
-  _clean(destinationFolder, done)
+  _clean(destinationFolder, done);
 }
 
 function cleanTmp() {
-  _clean('tmp', done)
+  _clean('tmp', done);
 }
 
 // Send a notification when JSCS fails,
@@ -59,6 +59,10 @@ function lintSrc() {
 
 function lintTest() {
   return lint('test/**/*.js');
+}
+
+function lintGulpfile() {
+  return lint('gulpfile.babel.js');
 }
 
 function build(done) {
@@ -176,7 +180,7 @@ function watch() {
 function testBrowser() {
   _browserifyBundle().on('end', () => {
     $.livereload.listen({port: 35729, host: 'localhost', start: true});
-    gulp.watch(otherWatchFiles, ['lint-src', 'lint-test']);
+    gulp.watch(otherWatchFiles, ['lint']);
     $.util.log($.util.colors.green.bold('Ready to go! Open "test/runner.html" in your browser to view the tests. Changes will automatically refresh the browser.'));
   });
 }
@@ -193,17 +197,23 @@ gulp.task('lint-src', lintSrc);
 // Lint our test code
 gulp.task('lint-test', lintTest);
 
+// Lint this file
+gulp.task('lint-gulpfile', lintGulpfile);
+
+// Lint everything
+gulp.task('lint', ['lint-src', 'lint-test', 'lint-gulpfile']);
+
 // Build two versions of the library
-gulp.task('build', ['lint-src', 'clean'], build);
+gulp.task('build', ['lint', 'clean'], build);
 
 // Lint and run our tests
-gulp.task('test', ['lint-src', 'lint-test'], test);
+gulp.task('test', ['lint'], test);
 
 // Set up coverage and run tests
-gulp.task('coverage', ['lint-src', 'lint-test'], coverage);
+gulp.task('coverage', ['lint'], coverage);
 
 // Set up a livereload environment for our spec runner `test/runner.html`
-gulp.task('test-browser', ['lint-src', 'lint-test'], testBrowser);
+gulp.task('test-browser', ['lint'], testBrowser);
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch);
