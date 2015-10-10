@@ -30,7 +30,7 @@ function cleanDist(done) {
   _clean(destinationFolder, done);
 }
 
-function cleanTmp() {
+function cleanTmp(done) {
   _clean('tmp', done);
 }
 
