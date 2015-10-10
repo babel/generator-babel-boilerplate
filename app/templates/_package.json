@@ -57,9 +57,8 @@
     "entryFileName": "<%= repo %>",
     "mainVarName": "<%= variable %>",
     "mochaGlobals": [
-      "stub",
-      "spy",
-      "expect"
+      "stub", "spy", "expect", "sandbox", "mock",
+      "useFakeTimers", "useFakeXMLHttpRequest", "useFakeServer"
     ]
   }
 }

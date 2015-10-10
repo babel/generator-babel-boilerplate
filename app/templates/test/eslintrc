@@ -12,6 +12,11 @@
   },
   "globals": {
     "spy": true,
+    "stub": true,
+    "mock": true,
+    "useFakeTimers": true,
+    "useFakeXMLHttpRequest": true,
+    "useFakeServer": true,
     "expect": true
   }
 }
