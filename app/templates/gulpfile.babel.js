@@ -7,6 +7,7 @@ import {Instrumenter} from 'isparta';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import source  from 'vinyl-source-stream';
+import { Instrumenter } from 'isparta';
 
 import manifest  from './package.json';
 
