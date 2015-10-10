@@ -98,8 +98,10 @@ function _registerBabel() {
   require('babel-core/register');
 }
 
-function test() {
-  _registerBabel();
+function test({ registerBabel: true }) {
+  if (registerBabel) {
+    _registerBabel();
+  }
   return _mocha();
 }
 
@@ -109,7 +111,7 @@ function coverage(done) {
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe($.istanbul.hookRequire())
     .on('finish', () => {
-      return test()
+      return test({registerBabel: false})
         .pipe($.istanbul.writeReports())
         .on('end', done);
     });
