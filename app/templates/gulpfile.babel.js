@@ -206,7 +206,7 @@ gulp.task('test', ['lint'], test);
 gulp.task('coverage', ['lint'], coverage);
 
 // Set up a livereload environment for our spec runner `test/runner.html`
-gulp.task('test-browser', ['lint'], testBrowser);
+gulp.task('test-browser', ['lint', 'clean-tmp'], testBrowser);
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch);
