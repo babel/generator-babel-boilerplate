@@ -144,7 +144,7 @@ these steps:
 
 #### I don't want to export a variable
 
-This is unsupported at this time due to Esperanto. See https://github.com/esperantojs/esperanto/issues/96 for more.
+When prompted for the name of the library's main variable, leave the response empty.
 
 #### My library depends on an external module
 
