@@ -1,15 +1,16 @@
-module.exports = function() {
-  global.expect = global.chai.expect;
+module.exports = function(root) {
+  root = root ? root : this;
+  root.expect = root.chai.expect;
 
   beforeEach(function() {
-    this.sandbox = global.sinon.sandbox.create();
-    global.stub = this.sandbox.stub.bind(this.sandbox);
-    global.spy = this.sandbox.spy.bind(this.sandbox);
+    this.sandbox = root.sinon.sandbox.create();
+    root.stub = this.sandbox.stub.bind(this.sandbox);
+    root.spy = this.sandbox.spy.bind(this.sandbox);
   });
 
   afterEach(function() {
-    delete global.stub;
-    delete global.spy;
+    delete root.stub;
+    delete root.spy;
     this.sandbox.restore();
   });
 };
