@@ -25,8 +25,6 @@
   "devDependencies": {
     "babel-core": "^5.2.17",
     "babel-eslint": "^4.0.5",
-    "babelify": "^6.0.0",
-    "browserify": "^11.0.1",
     "chai": "^3.2.0",
     "del": "^1.1.1",
     "glob": "^5.0.14",
@@ -49,9 +47,7 @@
     "mocha": "^2.1.0",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.7.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.0.0",
-    "watchify": "^3.3.1"
+    "vinyl-source-stream": "^1.0.0"
   },
   "babelBoilerplateOptions": {
     "entryFileName": "<%= repo %>",

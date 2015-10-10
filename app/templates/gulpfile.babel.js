@@ -3,11 +3,9 @@ import loadPlugins from 'gulp-load-plugins';
 import del  from 'del';
 import glob  from 'glob';
 import path  from 'path';
-import * as isparta  from 'isparta';
-import babelify  from 'babelify';
-import watchify  from 'watchify';
-import buffer  from 'vinyl-buffer';
-import browserify  from 'browserify';
+import {Instrumenter} from 'isparta';
+import webpack from 'webpack';
+import webpackSteam from 'webpack-stream';
 import source  from 'vinyl-source-stream';
 
 import manifest  from './package.json';
@@ -87,47 +85,6 @@ function build() {
     .pipe(gulp.dest(destinationFolder));
 }
 
-function _runBrowserifyBundle(bundler) {
-  return bundler.bundle()
-    .on('error', function(err) {
-      $.util.log($.util.colors.red.bold(err.message));
-      this.emit('end');
-    })
-    .pipe($.plumber())
-    .pipe(source('./tmp/__spec-build.js'))
-    .pipe(buffer())
-    .pipe(gulp.dest(''))
-    .pipe($.livereload());
-}
-
-// Build the unit test suite for running tests
-// in the browser
-function _browserifyBundle() {
-  // Our browserify bundle is made up of our unit tests, which
-  // should individually load up pieces of our application.
-  // We also include the browserify setup file.
-  const testFiles = glob.sync('./test/unit/**/*.js');
-  const allFiles = ['./test/setup/browserify.js'].concat(testFiles);
-
-  // Create our bundler, passing in the arguments required for watchify
-  let bundler = browserify(allFiles, {
-    cache: {},
-    packageCache: {},
-    debug: true
-  });
-
-  // Watch the bundler, and re-bundle it whenever files change
-  bundler = watchify(bundler);
-  bundler.on('update', () => _runBrowserifyBundle(bundler));
-
-  // Set up Babelify so that ES6 works in the tests
-  bundler.transform(babelify.configure({
-    sourceMapRelative: __dirname + '/src'
-  }));
-
-  return _runBrowserifyBundle(bundler);
-}
-
 function _mocha() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
     .pipe($.mocha({
@@ -149,7 +106,7 @@ function test() {
 function coverage(done) {
   _registerBabel();
   gulp.src(['src/**/*.js'])
-    .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
+    .pipe($.istanbul({ instrumenter: Instrumenter }))
     .pipe($.istanbul.hookRequire())
     .on('finish', () => {
       return test()
@@ -158,24 +115,56 @@ function coverage(done) {
     });
 }
 
-// These are JS files that should be watched by Gulp. When running tests in the browser,
-// watchify is used instead, so these aren't included.
-const jsWatchFiles = ['src/**/*', 'test/**/*'];
-// These are files other than JS files which are to be watched. They are always watched.
-const otherWatchFiles = ['package.json', '**/.eslintrc', '.jscsrc'];
+const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc', '.jscsrc'];
 
 // Run the headless unit tests as you make changes.
 function watch() {
-  const watchFiles = jsWatchFiles.concat(otherWatchFiles);
   gulp.watch(watchFiles, ['test']);
 }
 
 function testBrowser() {
-  _browserifyBundle().on('end', () => {
-    $.livereload.listen({port: 35729, host: 'localhost', start: true});
-    gulp.watch(otherWatchFiles, ['lint']);
-    $.util.log($.util.colors.green.bold('Ready to go! Open "test/runner.html" in your browser to view the tests. Changes will automatically refresh the browser.'));
-  });
+  // Our testing bundle is made up of our unit tests, which
+  // should individually load up pieces of our application.
+  // We also include the browser setup file.
+  const testFiles = glob.sync('./test/unit/**/*.js');
+  const allFiles = ['./test/setup/browser.js'].concat(testFiles);
+
+  // Lets us differentiate between the first build and subsequent builds
+  var firstBuild = true;
+
+  // This empty stream might seem like a hack, but we need to specify all of our files through
+  // the `entry` option of webpack. Otherwise, it ignores whatever file(s) are placed in here.
+  return gulp.src('')
+    .pipe($.plumber())
+    .pipe(webpackSteam({
+      watch: true,
+      entry: allFiles,
+      output: {
+        filename: '__spec-build.js'
+      },
+      module: {
+        loaders: [
+          // This is what allows us to author in future JavaScript
+          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+          // This allows the test setup scripts to load `package.json`
+          { test: /\.json$/, exclude: /node_modules/, loader: 'json-loader' }
+        ]
+      },
+      plugins: [
+        // By default, webpack does `n=>n` compilation with entry files. This concatenates
+        // them into a single chunk.
+        new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
+      ],
+      devtool: 'inline-source-map'
+    }, null, function() {
+      if (firstBuild) {
+        $.livereload.listen({port: 35729, host: 'localhost', start: true});
+        var watcher = gulp.watch(watchFiles, ['lint']);
+      } else {
+        $.livereload.reload('./tmp/__spec-build.js');
+      }
+    }))
+    .pipe(gulp.dest('./tmp'));
 }
 
 // Remove the built files

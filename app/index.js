@@ -94,7 +94,7 @@ module.exports = generators.Base.extend({
       this.template('test/eslintrc', 'test/.eslintrc');
       this.template('test/runner.html', 'test/runner.html');
       mkdirp.sync('test/setup');
-      this.template('test/setup/browserify.js', 'test/setup/browserify.js');
+      this.template('test/setup/browser.js', 'test/setup/browserify.js');
       this.template('test/setup/node.js', 'test/setup/node.js');
       this.template('test/setup/setup.js', 'test/setup/setup.js');
       mkdirp.sync('test/unit');
