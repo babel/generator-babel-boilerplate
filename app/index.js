@@ -1,4 +1,6 @@
 'use strict';
+var file = require('file');
+var path = require('path');
 var generators = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -77,7 +79,25 @@ module.exports = generators.Base.extend({
 
   writing: {
     app: function() {
-      this.directory('.');
+      var src = this.sourceRoot();
+      var self = this;
+      file.walkSync(src, function(dirPath, dirs, files) {
+        var relativeDir = path.relative(src, dirPath);
+        files.forEach(function(filename) {
+          var target;
+          // Only copy the files that we don't want to rename. We do that after this loop.
+          // The files we don't want to rename are both "index.js", and one of them is in 
+          // "test/unit," and the other is in "src"
+          var ignoreDir = relativeDir === 'test/unit' || relativeDir === 'src';
+          var shouldCopy = !ignoreDir && !/index.js$/.test(filename);
+          if (shouldCopy) {
+            target = path.join(relativeDir, filename);
+            self.template(target, target);
+          }
+        });
+      });
+      this.template('src/index.js', 'src/' + this.repo + '.js');
+      this.template('test/unit/index.js', 'test/unit/' + this.repo + '.js');
     }
   },
 
