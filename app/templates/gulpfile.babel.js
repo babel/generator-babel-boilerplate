@@ -163,6 +163,7 @@ function testBrowser() {
       } else {
         $.livereload.reload('./tmp/__spec-build.js');
       }
+      firstBuild = false;
     }))
     .pipe(gulp.dest('./tmp'));
 }
