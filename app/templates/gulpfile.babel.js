@@ -11,6 +11,8 @@ import esperanto  from 'esperanto';
 import browserify  from 'browserify';
 import runSequence  from 'run-sequence';
 import source  from 'vinyl-source-stream';
+import fs  from 'fs';
+import moment  from 'moment';
 
 import manifest  from './package.json';
 
@@ -73,11 +75,13 @@ function build(done) {
       sourceMap: 'inline',
       name: config.mainVarName
     });
+    const head = fs.readFileSync('src/header.js', 'utf8');
 
     $.file(exportFileName + '.js', res.code, { src: true })
       .pipe($.plumber())
       .pipe($.sourcemaps.init({ loadMaps: true }))
       .pipe($.babel())
+      .pipe($.header(head, {pkg: manifest, now: moment()}))
       .pipe($.sourcemaps.write('./'))
       .pipe(gulp.dest(destinationFolder))
       .pipe($.filter(['*', '!**/*.js.map']))
