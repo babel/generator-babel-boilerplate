@@ -154,6 +154,4 @@ If you want to access the module itself in your unit test files, you will need t
 test environment to support the module. To do this:
 
 1. Load the module in the [test setup file](https://github.com/babel/generator-babel-boilerplate/blob/master/test/setup/setup.js).
-  Attach any exported variables to global object if you'll be using them in your tests.
-2. Add those same global variables to the `mochaGlobals` array in `package.json` under
-  `babelBoilerplateOptions`
+2. Add any exported variables to globals object in the [test globals json](https://github.com/babel/generator-babel-boilerplate/blob/master/test/setup/.globals.js).

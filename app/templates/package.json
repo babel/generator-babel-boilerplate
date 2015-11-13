@@ -54,10 +54,6 @@
   },
   "babelBoilerplateOptions": {
     "entryFileName": "<%= repo %>",
-    "mainVarName": "<%= variable %>",
-    "mochaGlobals": [
-      "stub", "spy", "expect", "sandbox", "mock",
-      "useFakeTimers", "useFakeXMLHttpRequest", "useFakeServer"
-    ]
+    "mainVarName": "<%= variable %>"
   }
 }
