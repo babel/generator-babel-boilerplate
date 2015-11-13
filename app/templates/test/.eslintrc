@@ -1,4 +1,5 @@
 {
+  extends: "./setup/.globals.json",
   "parser": "babel-eslint",
   "rules": {
     "strict": 0,
@@ -9,14 +10,5 @@
     "browser": true,
     "node": true,
     "mocha": true
-  },
-  "globals": {
-    "spy": true,
-    "stub": true,
-    "mock": true,
-    "useFakeTimers": true,
-    "useFakeXMLHttpRequest": true,
-    "useFakeServer": true,
-    "expect": true
   }
 }
