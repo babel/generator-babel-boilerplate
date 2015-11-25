@@ -3,7 +3,7 @@ import loadPlugins from 'gulp-load-plugins';
 import del  from 'del';
 import glob  from 'glob';
 import path  from 'path';
-import isparta  from 'isparta';
+import * as isparta  from 'isparta';
 import babelify  from 'babelify';
 import watchify  from 'watchify';
 import buffer  from 'vinyl-buffer';
