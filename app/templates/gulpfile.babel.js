@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import source  from 'vinyl-source-stream';
 
+import mochaGlobals from './test/setup/.globals';
 import manifest  from './package.json';
 
 // Load all of our Gulp plugins
@@ -89,7 +90,7 @@ function _mocha() {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
     .pipe($.mocha({
       reporter: 'dot',
-      globals: config.mochaGlobals,
+      globals: Object.keys(mochaGlobals.globals),
       ignoreLeaks: false
     }));
 }
