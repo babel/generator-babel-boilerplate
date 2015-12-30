@@ -1,4 +1,6 @@
 'use strict';
+var file = require('file');
+var path = require('path');
 var generators = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -61,7 +63,7 @@ module.exports = generators.Base.extend({
     }, {
       type: 'input',
       name: 'variable',
-      message: 'What is the name of this project\'s main variable?',
+      message: 'If there is one, what is the name of this project\'s main variable?',
       default: camelcase(this.appname)
     }];
 
@@ -77,27 +79,24 @@ module.exports = generators.Base.extend({
 
   writing: {
     app: function() {
-      this.template('babelrc', '.babelrc');
-      this.template('jscsrc', '.jscsrc');
-      this.template('travis.yml', '.travis.yml');
-      this.template('eslintrc', '.eslintrc');
-      this.template('editorconfig', '.editorconfig');
-      this.template('_package.json', 'package.json');
-      this.template('LICENSE', 'LICENSE');
-      this.template('README.md', 'README.md');
-      this.template('CHANGELOG.md', 'CHANGELOG.md');
-      this.template('gitignore', '.gitignore');
-      this.template('gulpfile.babel.js', 'gulpfile.babel.js');
-      mkdirp.sync('src');
+      var src = this.sourceRoot();
+      var self = this;
+      file.walkSync(src, function(dirPath, dirs, files) {
+        var relativeDir = path.relative(src, dirPath);
+        files.forEach(function(filename) {
+          var target;
+          // Only copy the files that we don't want to rename. We do that after this loop.
+          // The files we don't want to rename are both "index.js", and one of them is in 
+          // "test/unit," and the other is in "src"
+          var ignoreDir = relativeDir === 'test/unit' || relativeDir === 'src';
+          var shouldCopy = !ignoreDir && !/index.js$/.test(filename);
+          if (shouldCopy) {
+            target = path.join(relativeDir, filename);
+            self.template(target, target);
+          }
+        });
+      });
       this.template('src/index.js', 'src/' + this.repo + '.js');
-      mkdirp.sync('test');
-      this.template('test/eslintrc', 'test/.eslintrc');
-      this.template('test/runner.html', 'test/runner.html');
-      mkdirp.sync('test/setup');
-      this.template('test/setup/browserify.js', 'test/setup/browserify.js');
-      this.template('test/setup/node.js', 'test/setup/node.js');
-      this.template('test/setup/setup.js', 'test/setup/setup.js');
-      mkdirp.sync('test/unit');
       this.template('test/unit/index.js', 'test/unit/' + this.repo + '.js');
     }
   },
