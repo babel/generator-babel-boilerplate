@@ -34,6 +34,7 @@
   "dependencies": {
     "bluebird": "^2.9.34",
     "chalk": "^1.1.0",
+    "file": "^0.2.2",
     "git-config": "0.0.6",
     "lodash.camelcase": "^3.0.1",
     "lodash.kebabcase": "^3.0.1",
@@ -44,7 +45,6 @@
     "yosay": "^1.0.5"
   },
   "devDependencies": {
-    "file": "^0.2.2",
     "mocha": "^2.2.5"
   },
   "preferGlobal": true
