@@ -1,4 +1,4 @@
-+var mochaGlobals = require('./.globals.json').globals;
+var mochaGlobals = require('./.globals.json').globals;
 
 window.mocha.setup('bdd');
 window.onload = function() {
