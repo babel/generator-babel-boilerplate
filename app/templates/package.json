@@ -50,7 +50,7 @@
     "sinon-chai": "^2.7.0",
     "vinyl-source-stream": "^1.0.0",
     "webpack": "^1.12.2",
-    "webpack-stream": "^2.1.1"
+    "webpack-stream": "^3.1.0"
   },
   "babelBoilerplateOptions": {
     "entryFileName": "<%= repo %>",
