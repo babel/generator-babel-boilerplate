@@ -1,3 +1,7 @@
+### [6.0.1]((https://github.com/babel/babel-library-boilerplate/releases/tag/6.0.1)
+
+- Fix installation error
+
 ### [6.0.0]((https://github.com/babel/babel-library-boilerplate/releases/tag/6.0.0)
 
 - The `gulpfile` is now authored in ES2015
