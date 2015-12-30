@@ -1,3 +1,7 @@
+### [6.0.2](https://github.com/babel/babel-library-boilerplate/releases/tag/6.0.2)
+
+- Fix issue where detected username would end in a newline
+
 ### [6.0.1](https://github.com/babel/babel-library-boilerplate/releases/tag/6.0.1)
 
 - Fix installation error
