@@ -91,7 +91,7 @@ function _mocha() {
 }
 
 function _registerBabel() {
-  require('babel-core/register');
+  require('babel-register');
 }
 
 function test() {
