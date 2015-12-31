@@ -20,17 +20,12 @@ const mainFile = manifest.main;
 const destinationFolder = path.dirname(mainFile);
 const exportFileName = path.basename(mainFile, path.extname(mainFile));
 
-// Remove a directory
-function _clean(dir, done) {
-  del([dir], done);
-}
-
 function cleanDist(done) {
-  _clean(destinationFolder, done);
+  del([destinationFolder]).then(() => done());
 }
 
 function cleanTmp(done) {
-  _clean('tmp', done);
+  del(['tmp']).then(() => done());
 }
 
 function onError() {
