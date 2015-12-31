@@ -1,5 +1,5 @@
 module.exports = function(root) {
-  root = root ? root : this;
+  root = root ? root : global;
   root.expect = root.chai.expect;
 
   beforeEach(function() {
