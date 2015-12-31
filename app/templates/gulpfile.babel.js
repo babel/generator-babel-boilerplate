@@ -1,6 +1,7 @@
 import gulp  from 'gulp';
 import loadPlugins from 'gulp-load-plugins';
-import del  from 'del';
+import del  from 'del';<% if (options.banner) { %>
+import fs from 'fs';<% } %>
 import glob  from 'glob';
 import path  from 'path';
 import {Instrumenter} from 'isparta';
@@ -57,6 +58,10 @@ function lintGulpfile() {
 }
 
 function build() {
+  <% if (options.banner) { %>
+  const head = fs.readFileSync('src/header.js', 'utf8');
+  <% } %>
+
   return gulp.src(path.join('src', config.entryFileName + '.js'))
     .pipe($.plumber())
     .pipe(webpackStream({
@@ -69,7 +74,10 @@ function build() {
         loaders: [
           { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
         ]
-      },
+      },<% if (options.banner) { %>
+      plugins: [
+        new webpack.BannerPlugin(header, {raw: true})
+      ],<% } %>
       devtool: 'source-map'
     }))
     .pipe(gulp.dest(destinationFolder))

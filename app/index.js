@@ -13,6 +13,11 @@ var exec = Promise.promisify(require('child_process').exec);
 var gitConfig = require('git-config');
 
 module.exports = generators.Base.extend({
+  constructor: function() {
+    generators.Base.apply(this, arguments);
+    this.option('banner');
+  },
+
   initializing: function() {
     this.pkg = require('../package.json');
   },
@@ -90,13 +95,18 @@ module.exports = generators.Base.extend({
           // The files we don't want to rename are both "index.js", and one of them is in
           // "test/unit," and the other is in "src"
           var ignoreDir = relativeDir === 'test/unit' || relativeDir === 'src';
-          var shouldCopy = !ignoreDir && !/index.js$/.test(filename);
+          var shouldCopy = !ignoreDir && !/(index|header).js$/.test(filename);
           if (shouldCopy) {
             target = path.join(relativeDir, filename);
             self.template(target, target);
           }
         });
       });
+      if (this.options.banner) {
+        console.log('wat', this.options.banner);
+        this.template('src/header.js', 'src/header.js');
+      }
+      this.template('')
       this.template('src/index.js', 'src/' + this.repo + '.js');
       this.template('test/unit/index.js', 'test/unit/' + this.repo + '.js');
     }
