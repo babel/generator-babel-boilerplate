@@ -18,25 +18,23 @@ module.exports = generators.Base.extend({
   },
 
   prompting: function() {
-    var done = this.async();
-
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the ' + chalk.red('Babel Library Boilerplate') + ' generator!'
     ));
 
-    Promise.all([exec('npm whoami').catch(function(e) {
+    return Promise.all([exec('npm whoami').catch(function(e) {
       console.error('Error getting npm user name: run `npm login`');
       console.error(e);
     })])
     .then(function(result) {
       result = result ? result : {};
       this.username = trim(result[0]);
-      this._showPrompts(done);
+      return this._showPrompts();
     }.bind(this));
   },
 
-  _showPrompts: function(done) {
+  _showPrompts: function() {
     var config = gitConfig.sync();
     config.user = config.user ? config.user : {};
     var prompts = [{
@@ -67,14 +65,17 @@ module.exports = generators.Base.extend({
       default: camelcase(this.appname)
     }];
 
-    this.prompt(prompts, function (props) {
-      this.user = props.user;
-      this.repo = props.repo;
-      this.description = props.description;
-      this.author = props.author;
-      this.variable = props.variable;
-      done();
-    }.bind(this));
+    var self = this;
+    return new Promise(function(resolve, reject) {
+      self.prompt(prompts, function(props) {
+        self.user = props.user;
+        self.repo = props.repo;
+        self.description = props.description;
+        self.author = props.author;
+        self.variable = props.variable;
+        resolve();
+      });
+    });
   },
 
   writing: {
@@ -86,7 +87,7 @@ module.exports = generators.Base.extend({
         files.forEach(function(filename) {
           var target;
           // Only copy the files that we don't want to rename. We do that after this loop.
-          // The files we don't want to rename are both "index.js", and one of them is in 
+          // The files we don't want to rename are both "index.js", and one of them is in
           // "test/unit," and the other is in "src"
           var ignoreDir = relativeDir === 'test/unit' || relativeDir === 'src';
           var shouldCopy = !ignoreDir && !/index.js$/.test(filename);
