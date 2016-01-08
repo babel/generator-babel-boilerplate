@@ -1,3 +1,8 @@
+### [7.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.0.0)
+
+- The boilerplate now uses Babel v6
+- While I was at it, I updated every other dependency, too
+
 ### [6.0.2](https://github.com/babel/babel-library-boilerplate/releases/tag/6.0.2)
 
 - Fix issue where detected username would end in a newline
