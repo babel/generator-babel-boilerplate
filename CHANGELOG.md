@@ -1,3 +1,8 @@
+### [7.1.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.1.0)
+
+- Travis tests run on Node 4 and the stable release of Node
+- Updates location of Babel polyfill for the browser spec runner
+
 ### [7.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.0.0)
 
 - The boilerplate now uses Babel v6
