@@ -1,3 +1,9 @@
+### [7.2.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.2.0)
+
+- JSCS now logs output when it fails
+- LiveReload snippet in unit test browser file will now work across your local network,
+  making it easier for you to test on other devices
+
 ### [7.1.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.1.0)
 
 - Travis tests run on Node 4 and the stable release of Node
