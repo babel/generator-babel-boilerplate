@@ -1,3 +1,8 @@
+### [7.2.1](https://github.com/babel/babel-library-boilerplate/releases/tag/7.2.1)
+
+- Fixes a bug where invalid an invalid `package.json` could be generated if double
+  quotes were included in responses
+
 ### [7.2.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.2.0)
 
 - JSCS now logs output when it fails
