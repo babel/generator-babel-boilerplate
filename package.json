@@ -1,6 +1,6 @@
 {
   "name": "generator-babel-boilerplate",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "description": "Generate a boilerplate for a library written in ES2015 for Node and the browser.",
   "main": "app/index.js",
   "scripts": {
