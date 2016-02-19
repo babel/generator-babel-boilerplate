@@ -8,9 +8,14 @@ var mkdirp = require('mkdirp');
 var camelcase = require('lodash.camelcase');
 var kebabcase = require('lodash.kebabcase');
 var trim = require('lodash.trim');
+var jsesc = require('jsesc');
 var Promise = require('bluebird');
 var exec = Promise.promisify(require('child_process').exec);
 var gitConfig = require('git-config');
+
+function jsonEscape(str) {
+  return jsesc(str, {quotes: 'double'});
+}
 
 module.exports = generators.Base.extend({
   initializing: function() {
@@ -68,10 +73,10 @@ module.exports = generators.Base.extend({
     var self = this;
     return new Promise(function(resolve, reject) {
       self.prompt(prompts, function(props) {
-        self.user = props.user;
-        self.repo = props.repo;
-        self.description = props.description;
-        self.author = props.author;
+        self.user = jsonEscape(props.user);
+        self.repo = jsonEscape(props.repo);
+        self.description = jsonEscape(props.description);
+        self.author = jsonEscape(props.author);
         self.variable = props.variable;
         resolve();
       });
