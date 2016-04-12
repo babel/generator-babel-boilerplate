@@ -66,6 +66,12 @@ function build() {
         libraryTarget: 'umd',
         library: config.mainVarName
       },
+      // Add your own externals here. For instance,
+      // {
+      //   jquery: true
+      // }
+      // would externalize the `jquery` module.
+      externals: {},
       module: {
         loaders: [
           { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
@@ -139,6 +145,7 @@ function testBrowser() {
       output: {
         filename: '__spec-build.js'
       },
+      // Externals isn't necessary here since these are for tests.
       module: {
         loaders: [
           // This is what allows us to author in future JavaScript

@@ -160,7 +160,9 @@ When prompted for the name of the library's main variable, leave the response em
 
 #### My library depends on an external module
 
-In the simplest case, you just need to install the module and use it in your scripts.
+Install the module and use it in your scripts like usual. Then, go into the Gulpfile and
+add the [`externals`](https://webpack.github.io/docs/configuration.html#externals) to the
+Webpack build options.
 
 If you want to access the module itself in your unit test files, you will need to set up the
 test environment to support the module. To do this:
