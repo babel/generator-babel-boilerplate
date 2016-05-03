@@ -1,42 +1,6 @@
 {
   "parser": "babel-eslint",
-  "rules": {
-    "array-bracket-spacing": [ 2, "never", { "singleValue": true } ],
-    "brace-style": 2,
-    "camelcase": [ 2, { "properties": "always" } ],
-    "curly": [ 2, "all" ],
-    "dot-notation": 2,
-    "eol-last": 2,
-    "indent": [ 2, 2, { "SwitchCase": 1 } ],
-    "key-spacing": [ 2, {
-        "beforeColon": false,
-        "afterColon": true
-      }
-    ],
-    "keyword-spacing": [ 2 ],
-    "new-cap": 2,
-    "no-mixed-spaces-and-tabs": 2,
-    "no-multiple-empty-lines": 2,
-    "no-multi-str": 2,
-    "no-spaced-func": 2,
-    "no-trailing-spaces": 2,
-    "no-with": 2,
-    "one-var": [ 2, "never" ],
-    "operator-linebreak": [ 2, "after" ],
-    "quotes": [ 2, "single" ],
-    "semi": [ 2, "always" ],
-    "space-before-blocks": [ 2, "always" ],
-    "space-before-function-paren": [ 2, "never" ],
-    "space-infix-ops": 2,
-    "space-in-parens": [ 2, "never" ],
-    "space-unary-ops": [ 2, {
-        "nonwords": false,
-        "overrides": {}
-        }
-    ],
-   "strict": 0,
-    "valid-jsdoc": 2
-  },
+  "rules": {},
   "env": {
     "browser": true,
     "node": true
