@@ -3,7 +3,6 @@ import loadPlugins from 'gulp-load-plugins';
 import del  from 'del';
 import glob  from 'glob';
 import path  from 'path';
-import {Instrumenter} from 'isparta';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import source  from 'vinyl-source-stream';
@@ -109,11 +108,11 @@ function test() {
 function coverage(done) {
   _registerBabel();
   gulp.src(['src/**/*.js'])
-    .pipe($.istanbul({ instrumenter: Instrumenter }))
-    .pipe($.istanbul.hookRequire())
+    .pipe($.babelIstanbul())
+    .pipe($.babelIstanbul.hookRequire())
     .on('finish', () => {
       return test()
-        .pipe($.istanbul.writeReports())
+        .pipe($.babelIstanbul.writeReports())
         .on('end', done);
     });
 }
