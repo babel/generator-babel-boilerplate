@@ -37,11 +37,9 @@
     "file": "^0.2.2",
     "git-config": "0.0.7",
     "jsesc": "^1.0.0",
-    "lodash.camelcase": "^3.0.1",
-    "lodash.kebabcase": "^3.0.1",
-    "lodash.trim": "^3.0.1",
+    "lodash": "^4.12.0",
     "mkdirp": "^0.5.1",
-    "yeoman-generator": "^0.22.2",
+    "yeoman-generator": "^0.23.3",
     "yo": "^1.4.7",
     "yosay": "^1.0.5"
   },

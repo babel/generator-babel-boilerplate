@@ -5,9 +5,7 @@ var generators = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var mkdirp = require('mkdirp');
-var camelcase = require('lodash.camelcase');
-var kebabcase = require('lodash.kebabcase');
-var trim = require('lodash.trim');
+var _ = require('lodash');
 var jsesc = require('jsesc');
 var Promise = require('bluebird');
 var exec = Promise.promisify(require('child_process').exec);
@@ -34,7 +32,7 @@ module.exports = generators.Base.extend({
     })])
     .then(function(result) {
       result = result ? result : {};
-      this.username = trim(result[0]);
+      this.username = _.trim(result[0]);
       return this._showPrompts();
     }.bind(this));
   },
@@ -52,7 +50,7 @@ module.exports = generators.Base.extend({
       type: 'input',
       name: 'repo',
       message: 'What is the repository/project name?',
-      default: kebabcase(this.appname)
+      default: _.kebabCase(this.appname)
     }, {
       type: 'input',
       name: 'description',
@@ -67,19 +65,16 @@ module.exports = generators.Base.extend({
       type: 'input',
       name: 'variable',
       message: 'If there is one, what is the name of this project\'s main variable?',
-      default: camelcase(this.appname)
+      default: _.camelCase(this.appname)
     }];
 
     var self = this;
-    return new Promise(function(resolve, reject) {
-      self.prompt(prompts, function(props) {
-        self.user = jsonEscape(props.user);
-        self.repo = jsonEscape(props.repo);
-        self.description = jsonEscape(props.description);
-        self.author = jsonEscape(props.author);
-        self.variable = props.variable;
-        resolve();
-      });
+    return self.prompt(prompts).then(function(props) {
+      self.user = jsonEscape(props.user);
+      self.repo = jsonEscape(props.repo);
+      self.description = jsonEscape(props.description);
+      self.author = jsonEscape(props.author);
+      self.variable = props.variable;
     });
   },
 
