@@ -94,8 +94,7 @@ may be a delay between when a new feature is added to Babel and when those other
 
 #### When should I consider using this boilerplate?
 
-You're authoring any library that exports a single file. From small libraries to full-fledged
-JavaScript web apps, I use this generator for both.
+This library is ideal for libraries that export a single file.
 
 #### When might I not want to use this boilerplate?
 
@@ -108,8 +107,16 @@ intentionally omitted from this boilerplate.
 There are so many different preferences and needs when it comes to building a
 webapp, it wouldn't make sense to pick any one configuration for this boilerplate.
 
-Luckily, it's relatively straightforward to add those things to the boilerplate
-on a per-project basis.
+In the broader scheme of things, there's been discussion in the JavaScript community
+over whether or not boilerplates are good, or if they are bad. There's no denying
+that you might could yourself lost is you pick this up without much experience
+with the tools used in this project. But it could also save you a lot of time if you're
+simply trying to get a build system set up and running.
+
+Even if you don't intend to use this boilerplate, I believe that boilerplates are
+useful as an example and as a source of inspiration. I encourage you to look through
+the current state of the project, and through its history, to see different ways to use
+Babel with various tools!
 
 #### What's the browser compatibility?
 
