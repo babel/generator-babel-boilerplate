@@ -128,12 +128,15 @@ Quite a few. Check them out on [the wiki](https://github.com/babel/generator-bab
 
 #### Is there a version for Node-only projects?
 
-There is, though I wouldn't recommend using it. It's unmaintained, and Node is rapidly
-adding support for ES2015 features as of v4. Before you decide to transpile your Node code,
-double-check to make sure that it isn't already supported.
+There is not a maintained version for Node-only projects. As of Node v6, many of
+the most commonly used ES2015 features are [now supported natively in Node](http://node.green/).
+I strongly recommend that you weigh the pros and cons of adding a transpiling step to your
+server-side code!
 
-With that said, you can still check out the project
-[over here](https://github.com/jmeas/es6-node-boilerplate).
+#### What's the cost of transpiling?
+
+A thorough analysis of this question can be found
+[here](https://github.com/samccone/The-cost-of-transpiling-es2015-in-2016).
 
 ### Customizing
 
