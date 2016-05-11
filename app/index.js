@@ -15,6 +15,15 @@ function jsonEscape(str) {
   return jsesc(str, {quotes: 'double'});
 }
 
+function generateName(str) {
+  str = _.chain(str)
+    .deburr()
+    .trim()
+    .replace(' ', '-')
+    .value();
+  return str.toLowerCase();
+}
+
 module.exports = generators.Base.extend({
   initializing: function() {
     this.pkg = require('../package.json');
@@ -50,7 +59,7 @@ module.exports = generators.Base.extend({
       type: 'input',
       name: 'repo',
       message: 'What is the repository/project name?',
-      default: _.kebabCase(this.appname)
+      default: generateName(this.appname)
     }, {
       type: 'input',
       name: 'description',
