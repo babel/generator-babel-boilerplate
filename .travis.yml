@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-  - '0.10'
-  - '0.12'
-  - 'io.js'
+  - "4"
+  - "5"
+  - "stable"
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-babel-boilerplate' ]; then cd .. && eval "mv $currentfolder generator-babel-boilerplate" && cd generator-babel-boilerplate; fi
