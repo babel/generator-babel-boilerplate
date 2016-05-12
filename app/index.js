@@ -7,9 +7,7 @@ var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 var _ = require('lodash');
 var jsesc = require('jsesc');
-var Promise = require('bluebird');
-var exec = Promise.promisify(require('child_process').exec);
-var gitConfig = require('git-config');
+var npmWhoami = require('npm-whoami');
 
 function jsonEscape(str) {
   return jsesc(str, {quotes: 'double'});
@@ -35,20 +33,21 @@ module.exports = generators.Base.extend({
       'Welcome to the ' + chalk.red('Babel Library Boilerplate') + ' generator!'
     ));
 
-    return Promise.all([exec('npm whoami').catch(function(e) {
-      console.error('Error getting npm user name: run `npm login`');
-      console.error(e);
-    })])
-    .then(function(result) {
-      result = result ? result : {};
-      this.username = _.trim(result[0]);
-      return this._showPrompts();
-    }.bind(this));
-  },
+    this.username = '';
+    try {
+      this.username = npmWhoami.sync();
+    } catch(e) {
+      console.warn('Error getting npm user name: run `npm login`');
+      console.warn(e);
+    }
 
-  _showPrompts: function() {
-    var config = gitConfig.sync();
-    config.user = config.user ? config.user : {};
+    const gitName = this.user.git.name();
+    const gitEmail = this.user.git.email();
+    let defaultAuthor = gitName ? gitName : '';
+    if (gitEmail) {
+      defaultAuthor += ` <${gitEmail}>`;
+    }
+
     var prompts = [{
       type: 'input',
       name: 'user',
@@ -68,7 +67,7 @@ module.exports = generators.Base.extend({
       type: 'input',
       name: 'author',
       message: 'Who is the author of this project?',
-      default: config.user.name + ' <' + config.user.email + '>',
+      default: defaultAuthor,
       store: true
     }, {
       type: 'input',
@@ -78,25 +77,26 @@ module.exports = generators.Base.extend({
     }];
 
     var self = this;
-    return self.prompt(prompts).then(function(props) {
-      self.user = jsonEscape(props.user);
-      self.repo = jsonEscape(props.repo);
+    return self.prompt(prompts)
+      .then(function(props) {
+        self.user = jsonEscape(props.user);
+        self.repo = jsonEscape(props.repo);
 
-      // Remove `.js` from the npm module name, per the "tips" section of the
-      // npm documentation: https://docs.npmjs.com/files/package.json#name
-      if (_.endsWith(self.repo, '.js')) {
-        self.moduleName = self.repo.slice(0, -3);
-      } else {
-        self.moduleName = self.repo;
-      }
+        // Remove `.js` from the npm module name, per the "tips" section of the
+        // npm documentation: https://docs.npmjs.com/files/package.json#name
+        if (_.endsWith(self.repo, '.js')) {
+          self.moduleName = self.repo.slice(0, -3);
+        } else {
+          self.moduleName = self.repo;
+        }
 
-      // The mainFile, on the other hand, must always have an extension
-      self.entryFileName = self.moduleName + '.js';
+        // The mainFile, on the other hand, must always have an extension
+        self.entryFileName = self.moduleName + '.js';
 
-      self.description = jsonEscape(props.description);
-      self.author = jsonEscape(props.author);
-      self.variable = props.variable;
-    });
+        self.description = jsonEscape(props.description);
+        self.author = jsonEscape(props.author);
+        self.variable = props.variable;
+      });
   },
 
   writing: {
