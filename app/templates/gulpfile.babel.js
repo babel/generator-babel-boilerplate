@@ -39,9 +39,6 @@ function lint(files) {
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.eslint.failOnError())
-    .pipe($.jscs())
-    .pipe($.jscs.reporter())
-    .pipe($.jscs.reporter('fail'))
     .on('error', onError);
 }
 
