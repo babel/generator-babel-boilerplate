@@ -1,8 +1,8 @@
 {
-  "name": "<%= repo %>",
+  "name": "<%= moduleName %>",
   "version": "0.0.1",
   "description": "<%- description %>",
-  "main": "dist/<%= repo %>.js",
+  "main": "dist/<%= entryFileName %>",
   "scripts": {
     "test": "gulp",
     "lint": "gulp lint",
@@ -55,7 +55,7 @@
     "webpack-stream": "^3.1.0"
   },
   "babelBoilerplateOptions": {
-    "entryFileName": "<%= repo %>",
+    "entryFileName": "<%= entryFileName %>",
     "mainVarName": "<%= variable %>"
   }
 }
