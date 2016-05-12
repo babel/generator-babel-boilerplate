@@ -81,6 +81,18 @@ module.exports = generators.Base.extend({
     return self.prompt(prompts).then(function(props) {
       self.user = jsonEscape(props.user);
       self.repo = jsonEscape(props.repo);
+
+      // Remove `.js` from the npm module name, per the "tips" section of the
+      // npm documentation: https://docs.npmjs.com/files/package.json#name
+      if (_.endsWith(self.repo, '.js')) {
+        self.moduleName = self.repo.slice(0, -3);
+      } else {
+        self.moduleName = self.repo;
+      }
+
+      // The mainFile, on the other hand, must always have an extension
+      self.entryFileName = self.moduleName + '.js';
+
       self.description = jsonEscape(props.description);
       self.author = jsonEscape(props.author);
       self.variable = props.variable;
