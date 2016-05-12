@@ -28,18 +28,12 @@ function cleanTmp(done) {
   del(['tmp']).then(() => done());
 }
 
-function onError() {
-  $.util.beep();
-}
-
 // Lint a set of files
 function lint(files) {
   return gulp.src(files)
-    .pipe($.plumber())
     .pipe($.eslint())
     .pipe($.eslint.format())
-    .pipe($.eslint.failOnError())
-    .on('error', onError);
+    .pipe($.eslint.failAfterError());
 }
 
 function lintSrc() {
@@ -56,7 +50,6 @@ function lintGulpfile() {
 
 function build() {
   return gulp.src(path.join('src', config.entryFileName))
-    .pipe($.plumber())
     .pipe(webpackStream({
       output: {
         filename: exportFileName + '.js',
