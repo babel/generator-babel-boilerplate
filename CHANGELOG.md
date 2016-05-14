@@ -1,3 +1,11 @@
+### [7.3.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.0)
+
+- Fixes an error in the `.eslintrc` file under generated for the test suite
+- Removes JSCS, as it has been deprecated
+- Fixes issue where failed tests might not cause a CI build to fail
+- Smarter algorithms are used to produce the resulting `package.json` based
+  on the module name that you provide
+
 ### [7.2.1](https://github.com/babel/babel-library-boilerplate/releases/tag/7.2.1)
 
 - Fixes a bug where invalid an invalid `package.json` could be generated if double
