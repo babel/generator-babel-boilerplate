@@ -17,7 +17,7 @@ function generateName(str) {
   str = _.chain(str)
     .deburr()
     .trim()
-    .replace(' ', '-')
+    .replace(/\s/g, '-')
     .value();
   return str.toLowerCase();
 }
