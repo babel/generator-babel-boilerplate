@@ -1,3 +1,7 @@
+### [7.3.2](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.2)
+
+- Ensures that the intended naming updates from `7.3.0` work in more situations
+
 ### [7.3.1](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.1)
 
 - Fix issue where generated `package.json` name would have a space, and therefore
