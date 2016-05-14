@@ -1,3 +1,8 @@
+### [7.3.1](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.1)
+
+- Fix issue where generated `package.json` name would have a space, and therefore
+  be invalid.
+
 ### [7.3.0](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.0)
 
 - Fixes an error in the `.eslintrc` file under generated for the test suite
