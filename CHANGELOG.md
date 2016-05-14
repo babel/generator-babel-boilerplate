@@ -1,3 +1,8 @@
+### [7.3.3](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.3)
+
+- Fixes issue where ESLint would explode due to a lack of specifying `parserOptions`.
+  This was caused by the upgrade to ESLint 2.0.0 in v7.3.0
+
 ### [7.3.2](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.2)
 
 - Ensures that the intended naming updates from `7.3.0` work in more situations
