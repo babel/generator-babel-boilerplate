@@ -2,7 +2,7 @@
   "name": "<%= moduleName %>",
   "version": "0.0.1",
   "description": "<%- description %>",
-  "main": "dist/<%= entryFileName %>",
+  "main": "dist/<%= fileName %>",
   "scripts": {
     "test": "gulp",
     "lint": "gulp lint",
@@ -55,7 +55,7 @@
     "webpack-stream": "^3.1.0"
   },
   "babelBoilerplateOptions": {
-    "entryFileName": "<%= entryFileName %>",
+    "entryFileName": "<%= fileName %>",
     "mainVarName": "<%= variable %>"
   }
 }
