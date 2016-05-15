@@ -67,15 +67,13 @@ If you'd like to set up Code Climate for your project, follow [the steps here](h
 
 ### Linting
 
-This boilerplate uses [ESLint](http://eslint.org/)
-and [JSCS](http://jscs.info/rules.html) to lint your source. To change the rules,
-edit the `.eslintrc` and `.jscsrc` files in the root directory, respectively.
+This boilerplate uses [ESLint](http://eslint.org/) to lint your source. To
+change the rules, edit the `.eslintrc` files in the root directory, respectively.
 
-Given that your unit tests aren't your library code, it makes sense to
-lint them against a separate ESLint configuration. For this reason, a
-separate, unit-test specific `.eslintrc` can be found in the `test`
-directory. Unlike ESLint, the same JSCS rules are applied to both your code
-and your tests.
+Given that your unit tests typically follow different rules from your library
+code, it makes sense to lint them against a separate ESLint configuration. For
+this reason, a separate, unit-test specific `.eslintrc` can be found in the
+`test` directory.
 
 ### FAQ
 
