@@ -46,7 +46,7 @@ function lintTest() {
 }
 
 function lintGulpfile() {
-  return lint('gulpfile.babel.js');
+  return lint('gulpfile.js');
 }
 
 function build() {
@@ -71,7 +71,7 @@ function build() {
       devtool: 'source-map'
     }))
     .pipe(gulp.dest(destinationFolder))
-    .pipe($.filter(['*', '!**/*.js.map']))
+    .pipe($.filter(['**', '!**/*.js.map']))
     .pipe($.rename(exportFileName + '.min.js'))
     .pipe($.sourcemaps.init({ loadMaps: true }))
     .pipe($.uglify())
