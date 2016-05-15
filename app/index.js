@@ -119,8 +119,8 @@ module.exports = generators.Base.extend({
           }
         });
       });
-      this.template('src/index.js', 'src/' + this.repo + '.js');
-      this.template('test/unit/index.js', 'test/unit/' + this.repo + '.js');
+      this.template('src/index.js', 'src/' + this.fileName);
+      this.template('test/unit/index.js', 'test/unit/' + this.fileName);
     }
   },
 
