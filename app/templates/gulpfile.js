@@ -1,15 +1,16 @@
-import gulp  from 'gulp';
-import loadPlugins from 'gulp-load-plugins';
-import del  from 'del';
-import glob  from 'glob';
-import path  from 'path';
-import {Instrumenter} from 'isparta';
-import webpack from 'webpack';
-import webpackStream from 'webpack-stream';
-import source  from 'vinyl-source-stream';
+const gulp = require('gulp');
+const loadPlugins = require('gulp-load-plugins');
+const del = require('del');
+const glob = require('glob');
+const path = require('path');
+const isparta = require('isparta');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const source = require('vinyl-source-stream');
 
-import mochaGlobals from './test/setup/.globals';
-import manifest  from './package.json';
+const Instrumenter = isparta.Instrumenter;
+const mochaGlobals = require('./test/setup/.globals');
+const manifest = require('./package.json');
 
 // Load all of our Gulp plugins
 const $ = loadPlugins();
