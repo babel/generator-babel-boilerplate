@@ -81,15 +81,20 @@ and your tests.
 
 #### What Babel features are supported?
 
-Nearly all Babel features *should* be supported by this boilerplate. If you find a feature that is throwing an error
-when you use it, follow these steps:
+Nearly all Babel features *should* be supported by this boilerplate.
+
+If you're using certain experimental features, like class properties, async-await,
+types, or decorators, then you'll need to install [babel-eslint](https://github.com/babel/babel-eslint)
+to use as the parser for ESLint.
+
+If you're still getting an error, follow these steps:
 
 1. Double check to make sure that you're not typoing the new syntax ;)
-2. Determine what task is failing (for instance, is it JSCS?)
+2. Determine what task is failing (for instance, is it ESLint?)
 3. Check that project's issue tracker to see if it is a known issue
 4. If it isn't, then open an issue here
 
-Because of the fact that dependencies of this boilerplate, such as JSCS, are maintained by a team separate from Babel, there
+Because of the fact that dependencies of this boilerplate, such as ESLint, are maintained by a team separate from Babel, there
 may be a delay between when a new feature is added to Babel and when those other libraries add support for it.
 
 #### When should I consider using this boilerplate?
