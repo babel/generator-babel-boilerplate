@@ -1,3 +1,10 @@
+### [8.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/8.0.0)
+
+- Remove `babel-eslint`
+- No longer transpile the `gulpfile`
+- Updated `devDependencies` in the generated package
+- Further fixes for projects with names ending in `.js`
+
 ### [7.3.3](https://github.com/babel/babel-library-boilerplate/releases/tag/7.3.3)
 
 - Fixes issue where ESLint would explode due to a lack of specifying `parserOptions`.
