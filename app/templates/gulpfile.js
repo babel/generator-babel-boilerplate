@@ -46,7 +46,7 @@ function lintTest() {
 }
 
 function lintGulpfile() {
-  return lint('gulpfile.babel.js');
+  return lint('gulpfile.js');
 }
 
 function build() {
