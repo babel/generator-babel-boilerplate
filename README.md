@@ -7,10 +7,10 @@ A [Yeoman](http://yeoman.io/) generator to author libraries in ES2015 (and beyon
 
 ### Features
 
-- Author in [ES2015](https://babeljs.io/docs/learn-es2015/) (even the unit tests)
-- Export as ES5 & [UMD](https://github.com/umdjs/umd)
-- [Mocha](http://mochajs.org/)-[Chai](http://chaijs.com/)-[Sinon](http://sinonjs.org/) testing stack
-- Unit tests that work in Node and in the browser
+✓ Author in [ES2015](https://babeljs.io/docs/learn-es2015/) (including the unit tests)  
+✓ Export as ES5 & [UMD](https://github.com/umdjs/umd)  
+✓ [Mocha](http://mochajs.org/)-[Chai](http://chaijs.com/)-[Sinon](http://sinonjs.org/) testing stack  
+✓ Unit tests that work in Node and in the browser
 
 ### Installation
 
