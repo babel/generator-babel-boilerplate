@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const loadPlugins = require('gulp-load-plugins');
 const del = require('del');
+const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const isparta = require('isparta');
@@ -50,23 +51,38 @@ function lintGulpfile() {
 }
 
 function build() {
+  var nodeModules = {};
+  fs.readdirSync('node_modules')
+    .filter(function(x) {
+      return ['.bin'].indexOf(x) === -1;
+    })
+    .forEach(function(mod) {
+      nodeModules[mod] = 'commonjs ' + mod;
+    });
   return gulp.src(path.join('src', config.entryFileName))
     .pipe(webpackStream({
+      cache: true,
+      context: __dirname,
       output: {
         filename: exportFileName + '.js',
         libraryTarget: 'umd',
         library: config.mainVarName
       },
+      debug: true,
+      target: 'node',
       // Add your own externals here. For instance,
       // {
       //   jquery: true
       // }
       // would externalize the `jquery` module.
-      externals: {},
+      externals: nodeModules,
+      resolve: {
+        root: path.join(__dirname),
+        fallback: path.join(__dirname, 'node_modules'),
+      },
       module: {
-        loaders: [
-          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
-        ]
+        loaders: [{ test: /\.js$/, loader: 'babel?presets[]=es2015',exclude: /node_modules/},
+                  { test: /\.json$/, loader: 'json'}]
       },
       devtool: 'source-map'
     }))
