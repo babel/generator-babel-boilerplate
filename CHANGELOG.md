@@ -1,3 +1,10 @@
+### [9.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/9.0.0)
+
+- Updated dependencies in generated `package.json`
+- Fixes issue where `.gitignore` would not be copied
+- Updated coverage to ensure all source files are considered in coverage report,
+  not just the ones that are included by the tests
+
 ### [8.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/8.0.0)
 
 - Remove `babel-eslint`
