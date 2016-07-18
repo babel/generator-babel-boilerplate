@@ -139,6 +139,20 @@ server-side code!
 A thorough analysis of this question can be found
 [here](https://github.com/samccone/The-cost-of-transpiling-es2015-in-2016).
 
+### Troubleshooting
+
+#### Accessing the `window` or DOM in tests isn't working
+
+The tests run in Node, which has neither a `window` nor the DOM. To access the
+DOM, you'll need to do a bit of configuration. The quickest solution
+would be to add JSDom. The test setup file
+[has a comment](https://github.com/babel/generator-babel-boilerplate/blob/a50dc0012b882721fdc45de87791d15c1afc3d55/app/templates/test/setup/node.js#L8-L19)
+on the easiest way to get JSDom up-and-running (it takes all of 10 seconds).
+
+Alternatively, you could set up [PhantomJS](https://github.com/ariya/phantomjs) to
+run the tests in a headless webkit environment, or set up [Karma](https://github.com/karma-runner/karma)
+to run the tests in real browsers.
+
 ### Customizing
 
 This boilerplate is, to a degree, customizable. To make changes,
