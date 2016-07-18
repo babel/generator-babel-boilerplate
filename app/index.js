@@ -112,13 +112,17 @@ module.exports = generators.Base.extend({
           // The files we don't want to rename are both "index.js", and one of them is in
           // "test/unit," and the other is in "src"
           var ignoreDir = relativeDir === 'test/unit' || relativeDir === 'src';
-          var shouldCopy = !ignoreDir && !/index.js$/.test(filename);
+          // Ignore the source file, which is dynamically generated, and the gitignore,
+          // which we need to rename (https://github.com/babel/generator-babel-boilerplate/issues/320)
+          const ignoreFile = /index.js$/.test(filename) || /gitignore$/.test(filename);
+          var shouldCopy = !ignoreDir && !ignoreFile;
           if (shouldCopy) {
             target = path.join(relativeDir, filename);
             self.template(target, target);
           }
         });
       });
+      this.template('gitignore', '.gitignore');
       this.template('src/index.js', 'src/' + this.fileName);
       this.template('test/unit/index.js', 'test/unit/' + this.fileName);
     }
