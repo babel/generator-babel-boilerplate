@@ -1,0 +1,3 @@
+# intentionally left blank to ensure that the nested `.gitignore` is included
+# in the package. For more, see:
+# https://github.com/babel/generator-babel-boilerplate/issues/320
