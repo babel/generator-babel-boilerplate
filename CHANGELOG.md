@@ -1,3 +1,7 @@
+### [9.0.1](https://github.com/babel/babel-library-boilerplate/releases/tag/9.0.1)
+
+- Actually fixes issue where `.gitignore` would not be copied
+
 ### [9.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/9.0.0)
 
 - Updated dependencies in generated `package.json`
