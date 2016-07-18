@@ -38,7 +38,7 @@
     "lodash": "^4.12.0",
     "mkdirp": "^0.5.1",
     "npm-whoami": "^1.1.4",
-    "yeoman-generator": "^0.23.3",
+    "yeoman-generator": "^0.24.1",
     "yo": "^1.4.7",
     "yosay": "^1.0.5"
   },
