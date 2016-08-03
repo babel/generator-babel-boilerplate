@@ -33,7 +33,6 @@ module.exports = generators.Base.extend({
       this.username = npmWhoami.sync();
     } catch(e) {
       console.warn('Error getting npm user name: run `npm login`');
-      console.warn(e);
     }
 
     const gitName = this.user.git.name();
