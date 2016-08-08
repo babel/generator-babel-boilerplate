@@ -35,7 +35,7 @@
     "chalk": "^1.1.0",
     "file": "^0.2.2",
     "jsesc": "^2.2.0",
-    "lodash": "^4.12.0",
+    "lodash": "^4.14.2",
     "mkdirp": "^0.5.1",
     "npm-whoami": "^1.1.4",
     "yeoman-generator": "^0.24.1",
