@@ -47,7 +47,7 @@ require the DOM API, see the `test/setup/node.js` file.
 
 ### Browser Tests
 
-The browser spec runner can be opened in a browser to run your tests. For it to work, you must first run `npm run test-browser`. This will set up a watch task that will automatically refresh the tests when your scripts, or the tests, change. The spec runner file is located at `test/runner.html`.
+The browser spec runner can be opened in a browser to run your tests. For it to work, you must first run `npm run test-browser`. This will set up a watch task that will automatically refresh the tests when your scripts, or the tests, change. The spec runner file is located at `test/runner.html`: open it in your browser to run tests.
 
 ### Code Climate
 
