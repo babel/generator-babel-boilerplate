@@ -52,7 +52,7 @@ function build() {
   return gulp.src(path.join('src', config.entryFileName))
     .pipe(webpackStream({
       output: {
-        filename: exportFileName + '.js',
+        filename: `${exportFileName}.js`,
         libraryTarget: 'umd',
         library: config.mainVarName
       },
@@ -64,15 +64,15 @@ function build() {
       externals: {},
       module: {
         loaders: [
-          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+          {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
         ]
       },
       devtool: 'source-map'
     }))
     .pipe(gulp.dest(destinationFolder))
     .pipe($.filter(['**', '!**/*.js.map']))
-    .pipe($.rename(exportFileName + '.min.js'))
-    .pipe($.sourcemaps.init({ loadMaps: true }))
+    .pipe($.rename(`${exportFileName}.min.js`))
+    .pipe($.sourcemaps.init({loadMaps: true}))
     .pipe($.uglify())
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(destinationFolder));
@@ -142,21 +142,21 @@ function testBrowser() {
       module: {
         loaders: [
           // This is what allows us to author in future JavaScript
-          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+          {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
           // This allows the test setup scripts to load `package.json`
-          { test: /\.json$/, exclude: /node_modules/, loader: 'json-loader' }
+          {test: /\.json$/, exclude: /node_modules/, loader: 'json-loader'}
         ]
       },
       plugins: [
         // By default, webpack does `n=>n` compilation with entry files. This concatenates
         // them into a single chunk.
-        new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
+        new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1})
       ],
       devtool: 'inline-source-map'
-    }, null, function() {
+    }, null, () => {
       if (firstBuild) {
         $.livereload.listen({port: 35729, host: 'localhost', start: true});
-        var watcher = gulp.watch(watchFiles, ['lint']);
+        gulp.watch(watchFiles, ['lint']);
       } else {
         $.livereload.reload('./tmp/__spec-build.js');
       }
