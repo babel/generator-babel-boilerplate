@@ -139,6 +139,15 @@ server-side code!
 A thorough analysis of this question can be found
 [here](https://github.com/samccone/The-cost-of-transpiling-es2015-in-2016).
 
+#### How can I use this with React?
+
+Do you wish to use JSX? If the answer is no, then there is nothing that you need
+to do. If the answer is yes, then you need to install the `babel-preset-react`,
+and add it to your .babelrc file.
+
+An example .babelrc file with this preset configured can be seen
+[here](https://github.com/jmeas/moolah/blob/ee451a9395b3169378f1df506d3a6142201e5306/.babelrc#L5).
+
 ### Troubleshooting
 
 #### Accessing the `window` or DOM in tests isn't working
