@@ -75,7 +75,10 @@ this reason, a separate, unit-test specific `.eslintrc` can be found in the
 
 ### FAQ
 
-#### What Babel features are supported?
+<details>
+<summary>
+  **What Babel features are supported?**
+</summary>
 
 Nearly all Babel features *should* be supported by this boilerplate.
 
@@ -92,12 +95,20 @@ If you're still getting an error, follow these steps:
 
 Because of the fact that dependencies of this boilerplate, such as ESLint, are maintained by a team separate from Babel, there
 may be a delay between when a new feature is added to Babel and when those other libraries add support for it.
+</details>
 
-#### When should I consider using this boilerplate?
+<details>
+<summary>
+  **When should I consider using this boilerplate?**
+</summary>
 
 This library is ideal for libraries that export a single file.
+</details>
 
-#### When might I not want to use this boilerplate?
+<details>
+<summary>
+  **When might I not want to use this boilerplate?**
+</summary>
 
 You can always use this boilerplate as inspiration, but it works best for smaller libraries.
 If you're building a full-scale webapp, you will likely need to make more changes to the build system.
@@ -118,28 +129,48 @@ Even if you don't intend to use this boilerplate, I believe that boilerplates ar
 useful as an example and as a source of inspiration. I encourage you to look through
 the current state of the project, and through its history, to see different ways to use
 Babel with various tools!
+</details>
 
-#### What's the browser compatibility?
+<details>
+<summary>
+  **What's the browser compatibility?**
+</summary>
 
-As a rule of thumb, Babel works best in IE9 and above.
+As a rule of thumb, Babel is most reliable in IE9 and above.
+</details>
 
-#### Are there examples?
+<details>
+<summary>
+  **Are there examples?**
+</summary>
 
 Quite a few. Check them out on [the wiki](https://github.com/babel/generator-babel-boilerplate/wiki/Examples).
+</details>
 
-#### Is there a version for Node-only projects?
+<details>
+<summary>
+  **Is there a version for Node-only projects?**
+</summary>
 
 There is not a maintained version for Node-only projects. As of Node v6, many of
 the most commonly used ES2015 features are [now supported natively in Node](http://node.green/).
 I strongly recommend that you weigh the pros and cons of adding a transpiling step to your
 server-side code!
+</details>
 
-#### What's the cost of transpiling?
+<details>
+<summary>
+  **What's the cost of transpiling?**
+</summary>
 
 A thorough analysis of this question can be found
 [here](https://github.com/samccone/The-cost-of-transpiling-es2015-in-2016).
+</details>
 
-#### How can I use this with React?
+<details>
+<summary>
+  **How can I use this with React?**
+</summary>
 
 Do you wish to use JSX? If the answer is no, then there is nothing that you need
 to do. If the answer is yes, then you need to install the `babel-preset-react`,
@@ -147,6 +178,7 @@ and add it to your .babelrc file.
 
 An example .babelrc file with this preset configured can be seen
 [here](https://github.com/jmeas/moolah/blob/ee451a9395b3169378f1df506d3a6142201e5306/.babelrc#L5).
+</details>
 
 ### Troubleshooting
 
