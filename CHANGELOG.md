@@ -1,3 +1,9 @@
+### [10.0.1](https://github.com/babel/babel-library-boilerplate/releases/tag/10.0.1)
+
+- Fix an issue where the wrong preset was specified in the generated `.babelrc`.
+  It was specifying `es2015`; it now specifies `latest`, which is what the
+  boilerplate depends on.
+
 ### [10.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/10.0.0)
 
 - Updated dependencies for the generated project
