@@ -1,3 +1,10 @@
+### [10.0.0](https://github.com/babel/babel-library-boilerplate/releases/tag/10.0.0)
+
+- Updated dependencies for the generated project
+- Greenkeeper is now used to keep the dependencies up-to-date
+- Dependencies are now locked down, rather than using `^`
+- Less annoying messages when you're not logged into npm
+
 ### [9.0.1](https://github.com/babel/babel-library-boilerplate/releases/tag/9.0.1)
 
 - Actually fixes issue where `.gitignore` would not be copied
