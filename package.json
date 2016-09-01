@@ -39,7 +39,7 @@
     "mkdirp": "0.5.1",
     "npm-whoami": "1.1.4",
     "yeoman-generator": "0.24.1",
-    "yo": "1.8.4",
+    "yo": "1.8.5",
     "yosay": "1.2.0"
   },
   "devDependencies": {
