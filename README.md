@@ -180,6 +180,25 @@ An example .babelrc file with this preset configured can be seen
 [here](https://github.com/jmeas/moolah/blob/ee451a9395b3169378f1df506d3a6142201e5306/.babelrc#L5).
 </details>
 
+<details>
+<summary>
+  **How can I export my library without the "default" property?**
+</summary>
+
+As stated here, https://github.com/59naga/babel-plugin-add-module-exports:
+> Babel@6 doesn't export default module.exports any more
+So just `npm install babel-plugin-add-module-exports --save-dev` and then add it to your .babelrc file:
+```
+{
+  "presets": ["latest"],
+  "plugins": [
+    "add-module-exports",
+    "transform-es2015-modules-umd"
+  ]
+}
+```
+</details>
+
 ### Troubleshooting
 
 #### Accessing the `window` or DOM in tests isn't working
