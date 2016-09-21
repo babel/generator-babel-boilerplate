@@ -182,10 +182,10 @@ An example .babelrc file with this preset configured can be seen
 
 <details>
 <summary>
-  **How can I export default without hacking - eg. support ordinary libs?**
+  **How can I export my library without the "default" property?**
 </summary>
 
-As stated here, https://github.com/59naga/babel-plugin-add-module-exports :
+As stated here, https://github.com/59naga/babel-plugin-add-module-exports:
 > Babel@6 doesn't export default module.exports any more
 So just `npm install babel-plugin-add-module-exports --save-dev` and then add it to your .babelrc file:
 ```
