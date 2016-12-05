@@ -1,7 +1,8 @@
 language: node_js
 node_js:
-  - "4"
-  - "stable"
+  - 7
+  - 6
+  - 4
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-babel-boilerplate' ]; then cd .. && eval "mv $currentfolder generator-babel-boilerplate" && cd generator-babel-boilerplate; fi
