@@ -77,7 +77,7 @@ this reason, a separate, unit-test specific `.eslintrc` can be found in the
 
 <details>
 <summary>
-  **What Babel features are supported?**
+  <b>What Babel features are supported?</b>
 </summary>
 
 Nearly all Babel features *should* be supported by this boilerplate.
@@ -99,7 +99,7 @@ may be a delay between when a new feature is added to Babel and when those other
 
 <details>
 <summary>
-  **When should I consider using this boilerplate?**
+  <b>When should I consider using this boilerplate?</b>
 </summary>
 
 This library is ideal for libraries that export a single file.
@@ -107,7 +107,7 @@ This library is ideal for libraries that export a single file.
 
 <details>
 <summary>
-  **When might I not want to use this boilerplate?**
+  <b>When might I not want to use this boilerplate?</b>
 </summary>
 
 You can always use this boilerplate as inspiration, but it works best for smaller libraries.
@@ -133,7 +133,7 @@ Babel with various tools!
 
 <details>
 <summary>
-  **What's the browser compatibility?**
+  <b>What's the browser compatibility?</b>
 </summary>
 
 As a rule of thumb, Babel is most reliable in IE9 and above.
@@ -141,7 +141,7 @@ As a rule of thumb, Babel is most reliable in IE9 and above.
 
 <details>
 <summary>
-  **Are there examples?**
+  <b>Are there examples?</b>
 </summary>
 
 Quite a few. Check them out on [the wiki](https://github.com/babel/generator-babel-boilerplate/wiki/Examples).
@@ -149,7 +149,7 @@ Quite a few. Check them out on [the wiki](https://github.com/babel/generator-bab
 
 <details>
 <summary>
-  **Is there a version for Node-only projects?**
+  <b>Is there a version for Node-only projects?</b>
 </summary>
 
 There is not a maintained version for Node-only projects. As of Node v6, many of
@@ -160,7 +160,7 @@ server-side code!
 
 <details>
 <summary>
-  **What's the cost of transpiling?**
+  <b>What's the cost of transpiling?</b>
 </summary>
 
 A thorough analysis of this question can be found
@@ -169,7 +169,7 @@ A thorough analysis of this question can be found
 
 <details>
 <summary>
-  **How can I use this with React?**
+  <b>How can I use this with React?</b>
 </summary>
 
 Do you wish to use JSX? If the answer is no, then there is nothing that you need
@@ -189,7 +189,7 @@ to be `{test: /\.js|.jsx$/, exclude: /node_modules/, loader: 'babel-loader'},`
 
 <details>
 <summary>
-  **How can I export my library without the "default" property?**
+  <b>How can I export my library without the "default" property?</b>
 </summary>
 
 As stated here, https://github.com/59naga/babel-plugin-add-module-exports:
