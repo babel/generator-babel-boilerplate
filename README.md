@@ -178,6 +178,13 @@ and add it to your .babelrc file.
 
 An example .babelrc file with this preset configured can be seen
 [here](https://github.com/jmeas/moolah/blob/ee451a9395b3169378f1df506d3a6142201e5306/.babelrc#L5).
+
+Also, if you plan to use `jsx` files, you'll need to update the webpack configuration
+to apply the Babel loader to `.jsx` files. Out of the box, it only looks for `.js` files.
+
+This involves changing
+[this line](https://github.com/babel/generator-babel-boilerplate/blob/5e4d990fd85eae221766b174c859fa3621132b7a/app/templates/gulpfile.js#L145)
+to be `{test: /\.js|.jsx$/, exclude: /node_modules/, loader: 'babel-loader'},`
 </details>
 
 <details>
