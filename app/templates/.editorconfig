@@ -1,9 +1,11 @@
-# EditorConfig is awesome: http://EditorConfig.org
+# This file is for unifying the coding style for different editors and IDEs.
+# http://editorconfig.org
 
+# This is the top-most configuration file.
 root = true;
 
 [*]
-#  Ensure there's no lingering whitespace
+# Ensure there's no lingering whitespace
 trim_trailing_whitespace = true
 # Ensure a newline at the end of each file
 insert_final_newline = true
@@ -14,3 +16,7 @@ end_of_line = lf
 charset = utf-8
 indent_style = space
 indent_size = 2
+
+# Allow trailing whitespace in Markdown files (it's part of the syntax)
+[*.md]
+trim_trailing_whitespace = false
